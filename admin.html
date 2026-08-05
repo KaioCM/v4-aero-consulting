@@ -9,7 +9,7 @@
 <style>
   :root{
     --blue-950:#061423;--blue-900:#0B2137;--blue-800:#12314D;--blue-700:#1B4269;
-    --blue-600:#2A5B8C;--blue-500:#3E77AE;--blue-300:#8FB6D8;--blue-100:#DCE8F3;
+    --blue-600:#2A5B8C;--blue-500:#3E77AE;--blue-300:#8FB0D8;--blue-100:#DCE9F3;
     --blue-050:#F1F5FA;--white:#FFFFFF;--red:#B23A48;
   }
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -71,6 +71,15 @@
   .foto-prev{width:100%;max-width:220px;aspect-ratio:3/2;object-fit:cover;border:1px solid var(--blue-100);border-radius:3px;background:var(--blue-050);margin-top:.4rem;display:none}
   .card .actions{display:flex;justify-content:space-between;gap:.6rem;margin-top:1.4rem;flex-wrap:wrap}
   .hint{font-size:.72rem;color:var(--blue-600);margin-top:.25rem}
+  .fotos-wrap{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.5rem}
+  .fthumb{position:relative;width:96px;height:70px;border:1px solid var(--blue-100);border-radius:3px;overflow:hidden;background:var(--blue-050);cursor:grab}
+  .fthumb.cover{border-color:var(--blue-500);border-width:2px}
+  .fthumb.drag{opacity:.35}
+  .fthumb img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
+  .fthumb .cap{position:absolute;top:2px;left:2px;background:var(--blue-500);color:#fff;font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:.5rem;letter-spacing:.08em;padding:.06rem .3rem;border-radius:2px}
+  .fthumb .fdel{position:absolute;top:2px;right:2px;width:19px;height:19px;border:0;border-radius:50%;background:rgba(6,20,35,.72);color:#fff;cursor:pointer;font-size:.85rem;line-height:1;display:flex;align-items:center;justify-content:center}
+  .fthumb .fcap{position:absolute;bottom:2px;left:2px;background:rgba(6,20,35,.72);color:#fff;border:0;border-radius:2px;font-size:.58rem;padding:.1rem .32rem;cursor:pointer}
+  .fuploading{font-size:.74rem;color:var(--blue-600)}
   @media (max-width:560px){.grid2,.grid3{grid-template-columns:1fr}.item{grid-template-columns:56px 1fr}.item .acts{grid-column:1/-1;justify-content:flex-start}}
 </style>
 
@@ -78,7 +87,7 @@
 <div class="login-wrap" id="loginView">
   <div class="login">
     <div class="brand">
-      <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 4 L24 33 L6 42 Z" fill="#0B2137"/><path d="M24 4 L42 42 L24 33 Z" fill="#3E77AE"/></svg>
+      <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 4 L24 33 L6 42 Z" fill="#061423"/><path d="M24 4 L42 42 L24 33 Z" fill="#3E77AE"/></svg>
       <b>V4 <i>Aero</i></b>
     </div>
     <h1>Painel de aeronaves</h1>
@@ -96,7 +105,7 @@
 <div id="app">
   <header class="top">
     <div class="brand" style="margin:0">
-      <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 4 L24 33 L6 42 Z" fill="#0B2137"/><path d="M24 4 L42 42 L24 33 Z" fill="#3E77AE"/></svg>
+      <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 4 L24 33 L6 42 Z" fill="#061423"/><path d="M24 4 L42 42 L24 33 Z" fill="#3E77AE"/></svg>
       <b>V4 <i>Aero</i> · Painel</b>
     </div>
     <div style="display:flex;align-items:center;gap:.8rem">
@@ -153,17 +162,19 @@
         <div><label>Autonomia</label><input id="f_autonomia" placeholder="[a confirmar]"></div>
       </div>
       <div class="full" style="margin-top:.9rem"><label>Observações</label><textarea id="f_observacoes" rows="2" placeholder="[a confirmar]"></textarea></div>
-      <div class="grid2" style="margin-top:.9rem">
-        <div>
-          <label>Foto da aeronave</label>
-          <input type="file" id="f_foto" accept="image/*">
-          <div class="hint">JPG/PNG. Se deixar vazio numa edição, mantém a foto atual.</div>
-          <img class="foto-prev" id="fotoPrev" alt="prévia">
+      <div class="full" style="margin-top:.9rem">
+        <label>Fotos da aeronave</label>
+        <div class="fotos-wrap" id="fotosWrap"></div>
+        <input type="file" id="f_foto" accept="image/*" multiple hidden>
+        <div style="display:flex;align-items:center;gap:.7rem;margin-top:.5rem;flex-wrap:wrap">
+          <button type="button" class="btn btn-s" id="addFotoBtn">+ Adicionar fotos</button>
+          <span class="fuploading" id="fotoStatus"></span>
         </div>
-        <div class="row-check" style="align-self:end;padding-bottom:.5rem">
-          <input type="checkbox" id="f_ativo" checked>
-          <label for="f_ativo">Visível no site</label>
-        </div>
+        <div class="hint">Várias fotos (JPG/PNG). Arraste para reordenar; a 1ª (CAPA) aparece na lista e como principal no site. Toque em ★ para tornar uma foto a capa.</div>
+      </div>
+      <div class="row-check" style="margin-top:.9rem">
+        <input type="checkbox" id="f_ativo" checked>
+        <label for="f_ativo">Visível no site</label>
       </div>
       <div class="msg" id="formMsg"></div>
       <div class="actions">
@@ -226,10 +237,10 @@
     $('counter').textContent = '· '+data.length;
     $('list').innerHTML = data.map(av=>`
       <div class="item">
-        <img class="thumb" src="${av.foto_url||'assets/logo-mark.svg'}" alt="">
+        <img class="thumb" src="${(av.fotos&&av.fotos[0])||av.foto_url||'assets/logo-mark.svg'}" alt="">
         <div class="info">
           <b>${escapeHtml(av.nome)}</b>
-          <span class="meta">${CATS[av.categoria]||av.categoria} · ordem ${av.ordem} · ${escapeHtml(av.situacao)} ${av.ativo?'<span class="tag">no site</span>':'<span class="tag off">oculta</span>'}</span>
+          <span class="meta">${CATS[av.categoria]||av.categoria} · ordem ${av.ordem} · ${(av.fotos?av.fotos.length:0)} foto(s) · ${escapeHtml(av.situacao)} ${av.ativo?'<span class="tag">no site</span>':'<span class="tag off">oculta</span>'}</span>
           <span class="val">${fmtVal(av)}</span>
         </div>
         <div class="acts">
@@ -243,14 +254,15 @@
 
   // ---------- FORM ----------
   const F=['id','nome','categoria','situacao','moeda','valor','ordem','ano','celula_tt','motor','avionicos','local','matricula','assentos','autonomia','observacoes'];
-  let editing=null;
+  let editing=null, fotosArr=[];
   function openForm(av){
     editing=av||null;
     $('formTitle').textContent = av?'Editar aeronave':'Nova aeronave';
     F.forEach(k=>{ const el=$('f_'+k); if(el) el.value = av? (av[k]??'') : (k==='moeda'?'BRL':k==='situacao'?'Disponível':k==='categoria'?'monomotor':''); });
     $('f_ativo').checked = av? !!av.ativo : true;
-    $('f_foto').value=''; const p=$('fotoPrev');
-    if(av&&av.foto_url){ p.src=av.foto_url; p.style.display='block'; } else { p.style.display='none'; }
+    $('f_foto').value=''; $('fotoStatus').textContent='';
+    fotosArr = av ? (Array.isArray(av.fotos)&&av.fotos.length ? av.fotos.slice() : (av.foto_url?[av.foto_url]:[])) : [];
+    renderFotos();
     show($('delBtn'), !!av);
     msg($('formMsg'),'');
     $('modal').classList.add('open');
@@ -258,21 +270,41 @@
   $('newBtn').addEventListener('click',()=>openForm(null));
   $('cancelBtn').addEventListener('click',()=>$('modal').classList.remove('open'));
   $('modal').addEventListener('click',e=>{ if(e.target===$('modal')) $('modal').classList.remove('open'); });
-  $('f_foto').addEventListener('change',()=>{ const f=$('f_foto').files[0]; const p=$('fotoPrev'); if(f){ p.src=URL.createObjectURL(f); p.style.display='block'; } });
+  $('addFotoBtn').addEventListener('click',()=>$('f_foto').click());
+  $('f_foto').addEventListener('change',()=>{ if($('f_foto').files.length) uploadFiles([...$('f_foto').files]); });
+  async function uploadFiles(files){
+    $('addFotoBtn').disabled=true; $('fotoStatus').textContent='Enviando…';
+    try{
+      for(const file of files){
+        const ext=(file.name.split('.').pop()||'jpg').toLowerCase();
+        const path=crypto.randomUUID()+'.'+ext;
+        const up=await sb.storage.from('aeronaves').upload(path,file,{upsert:false,contentType:file.type});
+        if(up.error) throw up.error;
+        fotosArr.push(sb.storage.from('aeronaves').getPublicUrl(path).data.publicUrl);
+        renderFotos();
+      }
+      $('fotoStatus').textContent='';
+    }catch(e){ $('fotoStatus').textContent='Erro: '+(e.message||e); }
+    $('addFotoBtn').disabled=false; $('f_foto').value='';
+  }
+  function renderFotos(){
+    const w=$('fotosWrap');
+    w.innerHTML = fotosArr.map((u,i)=>`<div class="fthumb${i===0?' cover':''}" draggable="true" data-i="${i}"><img src="${u}" alt="">${i===0?'<span class="cap">CAPA</span>':`<button type="button" class="fcap" data-cap="${i}">★ capa</button>`}<button type="button" class="fdel" data-del="${i}">×</button></div>`).join('') || '<span class="hint">Nenhuma foto ainda.</span>';
+    w.querySelectorAll('.fdel').forEach(b=>b.onclick=()=>{ fotosArr.splice(+b.dataset.del,1); renderFotos(); });
+    w.querySelectorAll('.fcap').forEach(b=>b.onclick=()=>{ const i=+b.dataset.cap; const [x]=fotosArr.splice(i,1); fotosArr.unshift(x); renderFotos(); });
+    let di=null;
+    w.querySelectorAll('.fthumb').forEach(el=>{
+      el.addEventListener('dragstart',()=>{ di=+el.dataset.i; el.classList.add('drag'); });
+      el.addEventListener('dragend',()=>el.classList.remove('drag'));
+      el.addEventListener('dragover',e=>e.preventDefault());
+      el.addEventListener('drop',e=>{ e.preventDefault(); const ti=+el.dataset.i; if(di===null||di===ti) return; const [x]=fotosArr.splice(di,1); fotosArr.splice(ti,0,x); di=null; renderFotos(); });
+    });
+  }
 
   $('form').addEventListener('submit', async e=>{
     e.preventDefault();
     $('saveBtn').disabled=true; $('saveBtn').textContent='Salvando…'; msg($('formMsg'),'');
     try{
-      let foto_url = editing?.foto_url ?? null;
-      const file = $('f_foto').files[0];
-      if(file){
-        const ext = (file.name.split('.').pop()||'jpg').toLowerCase();
-        const path = crypto.randomUUID()+'.'+ext;
-        const up = await sb.storage.from('aeronaves').upload(path, file, { upsert:false, contentType:file.type });
-        if(up.error) throw up.error;
-        foto_url = sb.storage.from('aeronaves').getPublicUrl(path).data.publicUrl;
-      }
       const valRaw = $('f_valor').value.replace(/\./g,'').replace(',','.').trim();
       const rec = {
         nome: $('f_nome').value.trim() || '[a confirmar]',
@@ -284,7 +316,7 @@
         ano: nn($('f_ano').value), celula_tt: nn($('f_celula_tt').value), motor: nn($('f_motor').value),
         avionicos: nn($('f_avionicos').value), local: nn($('f_local').value), matricula: nn($('f_matricula').value),
         assentos: nn($('f_assentos').value), autonomia: nn($('f_autonomia').value), observacoes: nn($('f_observacoes').value),
-        ativo: $('f_ativo').checked, foto_url
+        ativo: $('f_ativo').checked, fotos: fotosArr, foto_url: fotosArr[0]||null
       };
       let res;
       if(editing) res = await sb.from('aeronaves').update(rec).eq('id',editing.id);

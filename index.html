@@ -124,8 +124,24 @@
 
   .av-detail{max-height:0;overflow:hidden;transition:max-height .32s var(--ease);background:var(--white)}
   .av-detail .inner{padding:1.4rem .9rem 1.8rem;display:grid;grid-template-columns:minmax(220px,340px) 1fr;gap:1.8rem;border-top:1px dashed var(--blue-100)}
-  .av-detail .plate{border:1px solid var(--blue-100);background:var(--blue-050)}
-  .av-detail .plate img{width:100%;aspect-ratio:3/2;object-fit:cover}
+  .av-detail .plate>img{width:100%;aspect-ratio:3/2;object-fit:cover;border:1px solid var(--blue-100);background:var(--blue-050)}
+  .gal{display:flex;flex-direction:column;gap:.5rem}
+  .gal-main{position:relative;display:block;width:100%;padding:0;border:1px solid var(--blue-100);background:var(--blue-050);cursor:zoom-in}
+  .gal-main img{width:100%;aspect-ratio:3/2;object-fit:cover;display:block}
+  .gal-main .gal-zoom{position:absolute;right:.4rem;bottom:.4rem;background:rgba(6,20,35,.72);color:#fff;font-size:.72rem;padding:.12rem .4rem;border-radius:2px;font-family:'IBM Plex Mono',monospace}
+  .gal-ths{display:flex;gap:.4rem;flex-wrap:wrap}
+  .gal-th{width:54px;height:40px;padding:0;border:1px solid var(--blue-100);background:var(--blue-050);cursor:pointer;border-radius:2px;overflow:hidden}
+  .gal-th.on{border-color:var(--blue-500);border-width:2px}
+  .gal-th img{width:100%;height:100%;object-fit:cover;display:block}
+  .gal-empty{display:flex;align-items:center;justify-content:center;aspect-ratio:3/2;color:var(--blue-600);font-family:'IBM Plex Mono',monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;background:var(--blue-050);border:1px dashed var(--blue-100)}
+  .lb{position:fixed;inset:0;z-index:200;background:rgba(6,20,35,.93);display:none;align-items:center;justify-content:center}
+  .lb.open{display:flex}
+  .lb img{max-width:92vw;max-height:86vh;object-fit:contain}
+  .lb .lb-x{position:absolute;top:.8rem;right:1.1rem;font-size:2rem;color:#fff;background:none;border:0;cursor:pointer;line-height:1}
+  .lb .lb-nav{position:absolute;top:50%;transform:translateY(-50%);font-size:2.6rem;color:#fff;background:none;border:0;cursor:pointer;padding:.3rem .9rem;opacity:.8}
+  .lb .lb-nav:hover{opacity:1}
+  .lb .lb-prev{left:.2rem}.lb .lb-next{right:.2rem}
+  .lb .lb-count{position:absolute;bottom:1rem;left:0;right:0;text-align:center;color:#fff;font-family:'IBM Plex Mono',monospace;font-size:.78rem;letter-spacing:.1em}
   .ficha{display:grid;grid-template-columns:1fr 1fr;gap:.1rem 1.6rem;align-content:start}
   .ficha .f{display:flex;justify-content:space-between;gap:1rem;padding:.6rem 0;border-bottom:1px solid var(--blue-050)}
   .ficha .f .k{font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.1em;font-size:.66rem;color:var(--blue-600)}
@@ -610,7 +626,11 @@
   const ficha=(l,v)=> `<div class="f"><span class="k">${l}</span><span class="v">${v&&String(v).trim()!==''?esc(v):'[a confirmar]'}</span></div>`;
   function valorCell(av){if(av.valor==null||+av.valor===0)return `<span class="c-valor tbc" data-label="Valor">[a confirmar]</span>`;const m=av.moeda==='USD'?'US$':'R$';return `<span class="c-valor" data-label="Valor"><span class="vwrap"><span class="moeda">${m}</span><span class="cifra">${nf.format(av.valor)}</span></span></span>`;}
   function wa(av){const t=av.nome&&!av.nome.includes('[')?`Olá, tenho interesse na aeronave ${av.nome} anunciada no site.`:'Olá, tenho interesse na aeronave anunciada no site.';return 'https://wa.me/5565981476175?text='+encodeURIComponent(t);}
-  function rowHTML(av){const foto=esc(av.foto_url||'assets/logo-mark.svg');const nome=esc(av.nome||'[a confirmar]');const dv=av.valor==null?'0':String(av.valor);
+  function rowHTML(av){const nome=esc(av.nome||'[a confirmar]');const dv=av.valor==null?'0':String(av.valor);
+    const fotos=(Array.isArray(av.fotos)?av.fotos:[]).filter(Boolean);const foto=esc(fotos[0]||av.foto_url||'assets/logo-mark.svg');
+    const gal = fotos.length
+      ? `<div class="gal"><button type="button" class="gal-main" data-i="0" aria-label="Ampliar foto"><img src="${esc(fotos[0])}" alt="${nome}" loading="lazy"><span class="gal-zoom">⤢ ampliar</span></button>${fotos.length>1?`<div class="gal-ths">${fotos.map((f,i)=>`<button type="button" class="gal-th${i===0?' on':''}" aria-label="Foto ${i+1}"><img src="${esc(f)}" alt="" loading="lazy"></button>`).join('')}</div>`:''}</div>`
+      : `<div class="gal-empty">Fotos em breve</div>`;
     return `<div class="av" data-tipo="${esc(av.categoria)}" data-moeda="${esc(av.moeda||'BRL')}" data-valor="${dv}" data-tt="" data-ordem="${av.ordem??0}" data-nome="${nome}">
       <button class="av-row" aria-expanded="false">
         <span class="c-img"><img src="${foto}" alt="${nome}" loading="lazy"></span>
@@ -620,13 +640,34 @@
         <span class="c-caret">▸</span>
       </button>
       <div class="av-detail"><div class="inner">
-        <div class="plate"><img src="${foto}" alt="${nome}" loading="lazy"></div>
+        <div class="plate">${gal}</div>
         <div class="ficha">
           ${ficha('Matrícula',av.matricula)}${ficha('Assentos',av.assentos)}${ficha('Autonomia',av.autonomia)}${ficha('Situação',av.situacao||'Disponível')}${ficha('Observações',av.observacoes)}
           <div class="cta"><a class="btn btn-p" href="${wa(av)}">Consultar esta aeronave</a></div>
         </div>
       </div></div>
     </div>`;}
+
+  // galeria (troca miniatura) + lightbox
+  const lb=document.createElement('div');lb.className='lb';
+  lb.innerHTML='<button class="lb-x" aria-label="Fechar">×</button><button class="lb-nav lb-prev" aria-label="Anterior">‹</button><img alt=""><button class="lb-nav lb-next" aria-label="Próxima">›</button><div class="lb-count"></div>';
+  document.body.appendChild(lb);
+  const lbImg=lb.querySelector('img'),lbCount=lb.querySelector('.lb-count'),lbPrev=lb.querySelector('.lb-prev'),lbNext=lb.querySelector('.lb-next');
+  let lbF=[],lbI=0;
+  const renderLb=()=>{lbImg.src=lbF[lbI]||'';lbCount.textContent=lbF.length>1?(lbI+1)+' / '+lbF.length:'';lbPrev.style.visibility=lbNext.style.visibility=lbF.length>1?'visible':'hidden';};
+  const openLb=(f,i)=>{lbF=f;lbI=i||0;renderLb();lb.classList.add('open');};
+  const closeLb=()=>{lb.classList.remove('open');lbImg.src='';};
+  lbPrev.onclick=e=>{e&&e.stopPropagation&&e.stopPropagation();lbI=(lbI-1+lbF.length)%lbF.length;renderLb();};
+  lbNext.onclick=e=>{e&&e.stopPropagation&&e.stopPropagation();lbI=(lbI+1)%lbF.length;renderLb();};
+  lb.querySelector('.lb-x').onclick=closeLb;
+  lb.addEventListener('click',e=>{if(e.target===lb)closeLb();});
+  document.addEventListener('keydown',e=>{if(!lb.classList.contains('open'))return;if(e.key==='Escape')closeLb();else if(e.key==='ArrowLeft'&&lbF.length>1)lbPrev.onclick();else if(e.key==='ArrowRight'&&lbF.length>1)lbNext.onclick();});
+  list.addEventListener('click',e=>{
+    const th=e.target.closest('.gal-th');
+    if(th){const g=th.closest('.gal');const ths=[...g.querySelectorAll('.gal-th')];const i=ths.indexOf(th);g.querySelector('.gal-main img').src=th.querySelector('img').src;g.querySelector('.gal-main').dataset.i=i;ths.forEach(t=>t.classList.toggle('on',t===th));return;}
+    const main=e.target.closest('.gal-main');
+    if(main){const g=main.closest('.gal');const ths=[...g.querySelectorAll('.gal-th img')];const f=ths.length?ths.map(x=>x.src):[g.querySelector('.gal-main img').src];openLb(f,+main.dataset.i||0);}
+  });
 
   (async()=>{
     try{
