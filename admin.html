@@ -1,0 +1,311 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="assets/logo-mark.svg" type="image/svg+xml">
+<title>V4 Aero — Painel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue-950:#061423;--blue-900:#0B2137;--blue-800:#12314D;--blue-700:#1B4269;
+    --blue-600:#2A5B8C;--blue-500:#3E77AE;--blue-300:#8FB6D8;--blue-100:#DCE8F3;
+    --blue-050:#F1F5FA;--white:#FFFFFF;--red:#B23A48;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'IBM Plex Sans',system-ui,sans-serif;background:var(--blue-050);color:var(--blue-900);line-height:1.55;-webkit-font-smoothing:antialiased}
+  .mono{font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.12em;font-size:.7rem;color:var(--blue-600)}
+  h1,h2,h3{font-weight:600;letter-spacing:-.01em}
+  a{color:var(--blue-500)}
+  input,select,textarea,button{font:inherit}
+  label{display:block;font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.1em;font-size:.62rem;color:var(--blue-600);margin:0 0 .3rem}
+  input,select,textarea{width:100%;padding:.6rem .7rem;border:1px solid var(--blue-300);border-radius:3px;background:var(--white);color:var(--blue-900)}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--blue-500)}
+  .btn{display:inline-flex;align-items:center;gap:.4rem;font-weight:500;font-size:.92rem;padding:.6rem 1.1rem;border-radius:3px;border:1px solid transparent;cursor:pointer;transition:.18s}
+  .btn-p{background:var(--blue-900);color:#fff;border-color:var(--blue-900)}.btn-p:hover{background:var(--blue-800)}
+  .btn-s{background:transparent;border-color:var(--blue-300);color:var(--blue-900)}.btn-s:hover{border-color:var(--blue-500)}
+  .btn-d{background:transparent;border-color:#e0b4ba;color:var(--red)}.btn-d:hover{background:#fbeef0}
+  .btn[disabled]{opacity:.5;cursor:not-allowed}
+
+  /* login */
+  .login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:1.2rem}
+  .login{width:100%;max-width:360px;background:#fff;border:1px solid var(--blue-100);border-radius:5px;padding:2rem 1.8rem}
+  .brand{display:flex;align-items:center;gap:.6rem;margin-bottom:1.4rem}
+  .brand svg{height:30px}.brand b{font-size:1.05rem;font-weight:700}.brand b i{font-style:normal;color:var(--blue-500)}
+  .login h1{font-size:1.15rem;margin-bottom:.3rem}
+  .login .sub{color:var(--blue-600);font-size:.88rem;margin-bottom:1.4rem}
+  .field{margin-bottom:1rem}
+  .msg{font-size:.85rem;padding:.6rem .7rem;border-radius:3px;margin-bottom:1rem;display:none}
+  .msg.err{display:block;background:#fbeef0;color:var(--red);border:1px solid #e0b4ba}
+  .msg.ok{display:block;background:var(--blue-050);color:var(--blue-700);border:1px solid var(--blue-100)}
+
+  /* app */
+  #app{display:none}
+  header.top{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid var(--blue-100);display:flex;align-items:center;justify-content:space-between;padding:.8rem 1.2rem;gap:1rem;flex-wrap:wrap}
+  header.top .who{font-size:.82rem;color:var(--blue-600)}
+  .wrap{max-width:1080px;margin:0 auto;padding:1.4rem 1.2rem 4rem}
+  .toolbar{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1.2rem;flex-wrap:wrap}
+  .toolbar h2{font-size:1.2rem}
+
+  .list{display:grid;gap:.7rem}
+  .item{background:#fff;border:1px solid var(--blue-100);border-radius:4px;padding:.7rem .8rem;display:grid;grid-template-columns:64px 1fr auto;gap:.9rem;align-items:center}
+  .item .thumb{width:64px;height:44px;object-fit:cover;background:var(--blue-050);border:1px solid var(--blue-100);border-radius:2px}
+  .item .info b{display:block;font-weight:600}
+  .item .info .meta{font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--blue-600);text-transform:uppercase;letter-spacing:.06em;margin-top:.15rem}
+  .item .info .val{font-family:'IBM Plex Mono',monospace;font-size:.82rem;color:var(--blue-900);font-weight:600}
+  .item .acts{display:flex;gap:.4rem;flex-wrap:wrap;justify-content:flex-end}
+  .tag{font-family:'IBM Plex Mono',monospace;font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;padding:.12rem .4rem;border-radius:2px;border:1px solid var(--blue-300);color:var(--blue-600)}
+  .tag.off{border-color:#e0b4ba;color:var(--red)}
+
+  /* modal form */
+  .modal{position:fixed;inset:0;z-index:50;background:rgba(6,20,35,.55);display:none;align-items:flex-start;justify-content:center;padding:2rem 1rem;overflow-y:auto}
+  .modal.open{display:flex}
+  .card{width:100%;max-width:640px;background:#fff;border-radius:6px;padding:1.6rem}
+  .card h3{font-size:1.1rem;margin-bottom:1.1rem}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.9rem}
+  .full{grid-column:1/-1}
+  .row-check{display:flex;align-items:center;gap:.5rem}
+  .row-check input{width:auto}
+  .row-check label{margin:0}
+  .foto-prev{width:100%;max-width:220px;aspect-ratio:3/2;object-fit:cover;border:1px solid var(--blue-100);border-radius:3px;background:var(--blue-050);margin-top:.4rem;display:none}
+  .card .actions{display:flex;justify-content:space-between;gap:.6rem;margin-top:1.4rem;flex-wrap:wrap}
+  .hint{font-size:.72rem;color:var(--blue-600);margin-top:.25rem}
+  @media (max-width:560px){.grid2,.grid3{grid-template-columns:1fr}.item{grid-template-columns:56px 1fr}.item .acts{grid-column:1/-1;justify-content:flex-start}}
+</style>
+
+<!-- ===== LOGIN ===== -->
+<div class="login-wrap" id="loginView">
+  <div class="login">
+    <div class="brand">
+      <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 4 L24 33 L6 42 Z" fill="#0B2137"/><path d="M24 4 L42 42 L24 33 Z" fill="#3E77AE"/></svg>
+      <b>V4 <i>Aero</i></b>
+    </div>
+    <h1>Painel de aeronaves</h1>
+    <p class="sub">Acesso restrito. Entre para gerenciar o catálogo.</p>
+    <div class="msg" id="loginMsg"></div>
+    <form id="loginForm">
+      <div class="field"><label>E-mail</label><input type="email" id="email" autocomplete="username" required></div>
+      <div class="field"><label>Senha</label><input type="password" id="senha" autocomplete="current-password" required></div>
+      <button class="btn btn-p" style="width:100%;just-content:center" id="loginBtn" type="submit">Entrar</button>
+    </form>
+  </div>
+</div>
+
+<!-- ===== APP ===== -->
+<div id="app">
+  <header class="top">
+    <div class="brand" style="margin:0">
+      <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 4 L24 33 L6 42 Z" fill="#0B2137"/><path d="M24 4 L42 42 L24 33 Z" fill="#3E77AE"/></svg>
+      <b>V4 <i>Aero</i> · Painel</b>
+    </div>
+    <div style="display:flex;align-items:center;gap:.8rem">
+      <span class="who" id="who"></span>
+      <button class="btn btn-s" id="pwBtn" type="button">Trocar senha</button>
+      <button class="btn btn-s" id="logoutBtn" type="button">Sair</button>
+    </div>
+  </header>
+  <div class="wrap">
+    <div class="toolbar">
+      <h2>Aeronaves <span class="mono" id="counter"></span></h2>
+      <button class="btn btn-p" id="newBtn" type="button">+ Nova aeronave</button>
+    </div>
+    <div class="msg" id="appMsg"></div>
+    <div class="list" id="list"></div>
+  </div>
+</div>
+
+<!-- ===== MODAL FORM ===== -->
+<div class="modal" id="modal">
+  <div class="card">
+    <h3 id="formTitle">Nova aeronave</h3>
+    <form id="form">
+      <input type="hidden" id="f_id">
+      <div class="grid2">
+        <div class="full"><label>Nome / modelo</label><input id="f_nome" placeholder="Ex.: Cessna 210"></div>
+        <div><label>Categoria</label>
+          <select id="f_categoria">
+            <option value="monomotor">Monomotor</option>
+            <option value="bimotor">Bimotor</option>
+            <option value="turboelice">Turboélice</option>
+            <option value="helicoptero">Helicóptero</option>
+          </select>
+        </div>
+        <div><label>Situação</label>
+          <select id="f_situacao">
+            <option>Disponível</option><option>Reservada</option><option>Vendida</option>
+          </select>
+        </div>
+      </div>
+      <div class="grid3" style="margin-top:.9rem">
+        <div><label>Moeda</label><select id="f_moeda"><option value="BRL">R$ (Real)</option><option value="USD">US$ (Dólar)</option></select></div>
+        <div><label>Valor (só números)</label><input id="f_valor" inputmode="decimal" placeholder="ex.: 3000000"><div class="hint">Em branco = "a confirmar"</div></div>
+        <div><label>Ordem</label><input id="f_ordem" inputmode="numeric" placeholder="1"></div>
+      </div>
+      <div class="grid3" style="margin-top:.9rem">
+        <div><label>Ano</label><input id="f_ano" placeholder="[a confirmar]"></div>
+        <div><label>Célula (TT)</label><input id="f_celula_tt" placeholder="[a confirmar]"></div>
+        <div><label>Motor</label><input id="f_motor" placeholder="[a confirmar]"></div>
+        <div><label>Aviônicos</label><input id="f_avionicos" placeholder="[a confirmar]"></div>
+        <div><label>Local</label><input id="f_local" placeholder="[a confirmar]"></div>
+        <div><label>Matrícula</label><input id="f_matricula" placeholder="[a confirmar]"></div>
+        <div><label>Assentos</label><input id="f_assentos" placeholder="[a confirmar]"></div>
+        <div><label>Autonomia</label><input id="f_autonomia" placeholder="[a confirmar]"></div>
+      </div>
+      <div class="full" style="margin-top:.9rem"><label>Observações</label><textarea id="f_observacoes" rows="2" placeholder="[a confirmar]"></textarea></div>
+      <div class="grid2" style="margin-top:.9rem">
+        <div>
+          <label>Foto da aeronave</label>
+          <input type="file" id="f_foto" accept="image/*">
+          <div class="hint">JPG/PNG. Se deixar vazio numa edição, mantém a foto atual.</div>
+          <img class="foto-prev" id="fotoPrev" alt="prévia">
+        </div>
+        <div class="row-check" style="align-self:end;padding-bottom:.5rem">
+          <input type="checkbox" id="f_ativo" checked>
+          <label for="f_ativo">Visível no site</label>
+        </div>
+      </div>
+      <div class="msg" id="formMsg"></div>
+      <div class="actions">
+        <button class="btn btn-d" id="delBtn" type="button" style="display:none">Excluir</button>
+        <div style="display:flex;gap:.6rem;margin-left:auto">
+          <button class="btn btn-s" id="cancelBtn" type="button">Cancelar</button>
+          <button class="btn btn-p" id="saveBtn" type="submit">Salvar</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script type="module">
+  import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+  const SB_URL = 'https://hobtolagifjjxcmxreip.supabase.co';
+  const SB_KEY = 'sb_publishable_29hmID65I5x-X0Ieot6f5Q_eLOk_Pkl';
+  const sb = createClient(SB_URL, SB_KEY);
+
+  const $ = id => document.getElementById(id);
+  const show = (el,on)=>el.style.display = on ? '' : 'none';
+  const msg = (el,type,text)=>{el.className='msg '+(type||'');el.textContent=text||'';};
+  const CATS={monomotor:'Monomotor',bimotor:'Bimotor',turboelice:'Turboélice',helicoptero:'Helicóptero'};
+  const nf = new Intl.NumberFormat('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+  const fmtVal = av => (av.valor==null||+av.valor===0) ? '[a confirmar]' : (av.moeda==='USD'?'US$ ':'R$ ')+nf.format(av.valor);
+
+  // ---------- AUTH ----------
+  async function refresh(){
+    const { data:{ session } } = await sb.auth.getSession();
+    if(session){
+      show($('loginView'),false); $('app').style.display='block';
+      $('who').textContent = session.user.email;
+      loadList();
+    } else {
+      $('app').style.display='none'; show($('loginView'),true);
+    }
+  }
+  $('loginForm').addEventListener('submit', async e=>{
+    e.preventDefault(); msg($('loginMsg'),''); $('loginBtn').disabled=true; $('loginBtn').textContent='Entrando…';
+    const { error } = await sb.auth.signInWithPassword({ email:$('email').value.trim(), password:$('senha').value });
+    $('loginBtn').disabled=false; $('loginBtn').textContent='Entrar';
+    if(error){ msg($('loginMsg'),'err', error.message==='Invalid login credentials'?'E-mail ou senha incorretos.':error.message); return; }
+    refresh();
+  });
+  $('logoutBtn').addEventListener('click', async()=>{ await sb.auth.signOut(); refresh(); });
+  $('pwBtn').addEventListener('click', async()=>{
+    const nova = prompt('Nova senha (mínimo 6 caracteres):');
+    if(!nova) return;
+    const { error } = await sb.auth.updateUser({ password:nova });
+    msg($('appMsg'), error?'err':'ok', error?error.message:'Senha atualizada.');
+    setTimeout(()=>msg($('appMsg'),''),4000);
+  });
+
+  // ---------- LIST ----------
+  async function loadList(){
+    msg($('appMsg'),'ok','Carregando…');
+    const { data, error } = await sb.from('aeronaves').select('*').order('ordem',{ascending:true});
+    if(error){ msg($('appMsg'),'err','Erro ao carregar: '+error.message); return; }
+    msg($('appMsg'),'');
+    $('counter').textContent = '· '+data.length;
+    $('list').innerHTML = data.map(av=>`
+      <div class="item">
+        <img class="thumb" src="${av.foto_url||'assets/logo-mark.svg'}" alt="">
+        <div class="info">
+          <b>${escapeHtml(av.nome)}</b>
+          <span class="meta">${CATS[av.categoria]||av.categoria} · ordem ${av.ordem} · ${escapeHtml(av.situacao)} ${av.ativo?'<span class="tag">no site</span>':'<span class="tag off">oculta</span>'}</span>
+          <span class="val">${fmtVal(av)}</span>
+        </div>
+        <div class="acts">
+          <button class="btn btn-s" data-edit="${av.id}" type="button">Editar</button>
+        </div>
+      </div>`).join('') || '<p class="mono">Nenhuma aeronave. Clique em “+ Nova aeronave”.</p>';
+    window.__data = data;
+    document.querySelectorAll('[data-edit]').forEach(b=>b.addEventListener('click',()=>openForm(data.find(x=>x.id===b.dataset.edit))));
+  }
+  function escapeHtml(s){return (s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+
+  // ---------- FORM ----------
+  const F=['id','nome','categoria','situacao','moeda','valor','ordem','ano','celula_tt','motor','avionicos','local','matricula','assentos','autonomia','observacoes'];
+  let editing=null;
+  function openForm(av){
+    editing=av||null;
+    $('formTitle').textContent = av?'Editar aeronave':'Nova aeronave';
+    F.forEach(k=>{ const el=$('f_'+k); if(el) el.value = av? (av[k]??'') : (k==='moeda'?'BRL':k==='situacao'?'Disponível':k==='categoria'?'monomotor':''); });
+    $('f_ativo').checked = av? !!av.ativo : true;
+    $('f_foto').value=''; const p=$('fotoPrev');
+    if(av&&av.foto_url){ p.src=av.foto_url; p.style.display='block'; } else { p.style.display='none'; }
+    show($('delBtn'), !!av);
+    msg($('formMsg'),'');
+    $('modal').classList.add('open');
+  }
+  $('newBtn').addEventListener('click',()=>openForm(null));
+  $('cancelBtn').addEventListener('click',()=>$('modal').classList.remove('open'));
+  $('modal').addEventListener('click',e=>{ if(e.target===$('modal')) $('modal').classList.remove('open'); });
+  $('f_foto').addEventListener('change',()=>{ const f=$('f_foto').files[0]; const p=$('fotoPrev'); if(f){ p.src=URL.createObjectURL(f); p.style.display='block'; } });
+
+  $('form').addEventListener('submit', async e=>{
+    e.preventDefault();
+    $('saveBtn').disabled=true; $('saveBtn').textContent='Salvando…'; msg($('formMsg'),'');
+    try{
+      let foto_url = editing?.foto_url ?? null;
+      const file = $('f_foto').files[0];
+      if(file){
+        const ext = (file.name.split('.').pop()||'jpg').toLowerCase();
+        const path = crypto.randomUUID()+'.'+ext;
+        const up = await sb.storage.from('aeronaves').upload(path, file, { upsert:false, contentType:file.type });
+        if(up.error) throw up.error;
+        foto_url = sb.storage.from('aeronaves').getPublicUrl(path).data.publicUrl;
+      }
+      const valRaw = $('f_valor').value.replace(/\./g,'').replace(',','.').trim();
+      const rec = {
+        nome: $('f_nome').value.trim() || '[a confirmar]',
+        categoria: $('f_categoria').value,
+        situacao: $('f_situacao').value,
+        moeda: $('f_moeda').value,
+        valor: valRaw==='' ? null : Number(valRaw),
+        ordem: $('f_ordem').value.trim()===''?0:parseInt($('f_ordem').value,10),
+        ano: nn($('f_ano').value), celula_tt: nn($('f_celula_tt').value), motor: nn($('f_motor').value),
+        avionicos: nn($('f_avionicos').value), local: nn($('f_local').value), matricula: nn($('f_matricula').value),
+        assentos: nn($('f_assentos').value), autonomia: nn($('f_autonomia').value), observacoes: nn($('f_observacoes').value),
+        ativo: $('f_ativo').checked, foto_url
+      };
+      let res;
+      if(editing) res = await sb.from('aeronaves').update(rec).eq('id',editing.id);
+      else res = await sb.from('aeronaves').insert(rec);
+      if(res.error) throw res.error;
+      $('modal').classList.remove('open'); loadList();
+      msg($('appMsg'),'ok', editing?'Aeronave atualizada.':'Aeronave criada.'); setTimeout(()=>msg($('appMsg'),''),3500);
+    }catch(err){ msg($('formMsg'),'err', err.message||'Erro ao salvar.'); }
+    $('saveBtn').disabled=false; $('saveBtn').textContent='Salvar';
+  });
+  const nn = v => { v=(v||'').trim(); return v===''?null:v; };
+
+  $('delBtn').addEventListener('click', async()=>{
+    if(!editing) return;
+    if(!confirm('Excluir "'+editing.nome+'" definitivamente? (Para só tirar do site, desmarque “Visível no site”.)')) return;
+    const { error } = await sb.from('aeronaves').delete().eq('id',editing.id);
+    if(error){ msg($('formMsg'),'err',error.message); return; }
+    $('modal').classList.remove('open'); loadList();
+    msg($('appMsg'),'ok','Aeronave excluída.'); setTimeout(()=>msg($('appMsg'),''),3500);
+  });
+
+  sb.auth.onAuthStateChange(()=>{});
+  refresh();
+</script>

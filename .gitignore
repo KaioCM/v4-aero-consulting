@@ -1,0 +1,9 @@
+# Notas internas e pacotes — não publicar
+BRIEFING.md
+*.zip
+
+# Assets órfãos (não usados pelo site)
+assets/aeronave-*.svg
+assets/hero.svg
+assets/av-06.png
+assets/instagram.svg

@@ -1,0 +1,643 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="assets/logo-mark.svg" type="image/svg+xml">
+<title>V4 Aero Consulting — Aeronaves disponíveis para venda</title>
+<meta name="description" content="Compra, venda e intermediação de aeronaves, com ficha técnica completa e assessoria em todo o processo.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --blue-950:#061423;
+    --blue-900:#0B2137;
+    --blue-800:#12314D;
+    --blue-700:#1B4269;
+    --blue-600:#2A5B8C;
+    --blue-500:#3E77AE;
+    --blue-300:#8FB6D8;
+    --blue-100:#DCE8F3;
+    --blue-050:#F1F5FA;
+    --white:#FFFFFF;
+    --ease:cubic-bezier(.2,.6,.2,1);
+    --maxw:1160px;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'IBM Plex Sans',system-ui,sans-serif;
+    color:var(--blue-900);background:var(--white);line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+
+  .mono{font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.14em;font-size:.72rem;color:var(--blue-600)}
+  .tnum{font-family:'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums}
+  .wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:clamp(1.1rem,4vw,2.2rem)}
+
+  h1,h2,h3{font-weight:600;letter-spacing:-.01em;line-height:1.2}
+  .sec{padding-block:clamp(3.5rem,7vw,6rem)}
+  .sec-head{margin-bottom:2.4rem}
+  .sec-head .k{display:block;margin-bottom:.7rem}
+  .sec-head h2{font-size:clamp(1.7rem,3.4vw,2.5rem)}
+
+  /* ---------- buttons ---------- */
+  .btn{display:inline-flex;align-items:center;gap:.5rem;font-weight:500;font-size:.95rem;padding:.7rem 1.3rem;border-radius:3px;border:1px solid transparent;transition:.2s var(--ease);cursor:pointer}
+  .btn-p{background:var(--blue-900);color:var(--white);border-color:var(--blue-900)}
+  .btn-p:hover{background:var(--blue-800)}
+  .btn-s{border-color:var(--blue-300);color:var(--blue-900)}
+  .btn-s:hover{border-color:var(--blue-500);color:var(--blue-500)}
+  .btn-s.on-dark{border-color:var(--blue-700);color:var(--white)}
+  .btn-s.on-dark:hover{border-color:var(--blue-300);color:var(--blue-300)}
+
+  /* ---------- header ---------- */
+  header{position:fixed;top:0;left:0;right:0;z-index:60;background:var(--white);border-bottom:1px solid transparent;transition:.25s var(--ease)}
+  header.scrolled{border-bottom-color:var(--blue-100);box-shadow:0 1px 3px rgba(6,20,35,.06)}
+  .bar{display:flex;align-items:center;justify-content:space-between;height:60px}
+  .logo{display:inline-flex;align-items:center;gap:.6rem;color:var(--blue-900)}
+  .logo .mark{height:30px;width:auto;flex:none;display:block}
+  .logo .wm{display:flex;flex-direction:column;line-height:1.05}
+  .logo .wm b{font-weight:700;font-size:1.02rem;letter-spacing:-.01em;color:var(--blue-900)}
+  .logo .wm b i{font-style:normal;color:var(--blue-500)}
+  .logo .wm small{font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.26em;font-size:.54rem;color:var(--blue-600);margin-top:3px}
+  nav.main{display:flex;gap:1.7rem}
+  nav.main a{font-size:.92rem;color:var(--blue-600);font-weight:500;transition:.2s}
+  nav.main a:hover{color:var(--blue-900)}
+  .bar .end{display:flex;align-items:center;gap:1rem}
+  .menu-btn{display:none;width:26px;height:20px;position:relative}
+  .menu-btn span{position:absolute;left:0;right:0;height:2px;background:var(--blue-900);transition:.25s}
+  .menu-btn span:nth-child(1){top:0}.menu-btn span:nth-child(2){top:9px}.menu-btn span:nth-child(3){top:18px}
+  .mnav{display:none;flex-direction:column;background:var(--white);border-bottom:1px solid var(--blue-100)}
+  .mnav a{padding:.9rem clamp(1.1rem,4vw,2.2rem);border-top:1px solid var(--blue-050);font-size:.98rem;color:var(--blue-800)}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;min-height:62vh;background:var(--blue-950);color:var(--white);display:flex;align-items:center;overflow:hidden;padding-top:60px}
+  .hero .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.9}
+  .hero::after{content:"";position:absolute;inset:0;background:rgba(6,20,35,.6)}
+  .hero .wrap{position:relative;z-index:1;padding-block:clamp(1.4rem,3vw,2.4rem)}
+  .hero .k{color:var(--blue-300);display:block;margin-bottom:.8rem}
+  .hero h1{font-size:clamp(1.9rem,3.8vw,3rem);color:var(--white);max-width:20ch;margin-bottom:.85rem}
+  .hero p{color:#C3D3E4;max-width:52ch;font-size:1.05rem;margin-bottom:1.35rem}
+  .hero .actions{display:flex;flex-wrap:wrap;gap:.8rem}
+
+  /* ---------- catálogo ---------- */
+  .controls{display:flex;flex-direction:column;gap:.7rem;padding-bottom:1.4rem;border-bottom:1px solid var(--blue-300)}
+  .ctrl-line{display:flex;flex-wrap:wrap;align-items:baseline;gap:.4rem 1.1rem}
+  .ctrl-line > .lbl{margin-right:.2rem}
+  .opt{font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.1em;font-size:.72rem;color:var(--blue-600);padding-bottom:2px;border-bottom:1px solid transparent;transition:.18s}
+  .opt:hover{color:var(--blue-900)}
+  .opt.active{color:var(--blue-900);font-weight:600;border-bottom-color:var(--blue-900)}
+  .count{margin-left:auto;align-self:center}
+  .cat-note{font-family:'IBM Plex Mono',monospace;text-transform:none;letter-spacing:.02em;font-size:.7rem;color:var(--blue-600);margin-top:1rem}
+
+  .cat-head,.av-row{
+    display:grid;
+    grid-template-columns:84px minmax(120px,1.3fr) 54px 84px 78px 82px 76px 148px 24px;
+    align-items:center;column-gap:.6rem;
+  }
+  .cat-head{background:var(--blue-050);padding:.7rem .9rem;margin-top:1.4rem;border:1px solid var(--blue-100);border-bottom:0}
+  .cat-head span{font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.1em;font-size:.66rem;color:var(--blue-600)}
+  .cat-list{border:1px solid var(--blue-100);border-top:0}
+
+  .av{border-top:1px solid var(--blue-100)}
+  .av:first-child{border-top:0}
+  .av-row{width:100%;text-align:left;padding:.9rem;transition:background .18s var(--ease)}
+  .av:nth-child(odd) .av-row{background:rgba(241,245,250,.55)}
+  .av-row:hover{background:var(--blue-100)}
+  .c-img{width:88px;height:58px;overflow:hidden;background:var(--blue-050);border:1px solid var(--blue-100)}
+  .c-img img{width:100%;height:100%;object-fit:cover}
+  .c-nome b{display:block;font-family:'IBM Plex Sans';font-size:1.18rem;font-weight:600;color:var(--blue-900);line-height:1.25}
+  .c-nome .cat{font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.12em;font-size:.66rem;color:var(--blue-600);margin-top:.15rem}
+  .cell{font-family:'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums;font-size:.82rem;color:var(--blue-800)}
+  .cell.tbc{font-size:.72rem;color:var(--blue-600)}
+  .c-valor{font-family:'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums;text-align:right;color:var(--blue-900);white-space:nowrap}
+  .c-valor .vwrap{white-space:nowrap}
+  .c-valor .moeda{font-size:.72rem;color:var(--blue-600);margin-right:.35em}
+  .c-valor .cifra{font-weight:600;font-size:.94rem;color:var(--blue-900)}
+  .c-valor.tbc{font-weight:400;font-size:.72rem;color:var(--blue-600)}
+  .c-caret{justify-self:end;color:var(--blue-500);font-size:.9rem;transition:transform .25s var(--ease)}
+  .av.open .c-caret{transform:rotate(90deg)}
+
+  .av-detail{max-height:0;overflow:hidden;transition:max-height .32s var(--ease);background:var(--white)}
+  .av-detail .inner{padding:1.4rem .9rem 1.8rem;display:grid;grid-template-columns:minmax(220px,340px) 1fr;gap:1.8rem;border-top:1px dashed var(--blue-100)}
+  .av-detail .plate{border:1px solid var(--blue-100);background:var(--blue-050)}
+  .av-detail .plate img{width:100%;aspect-ratio:3/2;object-fit:cover}
+  .ficha{display:grid;grid-template-columns:1fr 1fr;gap:.1rem 1.6rem;align-content:start}
+  .ficha .f{display:flex;justify-content:space-between;gap:1rem;padding:.6rem 0;border-bottom:1px solid var(--blue-050)}
+  .ficha .f .k{font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.1em;font-size:.66rem;color:var(--blue-600)}
+  .ficha .f .v{font-family:'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums;font-size:.8rem;color:var(--blue-800);text-align:right}
+  .av-detail .cta{grid-column:1/-1;margin-top:.4rem}
+
+  /* ---------- serviços ---------- */
+  .svc-list{display:grid;grid-template-columns:1fr 1fr;gap:0 3rem}
+  .svc{padding:1.5rem 0;border-top:1px solid var(--blue-300)}
+  .svc h3{font-size:1.15rem;margin-bottom:.4rem}
+  .svc p{color:var(--blue-600);font-size:.96rem;max-width:44ch}
+
+  /* ---------- como trabalhamos ---------- */
+  .steps{border-top:1px solid var(--blue-100)}
+  .step{display:grid;grid-template-columns:64px 1fr;gap:1.4rem;padding:1.5rem 0;border-bottom:1px solid var(--blue-100);align-items:baseline}
+  .step .num{font-family:'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums;color:var(--blue-500);font-weight:600;font-size:1.05rem}
+  .step h3{font-size:1.12rem;margin-bottom:.3rem}
+  .step p{color:var(--blue-600);font-size:.96rem;max-width:60ch}
+
+  /* ---------- sobre ---------- */
+  .sobre{background:var(--blue-900);color:var(--white);position:relative;overflow:hidden}
+  .sobre::before{content:"";position:absolute;inset:0;background:url(assets/hero.png) center/cover no-repeat;opacity:.10}
+  .sobre .grid{position:relative;z-index:1;display:grid;grid-template-columns:1fr 2fr;gap:clamp(1.5rem,5vw,4rem);align-items:start}
+  .sobre h2{color:var(--white);font-size:clamp(1.7rem,3.4vw,2.4rem)}
+  .sobre .body p{color:#C3D3E4;font-size:1.05rem;margin-bottom:1.1rem;max-width:62ch}
+  .sobre .body p.ph{color:var(--blue-300);border-left:2px solid var(--blue-700);padding-left:1rem}
+
+  /* ---------- contato ---------- */
+  .contato .grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.5rem,5vw,4rem);align-items:center}
+  .cdata .row{display:grid;grid-template-columns:130px 1fr;gap:1rem;padding:.7rem 0;border-bottom:1px solid var(--blue-100)}
+  .cdata .row .v{font-weight:500}
+  .cdata .row a.v:hover{color:var(--blue-500)}
+  .ccall h2{font-size:clamp(1.5rem,3vw,2.1rem);margin-bottom:1rem}
+  .ccall p{color:var(--blue-600);margin-bottom:1.4rem;max-width:40ch}
+
+  /* ---------- instagram ---------- */
+  .ig-lead{color:var(--blue-600);max-width:62ch;margin-bottom:2.2rem;font-size:1.02rem}
+  .ig-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:2px}
+  .ig-post{overflow:hidden;display:block;aspect-ratio:1/1;background:var(--blue-100)}
+  .ig-post img{width:100%;height:100%;object-fit:cover;transition:transform .25s var(--ease)}
+  .ig-post:hover img{transform:scale(1.02)}
+  .ig-bar{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;border-top:1px solid var(--blue-300);margin-top:1.4rem;padding-top:1.2rem}
+  .ig-handle{display:inline-flex;align-items:center;gap:.55rem;color:var(--blue-900);font-weight:500}
+  .ig-handle:hover{color:var(--blue-500)}
+  .ig-glyph{width:20px;height:20px;flex:none;display:block}
+  .ig-stats{font-family:'IBM Plex Mono',monospace;font-size:.75rem;color:var(--blue-600)}
+  .ig-cta{margin-top:1.8rem;text-align:center}
+
+  /* ---------- footer ---------- */
+  footer{background:var(--blue-950);color:#9DB4CC;padding-block:2.6rem}
+  .foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1.4rem;align-items:center}
+  footer .logo{color:var(--white)}
+  footer .logo .wm b{color:var(--white)}footer .logo .wm b i{color:var(--blue-300)}
+  footer .logo .wm small{color:var(--blue-300)}
+  footer .desc{font-size:.9rem;max-width:34ch}
+  .foot-nav{display:flex;flex-wrap:wrap;gap:.4rem 1.2rem}
+  .foot-nav a{font-size:.86rem}.foot-nav a:hover{color:var(--white)}
+  .foot-copy{margin-top:1.6rem;padding-top:1.2rem;border-top:1px solid var(--blue-800);font-size:.82rem;color:#5E7897}
+
+  /* ---------- whatsapp float ---------- */
+  .wa{position:fixed;right:18px;bottom:18px;z-index:70;background:var(--blue-900);color:var(--white);border-radius:3px;padding:.75rem 1.05rem;font-size:.9rem;font-weight:500;box-shadow:0 1px 3px rgba(6,20,35,.12);transition:.2s var(--ease)}
+  .wa:hover{background:var(--blue-800)}
+
+  /* ---------- movimento ---------- */
+  .reveal{opacity:0;transform:translateY(10px);transition:opacity .4s var(--ease),transform .4s var(--ease)}
+  .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}.av-detail{transition:none}}
+
+  /* ---------- responsivo ---------- */
+  @media (max-width:1024px){
+    nav.main{display:none}.menu-btn{display:block}
+    .svc-list,.sobre .grid,.contato .grid{grid-template-columns:1fr;gap:1.4rem}
+    .ig-grid{grid-template-columns:repeat(3,1fr)}
+    .av-detail .inner{grid-template-columns:1fr}
+    .cat-head{display:none}
+    .av-row{grid-template-columns:88px 1fr 26px;column-gap:.8rem;row-gap:.5rem;padding:1rem;align-items:start}
+    .c-img{grid-row:span 2}
+    .c-caret{grid-column:3;grid-row:1}
+    .c-nome{grid-column:2}
+    .cell,.c-valor{grid-column:2/-1;display:flex;justify-content:space-between;font-size:.82rem;border-top:1px solid var(--blue-050);padding-top:.35rem}
+    .cell::before,.c-valor::before{content:attr(data-label);font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.1em;font-size:.62rem;color:var(--blue-600);font-weight:400}
+    .ficha{grid-template-columns:1fr}
+  }
+  @media (max-width:600px){
+    .ig-grid{grid-template-columns:repeat(2,1fr)}
+    .ig-bar{flex-direction:column;align-items:flex-start}
+  }
+  @media (max-width:400px){.hero .actions .btn{flex:1;justify-content:center}}
+</style>
+
+<!-- ===================== HEADER ===================== -->
+<header id="header">
+  <div class="wrap bar">
+    <a href="#top" class="logo" aria-label="V4 Aero Consulting — início">
+      <svg class="mark" viewBox="0 0 48 48" aria-hidden="true"><path d="M24 4 L24 33 L6 42 Z" fill="currentColor"/><path d="M24 4 L42 42 L24 33 Z" fill="#3E77AE"/></svg>
+      <span class="wm"><b>V4 <i>Aero</i></b><small>Consulting</small></span>
+    </a>
+    <nav class="main">
+      <a href="#aeronaves">Aeronaves</a>
+      <a href="#servicos">Serviços</a>
+      <a href="#sobre">Sobre</a>
+      <a href="#instagram">Instagram</a>
+      <a href="#contato">Contato</a>
+    </nav>
+    <div class="end">
+      <a href="https://wa.me/5565981476175" class="btn btn-p">Falar no WhatsApp</a>
+      <button class="menu-btn" id="menuBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+  <nav class="mnav" id="mnav">
+    <a href="#aeronaves">Aeronaves</a>
+    <a href="#servicos">Serviços</a>
+    <a href="#sobre">Sobre</a>
+    <a href="#instagram">Instagram</a>
+    <a href="#contato">Contato</a>
+  </nav>
+</header>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero" id="top">
+  <!-- Fundo de ambiente (aeronave genérica ao longe, imagem ilustrativa) — pode trocar por foto real da V4 -->
+  <img class="bg" src="assets/hero.png" alt="" aria-hidden="true">
+  <div class="wrap">
+    <span class="k mono">Compra · Venda · Intermediação de aeronaves</span>
+    <h1>Aeronaves disponíveis para venda, com ficha técnica completa.</h1>
+    <p>Assessoria em todo o processo — da avaliação e negociação à documentação e transferência.</p>
+    <div class="actions">
+      <a href="#aeronaves" class="btn btn-p">Ver aeronaves</a>
+      <a href="https://wa.me/5565981476175" class="btn btn-s on-dark">Falar no WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 01 · AERONAVES ===================== -->
+<section class="sec" id="aeronaves">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="k mono">01 · Catálogo</span>
+      <h2>Aeronaves disponíveis</h2>
+    </div>
+
+    <div class="controls reveal">
+      <div class="ctrl-line">
+        <span class="lbl mono">Categoria:</span>
+        <button class="opt filtro active" data-f="todas">Todas</button>
+        <button class="opt filtro" data-f="monomotor">Monomotor</button>
+        <button class="opt filtro" data-f="bimotor">Bimotor</button>
+        <button class="opt filtro" data-f="turboelice">Turboélice</button>
+        <button class="opt filtro" data-f="helicoptero">Helicóptero</button>
+        <span class="count mono" id="count">06 aeronaves</span>
+      </div>
+      <div class="ctrl-line">
+        <span class="lbl mono">Ordenar:</span>
+        <button class="opt ord active" data-s="recentes">Mais recentes</button>
+        <button class="opt ord" data-s="valor">Menor valor</button>
+        <!-- ordenação por hora de célula fica ativa quando data-tt receber valores reais -->
+        <button class="opt ord" data-s="tt">Menor hora de célula</button>
+      </div>
+    </div>
+
+    <div class="cat-head reveal">
+      <span></span><span>Aeronave</span><span>Ano</span><span>Célula (TT)</span><span>Motor</span><span>Aviônicos</span><span>Local</span><span>Valor</span><span></span>
+    </div>
+
+    <div class="cat-list reveal" id="catList">
+      <!-- SUBSTITUIR POR FOTO REAL: Cessna 210 -->
+      <div class="av" data-tipo="monomotor" data-moeda="BRL" data-valor="3000000" data-tt="" data-ordem="1" data-nome="Cessna 210">
+        <button class="av-row" aria-expanded="false">
+          <span class="c-img"><img src="assets/av-01.png" alt="Cessna 210" loading="lazy"></span>
+          <span class="c-nome"><b>Cessna 210</b><span class="cat">Monomotor</span></span>
+          <span class="cell tbc" data-label="Ano">[a confirmar]</span>
+          <span class="cell tbc" data-label="Célula (TT)">[a confirmar]</span>
+          <span class="cell tbc" data-label="Motor">[a confirmar]</span>
+          <span class="cell tbc" data-label="Aviônicos">[a confirmar]</span>
+          <span class="cell tbc" data-label="Local">[a confirmar]</span>
+          <span class="c-valor" data-label="Valor"><span class="vwrap"><span class="moeda">R$</span><span class="cifra">3.000.000,00</span></span></span>
+          <span class="c-caret">▸</span>
+        </button>
+        <div class="av-detail"><div class="inner">
+          <div class="plate"><img src="assets/av-01.png" alt="Cessna 210" loading="lazy"></div>
+          <div class="ficha">
+            <div class="f"><span class="k">Matrícula</span><span class="v">[a confirmar]</span></div>
+            <div class="f"><span class="k">Assentos</span><span class="v">[a confirmar]</span></div>
+            <div class="f"><span class="k">Autonomia</span><span class="v">[a confirmar]</span></div>
+            <div class="f"><span class="k">Situação</span><span class="v">Disponível</span></div>
+            <div class="f"><span class="k">Observações</span><span class="v">[a confirmar]</span></div>
+            <div class="cta"><a class="btn btn-p" href="https://wa.me/5565981476175?text=Ol%C3%A1%2C%20tenho%20interesse%20na%20Cessna%20210%20anunciada%20no%20site.">Consultar esta aeronave</a></div>
+          </div>
+        </div></div>
+      </div>
+
+      <!-- SUBSTITUIR POR FOTO REAL: Piper Cheyenne II -->
+      <div class="av" data-tipo="turboelice" data-moeda="USD" data-valor="1000000" data-tt="" data-ordem="2" data-nome="Piper Cheyenne II">
+        <button class="av-row" aria-expanded="false">
+          <span class="c-img"><img src="assets/av-02.png" alt="Piper Cheyenne II" loading="lazy"></span>
+          <span class="c-nome"><b>Piper Cheyenne II</b><span class="cat">Turboélice</span></span>
+          <span class="cell" data-label="Ano">1980</span>
+          <span class="cell tbc" data-label="Célula (TT)">[a confirmar]</span>
+          <span class="cell tbc" data-label="Motor">[a confirmar]</span>
+          <span class="cell tbc" data-label="Aviônicos">[a confirmar]</span>
+          <span class="cell tbc" data-label="Local">[a confirmar]</span>
+          <span class="c-valor" data-label="Valor"><span class="vwrap"><span class="moeda">US$</span><span class="cifra">1.000.000,00</span></span></span>
+          <span class="c-caret">▸</span>
+        </button>
+        <div class="av-detail"><div class="inner">
+          <div class="plate"><img src="assets/av-02.png" alt="Piper Cheyenne II" loading="lazy"></div>
+          <div class="ficha">
+            <div class="f"><span class="k">Matrícula</span><span class="v">[a confirmar]</span></div>
+            <div class="f"><span class="k">Assentos</span><span class="v">[a confirmar]</span></div>
+            <div class="f"><span class="k">Autonomia</span><span class="v">[a confirmar]</span></div>
+            <div class="f"><span class="k">Situação</span><span class="v">Disponível</span></div>
+            <div class="f"><span class="k">Observações</span><span class="v">[a confirmar]</span></div>
+            <div class="cta"><a class="btn btn-p" href="https://wa.me/5565981476175?text=Ol%C3%A1%2C%20tenho%20interesse%20na%20Piper%20Cheyenne%20II%20anunciada%20no%20site.">Consultar esta aeronave</a></div>
+          </div>
+        </div></div>
+      </div>
+
+      <!-- SUBSTITUIR POR FOTO REAL: Bell 206B -->
+      <div class="av" data-tipo="helicoptero" data-moeda="BRL" data-valor="1060000" data-tt="" data-ordem="3" data-nome="Bell 206B">
+        <button class="av-row" aria-expanded="false">
+          <span class="c-img"><img src="assets/av-03.png" alt="Bell 206B" loading="lazy"></span>
+          <span class="c-nome"><b>Bell 206B</b><span class="cat">Helicóptero</span></span>
+          <span class="cell" data-label="Ano">1996</span>
+          <span class="cell tbc" data-label="Célula (TT)">[a confirmar]</span>
+          <span class="cell tbc" data-label="Motor">[a confirmar]</span>
+          <span class="cell tbc" data-label="Aviônicos">[a confirmar]</span>
+          <span class="cell tbc" data-label="Local">[a confirmar]</span>
+          <span class="c-valor" data-label="Valor"><span class="vwrap"><span class="moeda">R$</span><span class="cifra">1.060.000,00</span></span></span>
+          <span class="c-caret">▸</span>
+        </button>
+        <div class="av-detail"><div class="inner">
+          <div class="plate"><img src="assets/av-03.png" alt="Bell 206B" loading="lazy"></div>
+          <div class="ficha">
+            <div class="f"><span class="k">Matrícula</span><span class="v">[a confirmar]</span></div>
+            <div class="f"><span class="k">Assentos</span><span class="v">5</span></div>
+            <div class="f"><span class="k">Autonomia</span><span class="v">[a confirmar]</span></div>
+            <div class="f"><span class="k">Situação</span><span class="v">Disponível</span></div>
+            <div class="f"><span class="k">Observações</span><span class="v">[a confirmar]</span></div>
+            <div class="cta"><a class="btn btn-p" href="https://wa.me/5565981476175?text=Ol%C3%A1%2C%20tenho%20interesse%20no%20Bell%20206B%20anunciado%20no%20site.">Consultar esta aeronave</a></div>
+          </div>
+        </div></div>
+      </div>
+
+      <!-- SUBSTITUIR POR FOTO REAL: Robinson R44 Raven II (usando foto de helicóptero como placeholder) -->
+      <div class="av" data-tipo="helicoptero" data-moeda="BRL" data-valor="0" data-tt="" data-ordem="4" data-nome="Robinson R44 Raven II">
+        <button class="av-row" aria-expanded="false">
+          <span class="c-img"><img src="assets/av-03.png" alt="Robinson R44 Raven II" loading="lazy"></span>
+          <span class="c-nome"><b>Robinson R44 Raven II</b><span class="cat">Helicóptero</span></span>
+          <span class="cell tbc" data-label="Ano">[a confirmar]</span>
+          <span class="cell tbc" data-label="Célula (TT)">[a confirmar]</span>
+          <span class="cell tbc" data-label="Motor">[a confirmar]</span>
+          <span class="cell tbc" data-label="Aviônicos">[a confirmar]</span>
+          <span class="cell tbc" data-label="Local">[a confirmar]</span>
+          <span class="c-valor tbc" data-label="Valor">[a confirmar]</span>
+          <span class="c-caret">▸</span>
+        </button>
+        <div class="av-detail"><div class="inner">
+          <div class="plate"><img src="assets/av-03.png" alt="Robinson R44 Raven II" loading="lazy"></div>
+          <div class="ficha">
+            <div class="f"><span class="k">Matrícula</span><span class="v">[a confirmar]</span></div>
+            <div class="f"><span class="k">Assentos</span><span class="v">[a confirmar]</span></div>
+            <div class="f"><span class="k">Autonomia</span><span class="v">[a confirmar]</span></div>
+            <div class="f"><span class="k">Situação</span><span class="v">Disponível</span></div>
+            <div class="f"><span class="k">Observações</span><span class="v">[a confirmar]</span></div>
+            <div class="cta"><a class="btn btn-p" href="https://wa.me/5565981476175?text=Ol%C3%A1%2C%20tenho%20interesse%20no%20Robinson%20R44%20Raven%20II%20anunciado%20no%20site.">Consultar esta aeronave</a></div>
+          </div>
+        </div></div>
+      </div>
+
+      <!-- SUBSTITUIR POR FOTO REAL: aeronave 05 (reservada) -->
+      <div class="av" data-tipo="bimotor" data-moeda="BRL" data-valor="0" data-tt="" data-ordem="5" data-nome="aeronave">
+        <button class="av-row" aria-expanded="false">
+          <span class="c-img"><img src="assets/av-04.png" alt="Aeronave bimotor" loading="lazy"></span>
+          <span class="c-nome"><b>[Fabricante Modelo]</b><span class="cat">Bimotor</span></span>
+          <span class="cell tbc" data-label="Ano">[a confirmar]</span>
+          <span class="cell tbc" data-label="Célula (TT)">[a confirmar]</span>
+          <span class="cell tbc" data-label="Motor">[a confirmar]</span>
+          <span class="cell tbc" data-label="Aviônicos">[a confirmar]</span>
+          <span class="cell tbc" data-label="Local">[a confirmar]</span>
+          <span class="c-valor tbc" data-label="Valor">[a confirmar]</span>
+          <span class="c-caret">▸</span>
+        </button>
+        <div class="av-detail"><div class="inner">
+          <div class="plate"><img src="assets/av-04.png" alt="Aeronave bimotor" loading="lazy"></div>
+          <div class="ficha">
+            <div class="f"><span class="k">Matrícula</span><span class="v">[a confirmar]</span></div>
+            <div class="f"><span class="k">Assentos</span><span class="v">[a confirmar]</span></div>
+            <div class="f"><span class="k">Autonomia</span><span class="v">[a confirmar]</span></div>
+            <div class="f"><span class="k">Situação</span><span class="v">Disponível</span></div>
+            <div class="f"><span class="k">Observações</span><span class="v">[a confirmar]</span></div>
+            <div class="cta"><a class="btn btn-p" href="https://wa.me/5565981476175?text=Ol%C3%A1%2C%20tenho%20interesse%20na%20aeronave%20anunciada%20no%20site.">Consultar esta aeronave</a></div>
+          </div>
+        </div></div>
+      </div>
+
+      <!-- SUBSTITUIR POR FOTO REAL: aeronave 06 (reservada) -->
+      <div class="av" data-tipo="monomotor" data-moeda="BRL" data-valor="0" data-tt="" data-ordem="6" data-nome="aeronave">
+        <button class="av-row" aria-expanded="false">
+          <span class="c-img"><img src="assets/av-05.png" alt="Aeronave monomotor" loading="lazy"></span>
+          <span class="c-nome"><b>[Fabricante Modelo]</b><span class="cat">Monomotor</span></span>
+          <span class="cell tbc" data-label="Ano">[a confirmar]</span>
+          <span class="cell tbc" data-label="Célula (TT)">[a confirmar]</span>
+          <span class="cell tbc" data-label="Motor">[a confirmar]</span>
+          <span class="cell tbc" data-label="Aviônicos">[a confirmar]</span>
+          <span class="cell tbc" data-label="Local">[a confirmar]</span>
+          <span class="c-valor tbc" data-label="Valor">[a confirmar]</span>
+          <span class="c-caret">▸</span>
+        </button>
+        <div class="av-detail"><div class="inner">
+          <div class="plate"><img src="assets/av-05.png" alt="Aeronave monomotor" loading="lazy"></div>
+          <div class="ficha">
+            <div class="f"><span class="k">Matrícula</span><span class="v">[a confirmar]</span></div>
+            <div class="f"><span class="k">Assentos</span><span class="v">[a confirmar]</span></div>
+            <div class="f"><span class="k">Autonomia</span><span class="v">[a confirmar]</span></div>
+            <div class="f"><span class="k">Situação</span><span class="v">Disponível</span></div>
+            <div class="f"><span class="k">Observações</span><span class="v">[a confirmar]</span></div>
+            <div class="cta"><a class="btn btn-p" href="https://wa.me/5565981476175?text=Ol%C3%A1%2C%20tenho%20interesse%20na%20aeronave%20anunciada%20no%20site.">Consultar esta aeronave</a></div>
+          </div>
+        </div></div>
+      </div>
+    </div>
+    <!-- ATUALIZAR PERIODICAMENTE: dados lidos do Instagram da V4 em jul/2026 — confirmar com a V4 -->
+    <p class="cat-note mono reveal">Valores e disponibilidade sujeitos a confirmação.</p>
+  </div>
+</section>
+
+<!-- ===================== 02 · SERVIÇOS ===================== -->
+<section class="sec" id="servicos" style="background:var(--blue-050)">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="k mono">02 · Serviços</span><h2>O que fazemos</h2></div>
+    <div class="svc-list">
+      <div class="svc reveal"><h3>Compra de aeronaves</h3><p>Busca ativa no mercado conforme o perfil de missão, orçamento e operação do cliente.</p></div>
+      <div class="svc reveal"><h3>Venda de aeronaves</h3><p>Avaliação, precificação, divulgação e condução da negociação até o fechamento.</p></div>
+      <div class="svc reveal"><h3>Intermediação</h3><p>Atuação entre comprador e vendedor, com segurança e transparência em todas as etapas.</p></div>
+      <div class="svc reveal"><h3>Assessoria completa</h3><p>Suporte na documentação, na vistoria e nos trâmites necessários à transferência.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 03 · COMO TRABALHAMOS ===================== -->
+<section class="sec" id="como">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="k mono">03 · Processo</span><h2>Como trabalhamos</h2></div>
+    <div class="steps reveal">
+      <div class="step"><span class="num">01</span><div><h3>Contato e briefing</h3><p>Entendemos o tipo de missão, o orçamento e o perfil de operação pretendido.</p></div></div>
+      <div class="step"><span class="num">02</span><div><h3>Seleção de opções</h3><p>Apresentamos as aeronaves compatíveis, com ficha técnica e histórico.</p></div></div>
+      <div class="step"><span class="num">03</span><div><h3>Negociação e vistoria</h3><p>Conduzimos as tratativas e acompanhamos a vistoria da aeronave escolhida.</p></div></div>
+      <div class="step"><span class="num">04</span><div><h3>Documentação e transferência</h3><p>Acompanhamos os trâmites até a conclusão da transferência.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 04 · SOBRE ===================== -->
+<section class="sec sobre" id="sobre">
+  <div class="wrap grid">
+    <h2 class="reveal">Sobre a V4</h2>
+    <div class="body reveal">
+      <p>A V4 Aero Consulting atua na compra, venda e intermediação de aeronaves, com assessoria completa em todas as etapas do processo.</p>
+      <p>O trabalho começa antes do anúncio: entender a missão pretendida, o orçamento e o perfil de operação, para apresentar apenas o que faz sentido. Conduzimos a negociação e acompanhamos a documentação até a transferência ser concluída.</p>
+      <p class="ph">[Parágrafo sobre histórico e equipe — a confirmar]</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 04 · INSTAGRAM ===================== -->
+<section class="sec ig" id="instagram" style="background:var(--blue-050)">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="k mono">04 · Instagram</span><h2>As aeronaves novas aparecem primeiro no Instagram.</h2></div>
+    <p class="ig-lead reveal">Publicamos as aeronaves que entram na carteira, os detalhes de cada uma e os negócios já concluídos. Acompanhe para saber das oportunidades antes que elas saiam da lista.</p>
+    <div class="ig-grid reveal">
+      <!-- SUBSTITUIR POR PRINT REAL DE PUBLICAÇÃO -->
+      <a class="ig-post" href="https://instagram.com/v4aeroconsulting" target="_blank" rel="noopener noreferrer"><img src="assets/post-placeholder.svg" alt="Publicação no Instagram" loading="lazy"></a>
+      <!-- SUBSTITUIR POR PRINT REAL DE PUBLICAÇÃO -->
+      <a class="ig-post" href="https://instagram.com/v4aeroconsulting" target="_blank" rel="noopener noreferrer"><img src="assets/post-placeholder.svg" alt="Publicação no Instagram" loading="lazy"></a>
+      <!-- SUBSTITUIR POR PRINT REAL DE PUBLICAÇÃO -->
+      <a class="ig-post" href="https://instagram.com/v4aeroconsulting" target="_blank" rel="noopener noreferrer"><img src="assets/post-placeholder.svg" alt="Publicação no Instagram" loading="lazy"></a>
+      <!-- SUBSTITUIR POR PRINT REAL DE PUBLICAÇÃO -->
+      <a class="ig-post" href="https://instagram.com/v4aeroconsulting" target="_blank" rel="noopener noreferrer"><img src="assets/post-placeholder.svg" alt="Publicação no Instagram" loading="lazy"></a>
+      <!-- SUBSTITUIR POR PRINT REAL DE PUBLICAÇÃO -->
+      <a class="ig-post" href="https://instagram.com/v4aeroconsulting" target="_blank" rel="noopener noreferrer"><img src="assets/post-placeholder.svg" alt="Publicação no Instagram" loading="lazy"></a>
+      <!-- SUBSTITUIR POR PRINT REAL DE PUBLICAÇÃO -->
+      <a class="ig-post" href="https://instagram.com/v4aeroconsulting" target="_blank" rel="noopener noreferrer"><img src="assets/post-placeholder.svg" alt="Publicação no Instagram" loading="lazy"></a>
+    </div>
+    <div class="ig-bar reveal">
+      <a class="ig-handle" href="https://instagram.com/v4aeroconsulting" target="_blank" rel="noopener noreferrer">
+        <svg class="ig-glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.2"/><circle cx="12" cy="12" r="4.6"/><circle cx="17.6" cy="6.4" r="1.15" fill="currentColor" stroke="none"/></svg>
+        @v4aeroconsulting
+      </a>
+      <!-- ATUALIZAR PERIODICAMENTE: contagem verificada em jul/2026 -->
+      <span class="ig-stats tnum">+4.600 seguidores · +240 publicações</span>
+    </div>
+    <div class="ig-cta reveal"><a class="btn btn-p" href="https://instagram.com/v4aeroconsulting" target="_blank" rel="noopener noreferrer">Ver perfil no Instagram →</a></div>
+  </div>
+</section>
+
+<!-- ===================== 05 · CONTATO ===================== -->
+<section class="sec contato" id="contato">
+  <div class="wrap grid">
+    <div class="cdata reveal">
+      <div class="row"><span class="k mono">WhatsApp</span><a class="v" href="https://wa.me/5565981476175">(65) 98147-6175</a></div>
+      <div class="row"><span class="k mono">Instagram</span><a class="v" href="https://instagram.com/v4aeroconsulting">@v4aeroconsulting</a></div>
+      <div class="row"><span class="k mono">E-mail</span><span class="v">[a confirmar]</span></div>
+      <div class="row"><span class="k mono">Localização</span><span class="v">[a confirmar]</span></div>
+    </div>
+    <div class="ccall reveal">
+      <h2>Vamos encontrar a sua aeronave.</h2>
+      <p>Fale com a nossa equipe e receba as opções disponíveis para o seu perfil de operação.</p>
+      <a href="https://wa.me/5565981476175" class="btn btn-p">Falar no WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <a href="#top" class="logo" aria-label="V4 Aero Consulting — início">
+      <svg class="mark" viewBox="0 0 48 48" aria-hidden="true"><path d="M24 4 L24 33 L6 42 Z" fill="currentColor"/><path d="M24 4 L42 42 L24 33 Z" fill="#3E77AE"/></svg>
+      <span class="wm"><b>V4 <i>Aero</i></b><small>Consulting</small></span>
+    </a>
+      <p class="desc">Compra, venda e intermediação de aeronaves.</p>
+      <nav class="foot-nav">
+        <a href="#aeronaves">Aeronaves</a>
+        <a href="#servicos">Serviços</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#contato">Contato</a>
+      </nav>
+    </div>
+    <div class="foot-copy">© 2026 V4 Aero Consulting</div>
+  </div>
+</footer>
+
+<a class="wa" href="https://wa.me/5565981476175" target="_blank" rel="noopener">Falar no WhatsApp</a>
+
+<script type="module">
+  import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+  const SB_URL = 'https://hobtolagifjjxcmxreip.supabase.co';
+  const SB_KEY = 'sb_publishable_29hmID65I5x-X0Ieot6f5Q_eLOk_Pkl';
+
+  // header scrolled + menu mobile
+  const header=document.getElementById('header');
+  addEventListener('scroll',()=>header.classList.toggle('scrolled',scrollY>10),{passive:true});
+  const mnav=document.getElementById('mnav');
+  document.getElementById('menuBtn').addEventListener('click',()=>{mnav.style.display=mnav.style.display==='flex'?'none':'flex';});
+  mnav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>mnav.style.display='none'));
+
+  // reveal
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.1,rootMargin:'0px 0px -30px 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // ---------- catálogo ----------
+  const list=document.getElementById('catList');
+  const countEl=document.getElementById('count');
+  const pad=n=>String(n).padStart(2,'0');
+  let filtro='todas';
+  const rows=()=>[...list.querySelectorAll('.av')];
+  function apply(){let vis=0;rows().forEach(a=>{const sh=filtro==='todas'||a.dataset.tipo===filtro;a.style.display=sh?'':'none';if(sh)vis++;});countEl.textContent=pad(vis)+(vis===1?' aeronave':' aeronaves');}
+  document.querySelectorAll('.filtro').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.filtro').forEach(x=>x.classList.remove('active'));b.classList.add('active');filtro=b.dataset.f;apply();}));
+  // ─────────────────────────────────────────────────────────────
+  // Cotação de referência — USADA APENAS PARA ORDENAR A TABELA.
+  // Nunca é exibida na tela e nunca converte o valor anunciado. ATUALIZAR PERIODICAMENTE.
+  // ─────────────────────────────────────────────────────────────
+  const USD_BRL_REFERENCIA = 5.40;
+  const valorOrd=el=>{const v=parseFloat(el.dataset.valor)||0;return v===0?Infinity:v*(el.dataset.moeda==='USD'?USD_BRL_REFERENCIA:1);};
+  document.querySelectorAll('.ord').forEach(b=>b.addEventListener('click',()=>{
+    document.querySelectorAll('.ord').forEach(x=>x.classList.remove('active'));b.classList.add('active');
+    const s=b.dataset.s;const arr=rows();
+    const num=(el,k)=>{const v=parseFloat(el.dataset[k]);return isNaN(v)||v===0?Infinity:v;};
+    if(s==='valor')arr.sort((a,b)=>valorOrd(a)-valorOrd(b));
+    else if(s==='tt')arr.sort((a,b)=>num(a,'tt')-num(b,'tt'));
+    else arr.sort((a,b)=>(+a.dataset.ordem)-(+b.dataset.ordem));
+    arr.forEach(a=>list.appendChild(a));
+  }));
+  function wireExpand(){list.querySelectorAll('.av-row').forEach(row=>{if(row.__w)return;row.__w=1;row.addEventListener('click',()=>{const av=row.closest('.av');const det=av.querySelector('.av-detail');const open=av.classList.toggle('open');row.setAttribute('aria-expanded',open);det.style.maxHeight=open?det.querySelector('.inner').scrollHeight+40+'px':null;});});}
+  wireExpand();apply();
+
+  // render a partir do banco
+  const CATS={monomotor:'Monomotor',bimotor:'Bimotor',turboelice:'Turboélice',helicoptero:'Helicóptero'};
+  const nf=new Intl.NumberFormat('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+  const esc=s=>(s??'').toString().replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const cellField=(l,v)=> v&&String(v).trim()!=='' ? `<span class="cell" data-label="${l}">${esc(v)}</span>` : `<span class="cell tbc" data-label="${l}">[a confirmar]</span>`;
+  const ficha=(l,v)=> `<div class="f"><span class="k">${l}</span><span class="v">${v&&String(v).trim()!==''?esc(v):'[a confirmar]'}</span></div>`;
+  function valorCell(av){if(av.valor==null||+av.valor===0)return `<span class="c-valor tbc" data-label="Valor">[a confirmar]</span>`;const m=av.moeda==='USD'?'US$':'R$';return `<span class="c-valor" data-label="Valor"><span class="vwrap"><span class="moeda">${m}</span><span class="cifra">${nf.format(av.valor)}</span></span></span>`;}
+  function wa(av){const t=av.nome&&!av.nome.includes('[')?`Olá, tenho interesse na aeronave ${av.nome} anunciada no site.`:'Olá, tenho interesse na aeronave anunciada no site.';return 'https://wa.me/5565981476175?text='+encodeURIComponent(t);}
+  function rowHTML(av){const foto=esc(av.foto_url||'assets/logo-mark.svg');const nome=esc(av.nome||'[a confirmar]');const dv=av.valor==null?'0':String(av.valor);
+    return `<div class="av" data-tipo="${esc(av.categoria)}" data-moeda="${esc(av.moeda||'BRL')}" data-valor="${dv}" data-tt="" data-ordem="${av.ordem??0}" data-nome="${nome}">
+      <button class="av-row" aria-expanded="false">
+        <span class="c-img"><img src="${foto}" alt="${nome}" loading="lazy"></span>
+        <span class="c-nome"><b>${nome}</b><span class="cat">${CATS[av.categoria]||esc(av.categoria)}</span></span>
+        ${cellField('Ano',av.ano)}${cellField('Célula (TT)',av.celula_tt)}${cellField('Motor',av.motor)}${cellField('Aviônicos',av.avionicos)}${cellField('Local',av.local)}
+        ${valorCell(av)}
+        <span class="c-caret">▸</span>
+      </button>
+      <div class="av-detail"><div class="inner">
+        <div class="plate"><img src="${foto}" alt="${nome}" loading="lazy"></div>
+        <div class="ficha">
+          ${ficha('Matrícula',av.matricula)}${ficha('Assentos',av.assentos)}${ficha('Autonomia',av.autonomia)}${ficha('Situação',av.situacao||'Disponível')}${ficha('Observações',av.observacoes)}
+          <div class="cta"><a class="btn btn-p" href="${wa(av)}">Consultar esta aeronave</a></div>
+        </div>
+      </div></div>
+    </div>`;}
+
+  (async()=>{
+    try{
+      const sb=createClient(SB_URL,SB_KEY);
+      const {data,error}=await sb.from('aeronaves').select('*').eq('ativo',true).order('ordem',{ascending:true});
+      if(error) throw error;
+      if(Array.isArray(data)){
+        list.innerHTML = data.length ? data.map(rowHTML).join('') : '<p class="cat-note" style="text-align:center;padding:2rem 0">Nenhuma aeronave disponível no momento. Fale conosco no WhatsApp.</p>';
+        filtro='todas';document.querySelectorAll('.filtro').forEach(x=>x.classList.toggle('active',x.dataset.f==='todas'));
+        wireExpand();apply();
+      }
+    }catch(e){ console.warn('Catálogo: banco indisponível, usando conteúdo estático.', e.message); }
+  })();
+</script>

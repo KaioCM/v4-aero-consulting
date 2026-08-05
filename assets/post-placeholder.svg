@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600" role="img" aria-label="Publicacao do Instagram">
+  <rect width="600" height="600" fill="#F1F5FA"/>
+  <rect x="0.5" y="0.5" width="599" height="599" fill="none" stroke="#DCE8F3"/>
+  <g fill="#DCE8F3" stroke="#8FB6D8" stroke-width="2" stroke-linejoin="round">
+    <path d="M300 196 q13 0 15 22 l4 158 q0 14 -19 14 q-19 0 -19 -14 l4 -158 q2 -22 15 -22 Z"/>
+    <path d="M130 274 h340 q8 0 8 9 v12 q0 9 -8 9 h-340 q-8 0 -8 -9 v-12 q0 -9 8 -9 Z"/>
+    <path d="M232 366 h136 q6 0 6 6 v9 q0 6 -6 6 h-136 q-6 0 -6 -6 v-9 q0 -6 6 -6 Z"/>
+  </g>
+  <text x="300" y="466" font-family="'IBM Plex Mono',ui-monospace,monospace" font-size="15" letter-spacing="3" fill="#8FB6D8" text-anchor="middle">PUBLICAÇÃO</text>
+</svg>
