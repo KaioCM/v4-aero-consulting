@@ -96,7 +96,7 @@
 
   .cat-head,.av-row{
     display:grid;
-    grid-template-columns:84px minmax(120px,1.3fr) 54px 84px 78px 82px 76px 148px 24px;
+    grid-template-columns:84px minmax(140px,1fr) minmax(96px,auto) 150px 24px;
     align-items:center;column-gap:.6rem;
   }
   .cat-head{background:var(--blue-050);padding:.7rem .9rem;margin-top:1.4rem;border:1px solid var(--blue-100);border-bottom:0}
@@ -121,6 +121,12 @@
   .c-valor.tbc{font-weight:400;font-size:.72rem;color:var(--blue-600)}
   .c-caret{justify-self:end;color:var(--blue-500);font-size:.9rem;transition:transform .25s var(--ease)}
   .av.open .c-caret{transform:rotate(90deg)}
+  .c-sit{justify-self:start}
+  .sit{display:inline-block;font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.08em;font-size:.62rem;padding:.16rem .45rem;border-radius:2px;border:1px solid var(--blue-300);color:var(--blue-700);white-space:nowrap}
+  .sit.reservada{background:var(--blue-700);border-color:var(--blue-700);color:#fff}
+  .sit.vendida{background:var(--blue-900);border-color:var(--blue-900);color:#fff;text-decoration:line-through}
+  .av-detail .descr{white-space:pre-line;font-size:.95rem;color:var(--blue-800);line-height:1.6}
+  .av-detail .descr.tbc{color:var(--blue-600);font-style:italic}
 
   .av-detail{max-height:0;overflow:hidden;transition:max-height .32s var(--ease);background:var(--white)}
   .av-detail .inner{padding:1.4rem .9rem 1.8rem;display:grid;grid-template-columns:minmax(220px,340px) 1fr;gap:1.8rem;border-top:1px dashed var(--blue-100)}
@@ -221,8 +227,8 @@
     .c-img{grid-row:span 2}
     .c-caret{grid-column:3;grid-row:1}
     .c-nome{grid-column:2}
-    .cell,.c-valor{grid-column:2/-1;display:flex;justify-content:space-between;font-size:.82rem;border-top:1px solid var(--blue-050);padding-top:.35rem}
-    .cell::before,.c-valor::before{content:attr(data-label);font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.1em;font-size:.62rem;color:var(--blue-600);font-weight:400}
+    .cell,.c-valor,.c-sit{grid-column:2/-1;display:flex;justify-content:space-between;align-items:center;font-size:.82rem;border-top:1px solid var(--blue-050);padding-top:.35rem}
+    .cell::before,.c-valor::before,.c-sit::before{content:attr(data-label);font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.1em;font-size:.62rem;color:var(--blue-600);font-weight:400}
     .ficha{grid-template-columns:1fr}
   }
   @media (max-width:600px){
@@ -297,167 +303,117 @@
         <span class="lbl mono">Ordenar:</span>
         <button class="opt ord active" data-s="recentes">Mais recentes</button>
         <button class="opt ord" data-s="valor">Menor valor</button>
-        <!-- ordenação por hora de célula fica ativa quando data-tt receber valores reais -->
-        <button class="opt ord" data-s="tt">Menor hora de célula</button>
       </div>
     </div>
 
     <div class="cat-head reveal">
-      <span></span><span>Aeronave</span><span>Ano</span><span>Célula (TT)</span><span>Motor</span><span>Aviônicos</span><span>Local</span><span>Valor</span><span></span>
+      <span></span><span>Aeronave</span><span>Situação</span><span>Valor</span><span></span>
     </div>
 
     <div class="cat-list reveal" id="catList">
       <!-- SUBSTITUIR POR FOTO REAL: Cessna 210 -->
-      <div class="av" data-tipo="monomotor" data-moeda="BRL" data-valor="3000000" data-tt="" data-ordem="1" data-nome="Cessna 210">
+      <div class="av" data-tipo="monomotor" data-moeda="BRL" data-valor="3000000" data-ordem="1" data-nome="Cessna 210">
         <button class="av-row" aria-expanded="false">
-          <span class="c-img"><img src="assets/av-01.png" alt="Cessna 210" loading="lazy"></span>
+          <span class="c-img"><img src="assets/logo-mark.svg" alt="Cessna 210" loading="lazy" style="object-fit:contain;padding:14px"></span>
           <span class="c-nome"><b>Cessna 210</b><span class="cat">Monomotor</span></span>
-          <span class="cell tbc" data-label="Ano">[a confirmar]</span>
-          <span class="cell tbc" data-label="Célula (TT)">[a confirmar]</span>
-          <span class="cell tbc" data-label="Motor">[a confirmar]</span>
-          <span class="cell tbc" data-label="Aviônicos">[a confirmar]</span>
-          <span class="cell tbc" data-label="Local">[a confirmar]</span>
+          <span class="c-sit" data-label="Situação"><span class="sit">Disponível</span></span>
           <span class="c-valor" data-label="Valor"><span class="vwrap"><span class="moeda">R$</span><span class="cifra">3.000.000,00</span></span></span>
           <span class="c-caret">▸</span>
         </button>
         <div class="av-detail"><div class="inner">
-          <div class="plate"><img src="assets/av-01.png" alt="Cessna 210" loading="lazy"></div>
+          <div class="plate"><div class="gal-empty">Fotos em breve</div></div>
           <div class="ficha">
-            <div class="f"><span class="k">Matrícula</span><span class="v">[a confirmar]</span></div>
-            <div class="f"><span class="k">Assentos</span><span class="v">[a confirmar]</span></div>
-            <div class="f"><span class="k">Autonomia</span><span class="v">[a confirmar]</span></div>
-            <div class="f"><span class="k">Situação</span><span class="v">Disponível</span></div>
-            <div class="f"><span class="k">Observações</span><span class="v">[a confirmar]</span></div>
+            <div class="descr tbc">Descrição em breve. Fale conosco no WhatsApp para detalhes.</div>
             <div class="cta"><a class="btn btn-p" href="https://wa.me/5565981476175?text=Ol%C3%A1%2C%20tenho%20interesse%20na%20Cessna%20210%20anunciada%20no%20site.">Consultar esta aeronave</a></div>
           </div>
         </div></div>
       </div>
 
       <!-- SUBSTITUIR POR FOTO REAL: Piper Cheyenne II -->
-      <div class="av" data-tipo="turboelice" data-moeda="USD" data-valor="1000000" data-tt="" data-ordem="2" data-nome="Piper Cheyenne II">
+      <div class="av" data-tipo="turboelice" data-moeda="USD" data-valor="1000000" data-ordem="2" data-nome="Piper Cheyenne II">
         <button class="av-row" aria-expanded="false">
-          <span class="c-img"><img src="assets/av-02.png" alt="Piper Cheyenne II" loading="lazy"></span>
+          <span class="c-img"><img src="assets/logo-mark.svg" alt="Piper Cheyenne II" loading="lazy" style="object-fit:contain;padding:14px"></span>
           <span class="c-nome"><b>Piper Cheyenne II</b><span class="cat">Turboélice</span></span>
-          <span class="cell" data-label="Ano">1980</span>
-          <span class="cell tbc" data-label="Célula (TT)">[a confirmar]</span>
-          <span class="cell tbc" data-label="Motor">[a confirmar]</span>
-          <span class="cell tbc" data-label="Aviônicos">[a confirmar]</span>
-          <span class="cell tbc" data-label="Local">[a confirmar]</span>
+          <span class="c-sit" data-label="Situação"><span class="sit">Disponível</span></span>
           <span class="c-valor" data-label="Valor"><span class="vwrap"><span class="moeda">US$</span><span class="cifra">1.000.000,00</span></span></span>
           <span class="c-caret">▸</span>
         </button>
         <div class="av-detail"><div class="inner">
-          <div class="plate"><img src="assets/av-02.png" alt="Piper Cheyenne II" loading="lazy"></div>
+          <div class="plate"><div class="gal-empty">Fotos em breve</div></div>
           <div class="ficha">
-            <div class="f"><span class="k">Matrícula</span><span class="v">[a confirmar]</span></div>
-            <div class="f"><span class="k">Assentos</span><span class="v">[a confirmar]</span></div>
-            <div class="f"><span class="k">Autonomia</span><span class="v">[a confirmar]</span></div>
-            <div class="f"><span class="k">Situação</span><span class="v">Disponível</span></div>
-            <div class="f"><span class="k">Observações</span><span class="v">[a confirmar]</span></div>
+            <div class="descr tbc">Descrição em breve. Fale conosco no WhatsApp para detalhes.</div>
             <div class="cta"><a class="btn btn-p" href="https://wa.me/5565981476175?text=Ol%C3%A1%2C%20tenho%20interesse%20na%20Piper%20Cheyenne%20II%20anunciada%20no%20site.">Consultar esta aeronave</a></div>
           </div>
         </div></div>
       </div>
 
       <!-- SUBSTITUIR POR FOTO REAL: Bell 206B -->
-      <div class="av" data-tipo="helicoptero" data-moeda="BRL" data-valor="1060000" data-tt="" data-ordem="3" data-nome="Bell 206B">
+      <div class="av" data-tipo="helicoptero" data-moeda="BRL" data-valor="1060000" data-ordem="3" data-nome="Bell 206B">
         <button class="av-row" aria-expanded="false">
-          <span class="c-img"><img src="assets/av-03.png" alt="Bell 206B" loading="lazy"></span>
+          <span class="c-img"><img src="assets/logo-mark.svg" alt="Bell 206B" loading="lazy" style="object-fit:contain;padding:14px"></span>
           <span class="c-nome"><b>Bell 206B</b><span class="cat">Helicóptero</span></span>
-          <span class="cell" data-label="Ano">1996</span>
-          <span class="cell tbc" data-label="Célula (TT)">[a confirmar]</span>
-          <span class="cell tbc" data-label="Motor">[a confirmar]</span>
-          <span class="cell tbc" data-label="Aviônicos">[a confirmar]</span>
-          <span class="cell tbc" data-label="Local">[a confirmar]</span>
+          <span class="c-sit" data-label="Situação"><span class="sit">Disponível</span></span>
           <span class="c-valor" data-label="Valor"><span class="vwrap"><span class="moeda">R$</span><span class="cifra">1.060.000,00</span></span></span>
           <span class="c-caret">▸</span>
         </button>
         <div class="av-detail"><div class="inner">
-          <div class="plate"><img src="assets/av-03.png" alt="Bell 206B" loading="lazy"></div>
+          <div class="plate"><div class="gal-empty">Fotos em breve</div></div>
           <div class="ficha">
-            <div class="f"><span class="k">Matrícula</span><span class="v">[a confirmar]</span></div>
-            <div class="f"><span class="k">Assentos</span><span class="v">5</span></div>
-            <div class="f"><span class="k">Autonomia</span><span class="v">[a confirmar]</span></div>
-            <div class="f"><span class="k">Situação</span><span class="v">Disponível</span></div>
-            <div class="f"><span class="k">Observações</span><span class="v">[a confirmar]</span></div>
+            <div class="descr tbc">Descrição em breve. Fale conosco no WhatsApp para detalhes.</div>
             <div class="cta"><a class="btn btn-p" href="https://wa.me/5565981476175?text=Ol%C3%A1%2C%20tenho%20interesse%20no%20Bell%20206B%20anunciado%20no%20site.">Consultar esta aeronave</a></div>
           </div>
         </div></div>
       </div>
 
       <!-- SUBSTITUIR POR FOTO REAL: Robinson R44 Raven II (usando foto de helicóptero como placeholder) -->
-      <div class="av" data-tipo="helicoptero" data-moeda="BRL" data-valor="0" data-tt="" data-ordem="4" data-nome="Robinson R44 Raven II">
+      <div class="av" data-tipo="helicoptero" data-moeda="BRL" data-valor="0" data-ordem="4" data-nome="Robinson R44 Raven II">
         <button class="av-row" aria-expanded="false">
-          <span class="c-img"><img src="assets/av-03.png" alt="Robinson R44 Raven II" loading="lazy"></span>
+          <span class="c-img"><img src="assets/logo-mark.svg" alt="Robinson R44 Raven II" loading="lazy" style="object-fit:contain;padding:14px"></span>
           <span class="c-nome"><b>Robinson R44 Raven II</b><span class="cat">Helicóptero</span></span>
-          <span class="cell tbc" data-label="Ano">[a confirmar]</span>
-          <span class="cell tbc" data-label="Célula (TT)">[a confirmar]</span>
-          <span class="cell tbc" data-label="Motor">[a confirmar]</span>
-          <span class="cell tbc" data-label="Aviônicos">[a confirmar]</span>
-          <span class="cell tbc" data-label="Local">[a confirmar]</span>
+          <span class="c-sit" data-label="Situação"><span class="sit">Disponível</span></span>
           <span class="c-valor tbc" data-label="Valor">[a confirmar]</span>
           <span class="c-caret">▸</span>
         </button>
         <div class="av-detail"><div class="inner">
-          <div class="plate"><img src="assets/av-03.png" alt="Robinson R44 Raven II" loading="lazy"></div>
+          <div class="plate"><div class="gal-empty">Fotos em breve</div></div>
           <div class="ficha">
-            <div class="f"><span class="k">Matrícula</span><span class="v">[a confirmar]</span></div>
-            <div class="f"><span class="k">Assentos</span><span class="v">[a confirmar]</span></div>
-            <div class="f"><span class="k">Autonomia</span><span class="v">[a confirmar]</span></div>
-            <div class="f"><span class="k">Situação</span><span class="v">Disponível</span></div>
-            <div class="f"><span class="k">Observações</span><span class="v">[a confirmar]</span></div>
+            <div class="descr tbc">Descrição em breve. Fale conosco no WhatsApp para detalhes.</div>
             <div class="cta"><a class="btn btn-p" href="https://wa.me/5565981476175?text=Ol%C3%A1%2C%20tenho%20interesse%20no%20Robinson%20R44%20Raven%20II%20anunciado%20no%20site.">Consultar esta aeronave</a></div>
           </div>
         </div></div>
       </div>
 
       <!-- SUBSTITUIR POR FOTO REAL: aeronave 05 (reservada) -->
-      <div class="av" data-tipo="bimotor" data-moeda="BRL" data-valor="0" data-tt="" data-ordem="5" data-nome="aeronave">
+      <div class="av" data-tipo="bimotor" data-moeda="BRL" data-valor="0" data-ordem="5" data-nome="aeronave">
         <button class="av-row" aria-expanded="false">
-          <span class="c-img"><img src="assets/av-04.png" alt="Aeronave bimotor" loading="lazy"></span>
+          <span class="c-img"><img src="assets/logo-mark.svg" alt="Aeronave bimotor" loading="lazy" style="object-fit:contain;padding:14px"></span>
           <span class="c-nome"><b>[Fabricante Modelo]</b><span class="cat">Bimotor</span></span>
-          <span class="cell tbc" data-label="Ano">[a confirmar]</span>
-          <span class="cell tbc" data-label="Célula (TT)">[a confirmar]</span>
-          <span class="cell tbc" data-label="Motor">[a confirmar]</span>
-          <span class="cell tbc" data-label="Aviônicos">[a confirmar]</span>
-          <span class="cell tbc" data-label="Local">[a confirmar]</span>
+          <span class="c-sit" data-label="Situação"><span class="sit reservada">Reservada</span></span>
           <span class="c-valor tbc" data-label="Valor">[a confirmar]</span>
           <span class="c-caret">▸</span>
         </button>
         <div class="av-detail"><div class="inner">
-          <div class="plate"><img src="assets/av-04.png" alt="Aeronave bimotor" loading="lazy"></div>
+          <div class="plate"><div class="gal-empty">Fotos em breve</div></div>
           <div class="ficha">
-            <div class="f"><span class="k">Matrícula</span><span class="v">[a confirmar]</span></div>
-            <div class="f"><span class="k">Assentos</span><span class="v">[a confirmar]</span></div>
-            <div class="f"><span class="k">Autonomia</span><span class="v">[a confirmar]</span></div>
-            <div class="f"><span class="k">Situação</span><span class="v">Disponível</span></div>
-            <div class="f"><span class="k">Observações</span><span class="v">[a confirmar]</span></div>
+            <div class="descr tbc">Descrição em breve. Fale conosco no WhatsApp para detalhes.</div>
             <div class="cta"><a class="btn btn-p" href="https://wa.me/5565981476175?text=Ol%C3%A1%2C%20tenho%20interesse%20na%20aeronave%20anunciada%20no%20site.">Consultar esta aeronave</a></div>
           </div>
         </div></div>
       </div>
 
       <!-- SUBSTITUIR POR FOTO REAL: aeronave 06 (reservada) -->
-      <div class="av" data-tipo="monomotor" data-moeda="BRL" data-valor="0" data-tt="" data-ordem="6" data-nome="aeronave">
+      <div class="av" data-tipo="monomotor" data-moeda="BRL" data-valor="0" data-ordem="6" data-nome="aeronave">
         <button class="av-row" aria-expanded="false">
-          <span class="c-img"><img src="assets/av-05.png" alt="Aeronave monomotor" loading="lazy"></span>
+          <span class="c-img"><img src="assets/logo-mark.svg" alt="Aeronave monomotor" loading="lazy" style="object-fit:contain;padding:14px"></span>
           <span class="c-nome"><b>[Fabricante Modelo]</b><span class="cat">Monomotor</span></span>
-          <span class="cell tbc" data-label="Ano">[a confirmar]</span>
-          <span class="cell tbc" data-label="Célula (TT)">[a confirmar]</span>
-          <span class="cell tbc" data-label="Motor">[a confirmar]</span>
-          <span class="cell tbc" data-label="Aviônicos">[a confirmar]</span>
-          <span class="cell tbc" data-label="Local">[a confirmar]</span>
+          <span class="c-sit" data-label="Situação"><span class="sit reservada">Reservada</span></span>
           <span class="c-valor tbc" data-label="Valor">[a confirmar]</span>
           <span class="c-caret">▸</span>
         </button>
         <div class="av-detail"><div class="inner">
-          <div class="plate"><img src="assets/av-05.png" alt="Aeronave monomotor" loading="lazy"></div>
+          <div class="plate"><div class="gal-empty">Fotos em breve</div></div>
           <div class="ficha">
-            <div class="f"><span class="k">Matrícula</span><span class="v">[a confirmar]</span></div>
-            <div class="f"><span class="k">Assentos</span><span class="v">[a confirmar]</span></div>
-            <div class="f"><span class="k">Autonomia</span><span class="v">[a confirmar]</span></div>
-            <div class="f"><span class="k">Situação</span><span class="v">Disponível</span></div>
-            <div class="f"><span class="k">Observações</span><span class="v">[a confirmar]</span></div>
+            <div class="descr tbc">Descrição em breve. Fale conosco no WhatsApp para detalhes.</div>
             <div class="cta"><a class="btn btn-p" href="https://wa.me/5565981476175?text=Ol%C3%A1%2C%20tenho%20interesse%20na%20aeronave%20anunciada%20no%20site.">Consultar esta aeronave</a></div>
           </div>
         </div></div>
@@ -611,7 +567,6 @@
     const s=b.dataset.s;const arr=rows();
     const num=(el,k)=>{const v=parseFloat(el.dataset[k]);return isNaN(v)||v===0?Infinity:v;};
     if(s==='valor')arr.sort((a,b)=>valorOrd(a)-valorOrd(b));
-    else if(s==='tt')arr.sort((a,b)=>num(a,'tt')-num(b,'tt'));
     else arr.sort((a,b)=>(+a.dataset.ordem)-(+b.dataset.ordem));
     arr.forEach(a=>list.appendChild(a));
   }));
@@ -635,14 +590,14 @@
       <button class="av-row" aria-expanded="false">
         <span class="c-img"><img src="${foto}" alt="${nome}" loading="lazy"></span>
         <span class="c-nome"><b>${nome}</b><span class="cat">${CATS[av.categoria]||esc(av.categoria)}</span></span>
-        ${cellField('Ano',av.ano)}${cellField('Célula (TT)',av.celula_tt)}${cellField('Motor',av.motor)}${cellField('Aviônicos',av.avionicos)}${cellField('Local',av.local)}
+        <span class="c-sit" data-label="Situação"><span class="sit ${(av.situacao||'').toLowerCase().includes('reserv')?'reservada':(av.situacao||'').toLowerCase().includes('vend')?'vendida':''}">${esc(av.situacao||'Disponível')}</span></span>
         ${valorCell(av)}
         <span class="c-caret">▸</span>
       </button>
       <div class="av-detail"><div class="inner">
         <div class="plate">${gal}</div>
         <div class="ficha">
-          ${ficha('Matrícula',av.matricula)}${ficha('Assentos',av.assentos)}${ficha('Autonomia',av.autonomia)}${ficha('Situação',av.situacao||'Disponível')}${ficha('Observações',av.observacoes)}
+          ${av.descricao&&String(av.descricao).trim()!==''?`<div class="descr">${esc(av.descricao)}</div>`:'<div class="descr tbc">Descrição em breve. Fale conosco no WhatsApp para detalhes.</div>'}
           <div class="cta"><a class="btn btn-p" href="${wa(av)}">Consultar esta aeronave</a></div>
         </div>
       </div></div>

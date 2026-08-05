@@ -151,17 +151,11 @@
         <div><label>Valor (só números)</label><input id="f_valor" inputmode="decimal" placeholder="ex.: 3000000"><div class="hint">Em branco = "a confirmar"</div></div>
         <div><label>Ordem</label><input id="f_ordem" inputmode="numeric" placeholder="1"></div>
       </div>
-      <div class="grid3" style="margin-top:.9rem">
-        <div><label>Ano</label><input id="f_ano" placeholder="[a confirmar]"></div>
-        <div><label>Célula (TT)</label><input id="f_celula_tt" placeholder="[a confirmar]"></div>
-        <div><label>Motor</label><input id="f_motor" placeholder="[a confirmar]"></div>
-        <div><label>Aviônicos</label><input id="f_avionicos" placeholder="[a confirmar]"></div>
-        <div><label>Local</label><input id="f_local" placeholder="[a confirmar]"></div>
-        <div><label>Matrícula</label><input id="f_matricula" placeholder="[a confirmar]"></div>
-        <div><label>Assentos</label><input id="f_assentos" placeholder="[a confirmar]"></div>
-        <div><label>Autonomia</label><input id="f_autonomia" placeholder="[a confirmar]"></div>
+      <div class="full" style="margin-top:.9rem">
+        <label>Descrição (todas as informações da aeronave)</label>
+        <textarea id="f_descricao" rows="9" placeholder="Escreva livremente tudo sobre a aeronave: ano, horas de célula e motor, aviônicos, matrícula, assentos, autonomia, localização, histórico, observações...&#10;&#10;Dica: uma informação por linha fica ótimo — as quebras de linha aparecem no site."></textarea>
+        <div class="hint">Campo único e livre — as quebras de linha são preservadas no site.</div>
       </div>
-      <div class="full" style="margin-top:.9rem"><label>Observações</label><textarea id="f_observacoes" rows="2" placeholder="[a confirmar]"></textarea></div>
       <div class="full" style="margin-top:.9rem">
         <label>Fotos da aeronave</label>
         <div class="fotos-wrap" id="fotosWrap"></div>
@@ -253,7 +247,7 @@
   function escapeHtml(s){return (s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
 
   // ---------- FORM ----------
-  const F=['id','nome','categoria','situacao','moeda','valor','ordem','ano','celula_tt','motor','avionicos','local','matricula','assentos','autonomia','observacoes'];
+  const F=['id','nome','categoria','situacao','moeda','valor','ordem','descricao'];
   let editing=null, fotosArr=[];
   function openForm(av){
     editing=av||null;
@@ -313,9 +307,7 @@
         moeda: $('f_moeda').value,
         valor: valRaw==='' ? null : Number(valRaw),
         ordem: $('f_ordem').value.trim()===''?0:parseInt($('f_ordem').value,10),
-        ano: nn($('f_ano').value), celula_tt: nn($('f_celula_tt').value), motor: nn($('f_motor').value),
-        avionicos: nn($('f_avionicos').value), local: nn($('f_local').value), matricula: nn($('f_matricula').value),
-        assentos: nn($('f_assentos').value), autonomia: nn($('f_autonomia').value), observacoes: nn($('f_observacoes').value),
+        descricao: nn($('f_descricao').value),
         ativo: $('f_ativo').checked, fotos: fotosArr, foto_url: fotosArr[0]||null
       };
       let res;
