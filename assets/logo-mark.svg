@@ -1,4 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-label="V4 Aero Flight">
-  <path d="M24 4 L24 33 L6 42 Z" fill="#061423"/>
-  <path d="M24 4 L42 42 L24 33 Z" fill="#3E77AE"/>
+  <circle cx="24" cy="24" r="21" fill="none" stroke="#3E77AE" stroke-width="2.4"/>
+  <path d="M24 10 L16 33 L24 28 Z" fill="#061423"/>
+  <path d="M24 10 L32 33 L24 28 Z" fill="#3E77AE"/>
 </svg>
