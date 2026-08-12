@@ -1,0 +1,41 @@
+name: Gerar páginas SEO das aeronaves
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - 'aeronaves/**'
+      - 'sitemap.xml'
+      - 'robots.txt'
+  schedule:
+    - cron: '17 * * * *'   # de hora em hora (minuto 17)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: gerar-seo
+  cancel-in-progress: false
+
+jobs:
+  gerar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Gerar páginas a partir do Supabase
+        run: node build/generate.mjs
+      - name: Commit se houver mudança
+        run: |
+          git config user.name "v4-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A aeronaves sitemap.xml robots.txt
+          if git diff --cached --quiet; then
+            echo "Sem mudanças — nada a publicar."
+          else
+            git commit -m "chore: regenera páginas SEO das aeronaves [skip ci]"
+            git push
+          fi

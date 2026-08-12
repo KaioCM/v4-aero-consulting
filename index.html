@@ -1,6 +1,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="robots" content="noindex, nofollow">
+<meta name="robots" content="index, follow">
 <link rel="icon" href="assets/logo-mark.svg" type="image/svg+xml">
 <title>V4 Aero Flight — Aeronaves disponíveis para venda</title>
 <meta name="description" content="Compra, venda e intermediação de aeronaves, com ficha técnica completa e assessoria em todo o processo.">
@@ -577,6 +577,7 @@
   const CATS={monomotor:'Monomotor',bimotor:'Bimotor',turboelice:'Turboélice',helicoptero:'Helicóptero'};
   const nf=new Intl.NumberFormat('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
   const esc=s=>(s??'').toString().replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const slug=s=>(s||'').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'')||'aeronave';
   const cellField=(l,v)=> v&&String(v).trim()!=='' ? `<span class="cell" data-label="${l}">${esc(v)}</span>` : `<span class="cell tbc" data-label="${l}">[a confirmar]</span>`;
   const ficha=(l,v)=> `<div class="f"><span class="k">${l}</span><span class="v">${v&&String(v).trim()!==''?esc(v):'[a confirmar]'}</span></div>`;
   function valorCell(av){if(av.valor==null||+av.valor===0)return `<span class="c-valor tbc" data-label="Valor">[a confirmar]</span>`;const m=av.moeda==='USD'?'US$':'R$';return `<span class="c-valor" data-label="Valor"><span class="vwrap"><span class="moeda">${m}</span><span class="cifra">${nf.format(av.valor)}</span></span></span>`;}
@@ -598,7 +599,7 @@
         <div class="plate">${gal}</div>
         <div class="ficha">
           ${av.descricao&&String(av.descricao).trim()!==''?`<div class="descr">${esc(av.descricao)}</div>`:'<div class="descr tbc">Descrição em breve. Fale conosco no WhatsApp para detalhes.</div>'}
-          <div class="cta"><a class="btn btn-p" href="${wa(av)}">Consultar esta aeronave</a></div>
+          <div class="cta"><a class="btn btn-p" href="${wa(av)}">Consultar esta aeronave</a><a class="btn btn-s" href="/aeronaves/${slug(av.nome)}/">Página desta aeronave ›</a></div>
         </div>
       </div></div>
     </div>`;}
