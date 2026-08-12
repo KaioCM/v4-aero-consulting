@@ -27,10 +27,11 @@
   .wrap{max-width:1080px;margin:0 auto;padding:0 clamp(1.1rem,4vw,2.2rem)}
   header{position:sticky;top:0;z-index:20;background:var(--white);border-bottom:1px solid var(--blue-100)}
   header .bar{display:flex;align-items:center;justify-content:space-between;padding:.8rem 0;gap:1rem}
-  .logo{display:inline-flex;align-items:center;gap:.55rem;color:var(--blue-900)}
-  .logo svg{height:26px}
-  .logo b{font-weight:700;font-size:1rem}.logo b i{font-style:italic;color:var(--blue-500)}
-  .logo small{font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.22em;font-size:.52rem;color:var(--blue-600);margin-left:.15rem}
+  .logo{display:inline-flex;align-items:center;gap:.6rem;color:var(--blue-900)}
+  .logo svg{height:38px;width:auto;flex:none}
+  .logo .wm{display:flex;flex-direction:column;line-height:1.05}
+  .logo .wm b{font-weight:700;font-size:1.24rem;letter-spacing:-.01em}.logo .wm b i{font-style:normal;color:var(--blue-500)}
+  .logo .wm small{font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.28em;font-size:.62rem;color:var(--blue-600);margin-top:3px}
   .btn{display:inline-flex;align-items:center;gap:.4rem;font-weight:500;font-size:.9rem;padding:.6rem 1.05rem;border-radius:3px;border:1px solid transparent;cursor:pointer;transition:.18s}
   .btn-p{background:var(--blue-900);color:#fff;border-color:var(--blue-900)}.btn-p:hover{background:var(--blue-800)}
   main{padding:1.8rem 0 3rem}
@@ -71,8 +72,8 @@
 <body>
 <header><div class="wrap bar">
   <a class="logo" href="/" aria-label="V4 Aero Flight — início">
-    <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 4 L24 33 L6 42 Z" fill="#061423"/><path d="M24 4 L42 42 L24 33 Z" fill="#3E77AE"/></svg>
-    <span><b>V4 <i>Aero</i></b><small>Flight</small></span>
+    <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="21" fill="none" stroke="#3E77AE" stroke-width="2.4"/><path d="M24 10 L16 33 L24 28 Z" fill="#061423"/><path d="M24 10 L32 33 L24 28 Z" fill="#3E77AE"/></svg>
+    <span class="wm"><b>V4 <i>Aero</i></b><small>Flight</small></span>
   </a>
   <a class="btn btn-p" href="https://wa.me/5565981476175?text=Ol%C3%A1%2C%20tenho%20interesse%20na%20aeronave%20Cessna%20182T%20Aspirado%202003%20anunciada%20no%20site.">Falar no WhatsApp</a>
 </div></header>
