@@ -59,11 +59,11 @@
   header.scrolled{border-bottom-color:var(--blue-100);box-shadow:0 1px 3px rgba(6,20,35,.06)}
   .bar{display:flex;align-items:center;justify-content:space-between;height:60px}
   .logo{display:inline-flex;align-items:center;gap:.6rem;color:var(--blue-900)}
-  .logo .mark{height:30px;width:auto;flex:none;display:block}
+  .logo .mark{height:38px;width:auto;flex:none;display:block}
   .logo .wm{display:flex;flex-direction:column;line-height:1.05}
-  .logo .wm b{font-weight:700;font-size:1.02rem;letter-spacing:-.01em;color:var(--blue-900)}
+  .logo .wm b{font-weight:700;font-size:1.24rem;letter-spacing:-.01em;color:var(--blue-900)}
   .logo .wm b i{font-style:normal;color:var(--blue-500)}
-  .logo .wm small{font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.26em;font-size:.54rem;color:var(--blue-600);margin-top:3px}
+  .logo .wm small{font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.28em;font-size:.62rem;color:var(--blue-600);margin-top:3px}
   nav.main{display:flex;gap:1.7rem}
   nav.main a{font-size:.92rem;color:var(--blue-600);font-weight:500;transition:.2s}
   nav.main a:hover{color:var(--blue-900)}
@@ -83,6 +83,8 @@
   .hero h1{font-size:clamp(1.9rem,3.8vw,3rem);color:var(--white);max-width:20ch;margin-bottom:.85rem}
   .hero p{color:#C3D3E4;max-width:52ch;font-size:1.05rem;margin-bottom:1.35rem}
   .hero .actions{display:flex;flex-wrap:wrap;gap:.8rem}
+  .hero-mark{position:absolute;right:-2%;top:50%;transform:translateY(-50%);height:135%;width:auto;z-index:0;opacity:.16;pointer-events:none}
+  @media (max-width:760px){.hero-mark{height:80%;right:-14%;opacity:.09}}
 
   /* ---------- catálogo ---------- */
   .controls{display:flex;flex-direction:column;gap:.7rem;padding-bottom:1.4rem;border-bottom:1px solid var(--blue-300)}
@@ -270,6 +272,7 @@
 <section class="hero" id="top">
   <!-- Fundo de ambiente (aeronave genérica ao longe, imagem ilustrativa) — pode trocar por foto real da V4 -->
   <img class="bg" src="assets/hero.png" alt="" aria-hidden="true">
+  <svg class="hero-mark" viewBox="0 0 48 48" aria-hidden="true"><path d="M24 4 L24 33 L6 42 Z" fill="#8FB0D8"/><path d="M24 4 L42 42 L24 33 Z" fill="#3E77AE"/></svg>
   <div class="wrap">
     <span class="k mono">Compra · Venda · Intermediação de aeronaves</span>
     <h1>Aeronaves disponíveis para venda, com ficha técnica completa.</h1>
@@ -369,12 +372,8 @@
       <a class="ig-post" href="https://instagram.com/v4aeroconsulting" target="_blank" rel="noopener noreferrer"><img src="assets/ig/ig-06.jpg" alt="Aeronave à venda — V4 Aero Flight no Instagram" loading="lazy"></a>
       <a class="ig-post" href="https://instagram.com/v4aeroconsulting" target="_blank" rel="noopener noreferrer"><img src="assets/ig/ig-07.jpg" alt="Aeronave à venda — V4 Aero Flight no Instagram" loading="lazy"></a>
       <a class="ig-post" href="https://instagram.com/v4aeroconsulting" target="_blank" rel="noopener noreferrer"><img src="assets/ig/ig-09.jpg" alt="Aeronave à venda — V4 Aero Flight no Instagram" loading="lazy"></a>
-      <a class="ig-post" href="https://instagram.com/v4aeroconsulting" target="_blank" rel="noopener noreferrer"><img src="assets/ig/ig-10.jpg" alt="Aeronave à venda — V4 Aero Flight no Instagram" loading="lazy"></a>
-      <a class="ig-post" href="https://instagram.com/v4aeroconsulting" target="_blank" rel="noopener noreferrer"><img src="assets/ig/ig-11.jpg" alt="Aeronave à venda — V4 Aero Flight no Instagram" loading="lazy"></a>
-      <a class="ig-post" href="https://instagram.com/v4aeroconsulting" target="_blank" rel="noopener noreferrer"><img src="assets/ig/ig-12.jpg" alt="Aeronave à venda — V4 Aero Flight no Instagram" loading="lazy"></a>
-      <a class="ig-post" href="https://instagram.com/v4aeroconsulting" target="_blank" rel="noopener noreferrer"><img src="assets/ig/ig-13.jpg" alt="Aeronave à venda — V4 Aero Flight no Instagram" loading="lazy"></a>
-      <a class="ig-post" href="https://instagram.com/v4aeroconsulting" target="_blank" rel="noopener noreferrer"><img src="assets/ig/ig-08.jpg" alt="Aeronave à venda — V4 Aero Flight no Instagram" loading="lazy"></a>
-    </div>
+      <a class="ig-post" href="https://instagram.com/v4aeroconsulting" target="_blank" rel="noopener noreferrer"><img src="assets/ig/ig-10.jpg" alt="Aeronave à venda — V4 Aero Flight no Instagram" loading="lazy"></a>      <a class="ig-post" href="https://instagram.com/v4aeroconsulting" target="_blank" rel="noopener noreferrer"><img src="assets/ig/ig-12.jpg" alt="Aeronave à venda — V4 Aero Flight no Instagram" loading="lazy"></a>
+      <a class="ig-post" href="https://instagram.com/v4aeroconsulting" target="_blank" rel="noopener noreferrer"><img src="assets/ig/ig-13.jpg" alt="Aeronave à venda — V4 Aero Flight no Instagram" loading="lazy"></a>    </div>
     <div class="ig-bar reveal">
       <a class="ig-handle" href="https://instagram.com/v4aeroconsulting" target="_blank" rel="noopener noreferrer">
         <svg class="ig-glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.2"/><circle cx="12" cy="12" r="4.6"/><circle cx="17.6" cy="6.4" r="1.15" fill="currentColor" stroke="none"/></svg>
@@ -393,9 +392,7 @@
     <div class="cdata reveal">
       <div class="row"><span class="k mono">WhatsApp</span><a class="v" href="https://wa.me/5565981476175">(65) 98147-6175</a></div>
       <div class="row"><span class="k mono">Instagram</span><a class="v" href="https://instagram.com/v4aeroconsulting">@v4aeroconsulting</a></div>
-      <div class="row"><span class="k mono">E-mail</span><span class="v">[a confirmar]</span></div>
-      <div class="row"><span class="k mono">Localização</span><span class="v">[a confirmar]</span></div>
-    </div>
+      <div class="row"><span class="k mono">E-mail</span><span class="v">[a confirmar]</span></div>    </div>
     <div class="ccall reveal">
       <h2>Vamos encontrar a sua aeronave.</h2>
       <p>Fale com a nossa equipe e receba as opções disponíveis para o seu perfil de operação.</p>
