@@ -60,8 +60,17 @@
   .gal-th img{width:100%;height:100%;object-fit:cover;display:block}
   .gal-empty{display:flex;align-items:center;justify-content:center;aspect-ratio:3/2;color:var(--blue-600);font-family:'IBM Plex Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;background:var(--blue-050);border:1px dashed var(--blue-100)}
   .cta{margin-top:1.4rem;display:flex;gap:.7rem;flex-wrap:wrap}
-  .lead-form{display:flex;flex-direction:column;gap:.55rem;margin-top:1.6rem;max-width:440px;border-top:1px solid var(--blue-100);padding-top:1.4rem}
-  .lead-form h3{font-size:.95rem;font-weight:600;color:var(--blue-900);margin-bottom:.15rem}
+  .lead-modal{position:fixed;inset:0;z-index:120;background:rgba(6,20,35,.6);display:flex;align-items:center;justify-content:center;padding:1.2rem;backdrop-filter:blur(2px)}
+  .lead-modal[hidden]{display:none}
+  .lead-box{position:relative;background:#fff;border-radius:6px;padding:1.8rem 1.6rem 1.6rem;width:100%;max-width:440px;box-shadow:0 12px 40px rgba(6,20,35,.28)}
+  .lead-box h3{font-size:1.3rem;margin-bottom:.3rem;color:var(--blue-950)}
+  .lm-sub{color:var(--blue-600);font-size:.92rem;margin-bottom:1.1rem}
+  .lm-x{position:absolute;top:.6rem;right:.8rem;background:none;border:0;font-size:1.7rem;line-height:1;color:var(--blue-500);cursor:pointer;padding:.1rem .3rem}
+  .lm-x:hover{color:var(--blue-900)}
+  .lead-form{display:flex;flex-direction:column;gap:.55rem;max-width:440px}
+  .lead-form textarea{width:100%;background:#fff;border:1px solid var(--blue-100);border-radius:3px;padding:.7rem .8rem;font:inherit;font-size:.92rem;color:var(--blue-950);resize:vertical;min-height:70px}
+  .lead-form textarea::placeholder{color:var(--blue-500);opacity:.7}
+  .lead-form textarea:focus{outline:none;border-color:var(--blue-500);box-shadow:0 0 0 2px rgba(62,119,174,.16)}
   .lf-row{display:flex;gap:.55rem}.lf-row>*{flex:1;min-width:0}
   .lead-form input{width:100%;background:#fff;border:1px solid var(--blue-100);border-radius:3px;padding:.7rem .8rem;font:inherit;font-size:.92rem;color:var(--blue-950)}
   .lead-form input::placeholder{color:var(--blue-500);opacity:.7}
@@ -87,7 +96,7 @@
     <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="21" fill="none" stroke="#3E77AE" stroke-width="2.4"/><path d="M24 10 L16 33 L24 28 Z" fill="#061423"/><path d="M24 10 L32 33 L24 28 Z" fill="#3E77AE"/></svg>
     <span class="wm"><b>V4 <i>Aero</i></b><small>Flight</small></span>
   </a>
-  <a class="btn btn-p" href="https://wa.me/5565981476175?text=Ol%C3%A1%2C%20tenho%20interesse%20na%20aeronave%20Beechjet%20400A%20anunciada%20no%20site.">Falar no WhatsApp</a>
+  <a class="btn btn-p js-lead" href="https://wa.me/5565981476175?text=Ol%C3%A1%2C%20tenho%20interesse%20na%20aeronave%20Beechjet%20400A%20anunciada%20no%20site.">Falar no WhatsApp</a>
 </div></header>
 <main><div class="wrap">
   <nav class="crumb"><a href="/">Início</a> › <a href="/#aeronaves">Aeronaves</a> › Beechjet 400A</nav>
@@ -110,40 +119,55 @@ Bateria do CVR nova.
 Pneus novos.
 
 Avião 100% operacional tudo funcionando em perfeito estado e bem conservado.</div>
-      <div class="cta"><a class="btn btn-p" href="https://wa.me/5565981476175?text=Ol%C3%A1%2C%20tenho%20interesse%20na%20aeronave%20Beechjet%20400A%20anunciada%20no%20site.">Consultar esta aeronave</a></div>
-      <form class="lead-form" id="leadForm">
-        <h3>Tenho interesse nesta aeronave</h3>
-        <div class="lf-row">
-          <input type="text" id="lf_nome" placeholder="Seu nome" required autocomplete="name">
-          <input type="tel" id="lf_tel" placeholder="WhatsApp (com DDD)" required autocomplete="tel">
-        </div>
-        <input type="email" id="lf_email" placeholder="E-mail (opcional)" autocomplete="email">
-        <button type="submit" class="btn btn-p" id="lf_btn">Falar sobre esta aeronave</button>
-        <p class="lf-note" id="lf_note" hidden></p>
-      </form>
+      <div class="cta"><a class="btn btn-p js-lead" href="https://wa.me/5565981476175?text=Ol%C3%A1%2C%20tenho%20interesse%20na%20aeronave%20Beechjet%20400A%20anunciada%20no%20site.">Consultar esta aeronave</a></div>
     </div>
   </div>
   <a class="back mono" href="/#aeronaves">‹ Ver todas as aeronaves</a>
 </div></main>
+<div class="lead-modal" id="leadModal" hidden>
+  <div class="lead-box" role="dialog" aria-modal="true" aria-labelledby="lmTitle">
+    <button class="lm-x" id="lmX" type="button" aria-label="Fechar">×</button>
+    <h3 id="lmTitle">Tenho interesse</h3>
+    <p class="lm-sub">Preencha e continue no WhatsApp com tudo pronto.</p>
+    <form class="lead-form" id="leadForm">
+      <div class="lf-row">
+        <input type="text" id="lf_nome" placeholder="Seu nome" required autocomplete="name">
+        <input type="tel" id="lf_tel" placeholder="WhatsApp (com DDD)" required autocomplete="tel">
+      </div>
+      <input type="email" id="lf_email" placeholder="E-mail (opcional)" autocomplete="email">
+      <textarea id="lf_msg" placeholder="Alguma observação? (opcional)"></textarea>
+      <button type="submit" class="btn btn-p" id="lf_btn">Continuar no WhatsApp</button>
+      <p class="lf-note" id="lf_note" hidden></p>
+    </form>
+  </div>
+</div>
 <footer><div class="wrap">© 2026 V4 Aero Flight · Compra, venda e intermediação de aeronaves · WhatsApp 5565981476175</div></footer>
 <script>
 (function(){
   var f=document.getElementById('leadForm'); if(!f) return;
   var AERO="Beechjet 400A", WA="5565981476175", SB="https://hobtolagifjjxcmxreip.supabase.co", KEY="sb_publishable_29hmID65I5x-X0Ieot6f5Q_eLOk_Pkl";
-  var note=document.getElementById('lf_note');
+  var modal=document.getElementById('leadModal'), note=document.getElementById('lf_note');
   function track(){try{if(window.fbq)fbq('track','Lead',{content_name:AERO});}catch(e){}try{if(window.gtag)gtag('event','generate_lead',{aircraft:AERO});}catch(e){}}
+  function openModal(){note.hidden=true;note.textContent='';modal.hidden=false;setTimeout(function(){document.getElementById('lf_nome').focus();},40);}
+  function closeModal(){modal.hidden=true;}
+  Array.prototype.forEach.call(document.querySelectorAll('.js-lead'),function(el){el.addEventListener('click',function(ev){ev.preventDefault();openModal();});});
+  document.getElementById('lmX').addEventListener('click',closeModal);
+  modal.addEventListener('click',function(ev){if(ev.target===modal)closeModal();});
+  addEventListener('keydown',function(ev){if(ev.key==='Escape'&&!modal.hidden)closeModal();});
   f.addEventListener('submit',function(ev){
     ev.preventDefault();
     var nome=document.getElementById('lf_nome').value.trim();
     var tel=document.getElementById('lf_tel').value.trim();
     var email=document.getElementById('lf_email').value.trim();
+    var msg=document.getElementById('lf_msg').value.trim();
     if(!nome||!tel){note.hidden=false;note.className='lf-note err';note.textContent='Preencha nome e WhatsApp.';return;}
-    fetch(SB+'/rest/v1/leads',{method:'POST',headers:{'Content-Type':'application/json',apikey:KEY,Authorization:'Bearer '+KEY,Prefer:'return=minimal'},body:JSON.stringify({nome:nome,telefone:tel,email:email||null,aeronave:AERO,origem:'aeronave:'+AERO})}).catch(function(){});
+    fetch(SB+'/rest/v1/leads',{method:'POST',headers:{'Content-Type':'application/json',apikey:KEY,Authorization:'Bearer '+KEY,Prefer:'return=minimal'},body:JSON.stringify({nome:nome,telefone:tel,email:email||null,mensagem:msg||null,aeronave:AERO,origem:'aeronave:'+AERO})}).catch(function(){});
     track();
-    var txt='Olá, sou '+nome+'. Tenho interesse na aeronave '+AERO+' anunciada no site.';
+    var base='Olá, sou '+nome+'. Tenho interesse na aeronave '+AERO+' anunciada no site.';
+    var txt=msg?base+' '+msg:base;
     window.open('https://wa.me/'+WA+'?text='+encodeURIComponent(txt),'_blank','noopener');
-    note.hidden=false;note.className='lf-note ok';note.textContent='Recebido! Abrindo o WhatsApp…';
-    f.reset();
+    note.hidden=false;note.className='lf-note ok';note.textContent='Perfeito! Abrindo o WhatsApp…';
+    f.reset();setTimeout(closeModal,900);
   });
 })();
 </script>

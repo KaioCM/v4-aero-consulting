@@ -190,7 +190,15 @@
   .cdata .row .v{font-weight:500}
   .cdata .row a.v:hover{color:var(--blue-500)}
   .ccall h2{font-size:clamp(1.5rem,3vw,2.1rem);margin-bottom:1rem}
-  .lead-form{display:flex;flex-direction:column;gap:.6rem;margin-top:1.2rem;max-width:460px}
+  .lead-modal{position:fixed;inset:0;z-index:120;background:rgba(6,20,35,.6);display:flex;align-items:center;justify-content:center;padding:1.2rem;backdrop-filter:blur(2px)}
+  .lead-modal[hidden]{display:none}
+  .lead-box{position:relative;background:var(--white);border-radius:6px;padding:1.8rem 1.6rem 1.6rem;width:100%;max-width:440px;box-shadow:0 12px 40px rgba(6,20,35,.28);animation:lmIn .22s var(--ease)}
+  @keyframes lmIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  .lead-box h3{font-size:1.3rem;margin-bottom:.3rem;color:var(--blue-950)}
+  .lm-sub{color:var(--blue-600);font-size:.92rem;margin-bottom:1.1rem}
+  .lm-x{position:absolute;top:.6rem;right:.8rem;background:none;border:0;font-size:1.7rem;line-height:1;color:var(--blue-500);cursor:pointer;padding:.1rem .3rem}
+  .lm-x:hover{color:var(--blue-900)}
+  .lead-form{display:flex;flex-direction:column;gap:.6rem;margin-top:0;max-width:460px}
   .lf-row{display:flex;gap:.6rem}
   .lf-row>*{flex:1;min-width:0}
   .lead-form input,.lead-form textarea{width:100%;background:var(--white);border:1px solid var(--blue-100);border-radius:3px;padding:.72rem .8rem;font:inherit;font-size:.92rem;color:var(--blue-950)}
@@ -275,7 +283,7 @@
       <a href="#contato">Contato</a>
     </nav>
     <div class="end">
-      <a href="https://wa.me/5565981476175" class="btn btn-p">Falar no WhatsApp</a>
+      <a href="https://wa.me/5565981476175" class="btn btn-p js-lead">Falar no WhatsApp</a>
       <button class="menu-btn" id="menuBtn" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
   </div>
@@ -299,7 +307,7 @@
     <p>Assessoria em todo o processo — da avaliação e negociação à documentação e transferência.</p>
     <div class="actions">
       <a href="#aeronaves" class="btn btn-p">Ver aeronaves</a>
-      <a href="https://wa.me/5565981476175" class="btn btn-s on-dark">Falar no WhatsApp</a>
+      <a href="https://wa.me/5565981476175" class="btn btn-s on-dark js-lead">Falar no WhatsApp</a>
     </div>
   </div>
 </section>
@@ -374,7 +382,6 @@
     <div class="body reveal">
       <p>A V4 Aero Flight atua na compra, venda e intermediação de aeronaves, com assessoria completa em todas as etapas do processo.</p>
       <p>O trabalho começa antes do anúncio: entender a missão pretendida, o orçamento e o perfil de operação, para apresentar apenas o que faz sentido. Conduzimos a negociação e acompanhamos a documentação até a transferência ser concluída.</p>
-      <p class="ph">[Parágrafo sobre histórico e equipe — a confirmar]</p>
     </div>
   </div>
 </section>
@@ -412,20 +419,12 @@
     <div class="cdata reveal">
       <div class="row"><span class="k mono">WhatsApp</span><a class="v" href="https://wa.me/5565981476175">(65) 98147-6175</a></div>
       <div class="row"><span class="k mono">Instagram</span><a class="v" href="https://instagram.com/v4aeroconsulting">@v4aeroconsulting</a></div>
-      <div class="row"><span class="k mono">E-mail</span><span class="v">[a confirmar]</span></div>    </div>
+      <div class="row"><span class="k mono">E-mail</span><a class="v" href="mailto:v4consulting@hotmail.com">v4consulting@hotmail.com</a></div>
+    </div>
     <div class="ccall reveal">
       <h2>Vamos encontrar a sua aeronave.</h2>
-      <p>Preencha e nossa equipe retorna com as opções para o seu perfil de operação.</p>
-      <form class="lead-form" id="leadForm" novalidate>
-        <div class="lf-row">
-          <input type="text" id="lf_nome" name="nome" placeholder="Seu nome" required autocomplete="name">
-          <input type="tel" id="lf_tel" name="telefone" placeholder="WhatsApp (com DDD)" required autocomplete="tel">
-        </div>
-        <input type="email" id="lf_email" name="email" placeholder="E-mail (opcional)" autocomplete="email">
-        <textarea id="lf_msg" name="mensagem" placeholder="O que você procura? (opcional)"></textarea>
-        <button type="submit" class="btn btn-p" id="lf_btn">Quero receber as opções</button>
-        <p class="lf-note" id="lf_note" hidden></p>
-      </form>
+      <p>Preencha rapidinho e nossa equipe continua com você no WhatsApp, já com o seu perfil em mãos.</p>
+      <a class="btn btn-p js-lead" href="https://wa.me/5565981476175">Falar com a nossa equipe</a>
     </div>
   </div>
 </section>
@@ -450,7 +449,26 @@
   </div>
 </footer>
 
-<a class="wa" href="https://wa.me/5565981476175" target="_blank" rel="noopener">Falar no WhatsApp</a>
+<a class="wa js-lead" href="https://wa.me/5565981476175" target="_blank" rel="noopener">Falar no WhatsApp</a>
+
+<!-- modal de captação de lead -->
+<div class="lead-modal" id="leadModal" hidden>
+  <div class="lead-box" role="dialog" aria-modal="true" aria-labelledby="lmTitle">
+    <button class="lm-x" id="lmX" type="button" aria-label="Fechar">×</button>
+    <h3 id="lmTitle">Fale com a nossa equipe</h3>
+    <p class="lm-sub" id="lmSub">Preencha e a gente continua no WhatsApp com tudo pronto.</p>
+    <form class="lead-form" id="leadForm" novalidate>
+      <div class="lf-row">
+        <input type="text" id="lf_nome" name="nome" placeholder="Seu nome" required autocomplete="name">
+        <input type="tel" id="lf_tel" name="telefone" placeholder="WhatsApp (com DDD)" required autocomplete="tel">
+      </div>
+      <input type="email" id="lf_email" name="email" placeholder="E-mail (opcional)" autocomplete="email">
+      <textarea id="lf_msg" name="mensagem" placeholder="O que você procura? (opcional)"></textarea>
+      <button type="submit" class="btn btn-p" id="lf_btn">Continuar no WhatsApp</button>
+      <p class="lf-note" id="lf_note" hidden></p>
+    </form>
+  </div>
+</div>
 
 <script type="module">
   import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
@@ -464,26 +482,44 @@
     try{ if(window.gtag) gtag('event','generate_lead',{aircraft:d.aeronave||'Geral'}); }catch(e){}
   }
 
-  // formulário de captação de lead (landing)
+  // modal de captação — abre no clique, coleta o lead, aí sim vai pro WhatsApp
+  const modal=document.getElementById('leadModal');
   const leadForm=document.getElementById('leadForm');
-  if(leadForm){
-    const note=document.getElementById('lf_note'), btn=document.getElementById('lf_btn');
-    leadForm.addEventListener('submit',ev=>{
-      ev.preventDefault();
-      const nome=document.getElementById('lf_nome').value.trim();
-      const tel=document.getElementById('lf_tel').value.trim();
-      const email=document.getElementById('lf_email').value.trim();
-      const msg=document.getElementById('lf_msg').value.trim();
-      if(!nome||!tel){note.hidden=false;note.className='lf-note err';note.textContent='Preencha nome e WhatsApp.';return;}
-      const rec={nome,telefone:tel,email:email||null,mensagem:msg||null,aeronave:null,origem:'landing'};
-      sb.from('leads').insert(rec).then(({error})=>{if(error)console.warn('lead:',error.message);}).catch(()=>{});
-      trackLead(rec);
-      const txt=`Olá, sou ${nome}.`+(msg?` ${msg}`:' Tenho interesse nas aeronaves anunciadas no site.');
-      window.open('https://wa.me/5565981476175?text='+encodeURIComponent(txt),'_blank','noopener');
-      note.hidden=false;note.className='lf-note ok';note.textContent='Recebido! Abrindo o WhatsApp…';
-      leadForm.reset();
-    });
+  let currentAero=null;
+  function openModal(aero){
+    currentAero=aero||null;
+    document.getElementById('lmTitle').textContent = currentAero ? 'Tenho interesse' : 'Fale com a nossa equipe';
+    document.getElementById('lmSub').textContent = currentAero
+      ? `Sobre a aeronave ${currentAero}. Preencha e continue no WhatsApp.`
+      : 'Preencha e a gente continua no WhatsApp com tudo pronto.';
+    const note=document.getElementById('lf_note'); note.hidden=true; note.textContent='';
+    modal.hidden=false;
+    setTimeout(()=>document.getElementById('lf_nome').focus(),40);
   }
+  function closeModal(){ modal.hidden=true; }
+  document.querySelectorAll('.js-lead').forEach(el=>el.addEventListener('click',ev=>{ev.preventDefault();openModal(el.dataset.aero||null);}));
+  document.getElementById('lmX').addEventListener('click',closeModal);
+  modal.addEventListener('click',ev=>{ if(ev.target===modal) closeModal(); });
+  addEventListener('keydown',ev=>{ if(ev.key==='Escape'&&!modal.hidden) closeModal(); });
+
+  leadForm.addEventListener('submit',ev=>{
+    ev.preventDefault();
+    const nome=document.getElementById('lf_nome').value.trim();
+    const tel=document.getElementById('lf_tel').value.trim();
+    const email=document.getElementById('lf_email').value.trim();
+    const msg=document.getElementById('lf_msg').value.trim();
+    const note=document.getElementById('lf_note');
+    if(!nome||!tel){note.hidden=false;note.className='lf-note err';note.textContent='Preencha nome e WhatsApp.';return;}
+    const rec={nome,telefone:tel,email:email||null,mensagem:msg||null,aeronave:currentAero,origem:currentAero?('aeronave:'+currentAero):'landing'};
+    sb.from('leads').insert(rec).then(({error})=>{if(error)console.warn('lead:',error.message);}).catch(()=>{});
+    trackLead(rec);
+    const base=currentAero?`Olá, sou ${nome}. Tenho interesse na aeronave ${currentAero} anunciada no site.`:`Olá, sou ${nome}. Tenho interesse nas aeronaves anunciadas no site.`;
+    const txt=msg?`${base} ${msg}`:base;
+    window.open('https://wa.me/5565981476175?text='+encodeURIComponent(txt),'_blank','noopener');
+    note.hidden=false;note.className='lf-note ok';note.textContent='Perfeito! Abrindo o WhatsApp…';
+    leadForm.reset();
+    setTimeout(closeModal,900);
+  });
 
   // header scrolled + menu mobile
   const header=document.getElementById('header');
