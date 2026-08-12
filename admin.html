@@ -45,6 +45,14 @@
   header.top .who{font-size:.82rem;color:var(--blue-600)}
   .wrap{max-width:1080px;margin:0 auto;padding:1.4rem 1.2rem 4rem}
   .toolbar{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1.2rem;flex-wrap:wrap}
+  .tabs{display:flex;gap:.4rem;margin-bottom:1.4rem;border-bottom:1px solid var(--blue-100)}
+  .tab{background:none;border:0;border-bottom:2px solid transparent;padding:.6rem .9rem;font:inherit;font-weight:600;font-size:.95rem;color:var(--blue-600);cursor:pointer;margin-bottom:-1px}
+  .tab.active{color:var(--blue-900);border-bottom-color:var(--blue-500)}
+  .lead-item{display:grid;grid-template-columns:1fr auto;gap:.5rem .9rem;align-items:start}
+  .lead-item .lmeta{font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--blue-600);text-transform:uppercase;letter-spacing:.05em;margin-top:.2rem}
+  .lead-item .lmsg{font-size:.9rem;color:var(--blue-800);margin-top:.35rem;white-space:pre-line}
+  .lead-item.atendido{opacity:.6}
+  .tag.novo{border-color:var(--blue-500);color:var(--blue-700)}
   .toolbar h2{font-size:1.2rem}
 
   .list{display:grid;gap:.7rem}
@@ -115,12 +123,28 @@
     </div>
   </header>
   <div class="wrap">
-    <div class="toolbar">
-      <h2>Aeronaves <span class="mono" id="counter"></span></h2>
-      <button class="btn btn-p" id="newBtn" type="button">+ Nova aeronave</button>
+    <div class="tabs">
+      <button class="tab active" id="tabAeronaves" type="button">Aeronaves</button>
+      <button class="tab" id="tabLeads" type="button">Leads <span class="tag novo" id="leadsBadge" style="display:none"></span></button>
     </div>
-    <div class="msg" id="appMsg"></div>
-    <div class="list" id="list"></div>
+
+    <div id="panelAeronaves">
+      <div class="toolbar">
+        <h2>Aeronaves <span class="mono" id="counter"></span></h2>
+        <button class="btn btn-p" id="newBtn" type="button">+ Nova aeronave</button>
+      </div>
+      <div class="msg" id="appMsg"></div>
+      <div class="list" id="list"></div>
+    </div>
+
+    <div id="panelLeads" style="display:none">
+      <div class="toolbar">
+        <h2>Leads <span class="mono" id="leadsCounter"></span></h2>
+        <button class="btn btn-s" id="reloadLeads" type="button">Atualizar</button>
+      </div>
+      <div class="msg" id="leadsMsg"></div>
+      <div class="list" id="leadsList"></div>
+    </div>
   </div>
 </div>
 
@@ -201,7 +225,7 @@
     if(session){
       show($('loginView'),false); $('app').style.display='block';
       $('who').textContent = session.user.email;
-      loadList();
+      loadList(); refreshLeadsBadge();
     } else {
       $('app').style.display='none'; show($('loginView'),true);
     }
@@ -245,6 +269,50 @@
     document.querySelectorAll('[data-edit]').forEach(b=>b.addEventListener('click',()=>openForm(data.find(x=>x.id===b.dataset.edit))));
   }
   function escapeHtml(s){return (s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+
+  // ---------- LEADS ----------
+  const tel2wa = t => 'https://wa.me/55'+(t||'').replace(/\D/g,'').replace(/^55/,'');
+  const fmtDate = s => { try{ return new Date(s).toLocaleString('pt-BR',{day:'2-digit',month:'2-digit',year:'2-digit',hour:'2-digit',minute:'2-digit'}); }catch(e){ return s; } };
+  async function refreshLeadsBadge(){
+    const { count } = await sb.from('leads').select('id',{count:'exact',head:true}).eq('status','novo');
+    const b=$('leadsBadge'); if(count){ b.style.display=''; b.textContent=count+' novo'+(count>1?'s':''); } else b.style.display='none';
+  }
+  async function loadLeads(){
+    msg($('leadsMsg'),'ok','Carregando…');
+    const { data, error } = await sb.from('leads').select('*').order('created_at',{ascending:false});
+    if(error){ msg($('leadsMsg'),'err','Erro ao carregar: '+error.message); return; }
+    msg($('leadsMsg'),'');
+    $('leadsCounter').textContent = '· '+data.length;
+    const novos = data.filter(l=>l.status==='novo').length;
+    const b=$('leadsBadge'); if(novos){ b.style.display=''; b.textContent=novos+' novo'+(novos>1?'s':''); } else b.style.display='none';
+    $('leadsList').innerHTML = data.map(l=>`
+      <div class="item lead-item ${l.status==='atendido'?'atendido':''}">
+        <div class="info">
+          <b>${escapeHtml(l.nome)} ${l.status==='novo'?'<span class="tag novo">novo</span>':'<span class="tag">atendido</span>'}</b>
+          <span class="lmeta">${fmtDate(l.created_at)} · ${escapeHtml(l.aeronave||'contato geral')} · ${escapeHtml(l.telefone)}${l.email?' · '+escapeHtml(l.email):''}</span>
+          ${l.mensagem?`<span class="lmsg">${escapeHtml(l.mensagem)}</span>`:''}
+        </div>
+        <div class="acts">
+          <a class="btn btn-p" href="${tel2wa(l.telefone)}" target="_blank" rel="noopener">WhatsApp</a>
+          <button class="btn btn-s" data-lead="${l.id}" data-st="${l.status==='novo'?'atendido':'novo'}" type="button">${l.status==='novo'?'Marcar atendido':'Reabrir'}</button>
+        </div>
+      </div>`).join('') || '<p class="mono">Nenhum lead ainda.</p>';
+    document.querySelectorAll('[data-lead]').forEach(btn=>btn.addEventListener('click',async()=>{
+      btn.disabled=true;
+      const { error } = await sb.from('leads').update({status:btn.dataset.st}).eq('id',btn.dataset.lead);
+      if(error){ msg($('leadsMsg'),'err',error.message); btn.disabled=false; return; }
+      loadLeads();
+    }));
+  }
+  $('reloadLeads').addEventListener('click',loadLeads);
+  function switchTab(av){
+    $('tabAeronaves').classList.toggle('active',av);
+    $('tabLeads').classList.toggle('active',!av);
+    show($('panelAeronaves'),av); show($('panelLeads'),!av);
+    if(!av) loadLeads();
+  }
+  $('tabAeronaves').addEventListener('click',()=>switchTab(true));
+  $('tabLeads').addEventListener('click',()=>switchTab(false));
 
   // ---------- FORM ----------
   const F=['id','nome','categoria','situacao','moeda','valor','ordem','descricao'];

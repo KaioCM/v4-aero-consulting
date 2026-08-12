@@ -5,6 +5,13 @@
 <title>V4 Aero Flight — Aeronaves disponíveis para venda</title>
 <meta name="description" content="Compra, venda e intermediação de aeronaves, com ficha técnica completa e assessoria em todo o processo.">
 
+<!-- ============ TRACKING / PIXELS · V4 Aero ============ -->
+<!-- Preencha os IDs abaixo para ligar o rastreamento. Vazio = desligado (nada carrega). -->
+<script>window.V4_TRACK={META_PIXEL_ID:'',GA4_ID:''};</script>
+<script>(function(){var id=window.V4_TRACK.META_PIXEL_ID;if(!id)return;!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init',id);fbq('track','PageView');})();</script>
+<script>(function(){var id=window.V4_TRACK.GA4_ID;if(!id)return;var s=document.createElement('script');s.async=1;s.src='https://www.googletagmanager.com/gtag/js?id='+id;document.head.appendChild(s);window.dataLayer=window.dataLayer||[];window.gtag=function(){dataLayer.push(arguments)};gtag('js',new Date());gtag('config',id);})();</script>
+<!-- ==================================================== -->
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -183,6 +190,19 @@
   .cdata .row .v{font-weight:500}
   .cdata .row a.v:hover{color:var(--blue-500)}
   .ccall h2{font-size:clamp(1.5rem,3vw,2.1rem);margin-bottom:1rem}
+  .lead-form{display:flex;flex-direction:column;gap:.6rem;margin-top:1.2rem;max-width:460px}
+  .lf-row{display:flex;gap:.6rem}
+  .lf-row>*{flex:1;min-width:0}
+  .lead-form input,.lead-form textarea{width:100%;background:var(--white);border:1px solid var(--blue-100);border-radius:3px;padding:.72rem .8rem;font:inherit;font-size:.92rem;color:var(--blue-950)}
+  .lead-form input::placeholder,.lead-form textarea::placeholder{color:var(--blue-500);opacity:.7}
+  .lead-form input:focus,.lead-form textarea:focus{outline:none;border-color:var(--blue-500);box-shadow:0 0 0 2px rgba(62,119,174,.16)}
+  .lead-form textarea{resize:vertical;min-height:74px}
+  .lead-form .btn{margin-top:.25rem;border:none;cursor:pointer}
+  .lead-form .btn[disabled]{opacity:.6;cursor:default}
+  .lf-note{font-size:.85rem;margin:.15rem 0 0}
+  .lf-note.ok{color:#1a7a4c}
+  .lf-note.err{color:#b3261e}
+  @media(max-width:560px){.lf-row{flex-direction:column}}
   .ccall p{color:var(--blue-600);margin-bottom:1.4rem;max-width:40ch}
 
   /* ---------- instagram ---------- */
@@ -395,8 +415,17 @@
       <div class="row"><span class="k mono">E-mail</span><span class="v">[a confirmar]</span></div>    </div>
     <div class="ccall reveal">
       <h2>Vamos encontrar a sua aeronave.</h2>
-      <p>Fale com a nossa equipe e receba as opções disponíveis para o seu perfil de operação.</p>
-      <a href="https://wa.me/5565981476175" class="btn btn-p">Falar no WhatsApp</a>
+      <p>Preencha e nossa equipe retorna com as opções para o seu perfil de operação.</p>
+      <form class="lead-form" id="leadForm" novalidate>
+        <div class="lf-row">
+          <input type="text" id="lf_nome" name="nome" placeholder="Seu nome" required autocomplete="name">
+          <input type="tel" id="lf_tel" name="telefone" placeholder="WhatsApp (com DDD)" required autocomplete="tel">
+        </div>
+        <input type="email" id="lf_email" name="email" placeholder="E-mail (opcional)" autocomplete="email">
+        <textarea id="lf_msg" name="mensagem" placeholder="O que você procura? (opcional)"></textarea>
+        <button type="submit" class="btn btn-p" id="lf_btn">Quero receber as opções</button>
+        <p class="lf-note" id="lf_note" hidden></p>
+      </form>
     </div>
   </div>
 </section>
@@ -427,6 +456,34 @@
   import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
   const SB_URL = 'https://hobtolagifjjxcmxreip.supabase.co';
   const SB_KEY = 'sb_publishable_29hmID65I5x-X0Ieot6f5Q_eLOk_Pkl';
+  const sb = createClient(SB_URL,SB_KEY);
+
+  // dispara evento de conversão nos pixels (só se estiverem ligados)
+  function trackLead(d){
+    try{ if(window.fbq) fbq('track','Lead',{content_name:d.aeronave||'Geral'}); }catch(e){}
+    try{ if(window.gtag) gtag('event','generate_lead',{aircraft:d.aeronave||'Geral'}); }catch(e){}
+  }
+
+  // formulário de captação de lead (landing)
+  const leadForm=document.getElementById('leadForm');
+  if(leadForm){
+    const note=document.getElementById('lf_note'), btn=document.getElementById('lf_btn');
+    leadForm.addEventListener('submit',ev=>{
+      ev.preventDefault();
+      const nome=document.getElementById('lf_nome').value.trim();
+      const tel=document.getElementById('lf_tel').value.trim();
+      const email=document.getElementById('lf_email').value.trim();
+      const msg=document.getElementById('lf_msg').value.trim();
+      if(!nome||!tel){note.hidden=false;note.className='lf-note err';note.textContent='Preencha nome e WhatsApp.';return;}
+      const rec={nome,telefone:tel,email:email||null,mensagem:msg||null,aeronave:null,origem:'landing'};
+      sb.from('leads').insert(rec).then(({error})=>{if(error)console.warn('lead:',error.message);}).catch(()=>{});
+      trackLead(rec);
+      const txt=`Olá, sou ${nome}.`+(msg?` ${msg}`:' Tenho interesse nas aeronaves anunciadas no site.');
+      window.open('https://wa.me/5565981476175?text='+encodeURIComponent(txt),'_blank','noopener');
+      note.hidden=false;note.className='lf-note ok';note.textContent='Recebido! Abrindo o WhatsApp…';
+      leadForm.reset();
+    });
+  }
 
   // header scrolled + menu mobile
   const header=document.getElementById('header');
@@ -489,7 +546,6 @@
 
   (async()=>{
     try{
-      const sb=createClient(SB_URL,SB_KEY);
       const {data,error}=await sb.from('aeronaves').select('*').eq('ativo',true).order('ordem',{ascending:true});
       if(error) throw error;
       if(Array.isArray(data)){

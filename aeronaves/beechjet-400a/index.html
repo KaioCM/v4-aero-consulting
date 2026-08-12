@@ -7,6 +7,9 @@
 <link rel="canonical" href="https://v4aeroflight.com/aeronaves/beechjet-400a/">
 <title>Beechjet 400A à venda — V4 Aero Flight</title>
 <meta name="description" content="5995 totais 1335 horas disponíveis na extensão Interior XP Pára-brisa direito e esquerdo novo. Bateria principal nova. Bateria do CVR nova. Pneus novos.…">
+<script>window.V4_TRACK={META_PIXEL_ID:'',GA4_ID:''};</script>
+<script>(function(){var id=window.V4_TRACK.META_PIXEL_ID;if(!id)return;!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init',id);fbq('track','PageView');})();</script>
+<script>(function(){var id=window.V4_TRACK.GA4_ID;if(!id)return;var s=document.createElement('script');s.async=1;s.src='https://www.googletagmanager.com/gtag/js?id='+id;document.head.appendChild(s);window.dataLayer=window.dataLayer||[];window.gtag=function(){dataLayer.push(arguments)};gtag('js',new Date());gtag('config',id);})();</script>
 <meta property="og:type" content="website">
 <meta property="og:title" content="Beechjet 400A à venda — V4 Aero Flight">
 <meta property="og:description" content="5995 totais 1335 horas disponíveis na extensão Interior XP Pára-brisa direito e esquerdo novo. Bateria principal nova. Bateria do CVR nova. Pneus novos.…">
@@ -57,6 +60,15 @@
   .gal-th img{width:100%;height:100%;object-fit:cover;display:block}
   .gal-empty{display:flex;align-items:center;justify-content:center;aspect-ratio:3/2;color:var(--blue-600);font-family:'IBM Plex Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;background:var(--blue-050);border:1px dashed var(--blue-100)}
   .cta{margin-top:1.4rem;display:flex;gap:.7rem;flex-wrap:wrap}
+  .lead-form{display:flex;flex-direction:column;gap:.55rem;margin-top:1.6rem;max-width:440px;border-top:1px solid var(--blue-100);padding-top:1.4rem}
+  .lead-form h3{font-size:.95rem;font-weight:600;color:var(--blue-900);margin-bottom:.15rem}
+  .lf-row{display:flex;gap:.55rem}.lf-row>*{flex:1;min-width:0}
+  .lead-form input{width:100%;background:#fff;border:1px solid var(--blue-100);border-radius:3px;padding:.7rem .8rem;font:inherit;font-size:.92rem;color:var(--blue-950)}
+  .lead-form input::placeholder{color:var(--blue-500);opacity:.7}
+  .lead-form input:focus{outline:none;border-color:var(--blue-500);box-shadow:0 0 0 2px rgba(62,119,174,.16)}
+  .lead-form .btn{margin-top:.2rem;border:none;cursor:pointer}
+  .lf-note{font-size:.85rem;margin:.1rem 0 0}.lf-note.ok{color:#1a7a4c}.lf-note.err{color:#b3261e}
+  @media(max-width:560px){.lf-row{flex-direction:column}}
   .back{display:inline-block;margin-top:2.4rem;font-size:.9rem}
   footer{border-top:1px solid var(--blue-100);padding:1.6rem 0;color:var(--blue-600);font-size:.82rem}
   .lb{position:fixed;inset:0;z-index:200;background:rgba(6,20,35,.93);display:none;align-items:center;justify-content:center}
@@ -99,11 +111,42 @@ Pneus novos.
 
 Avião 100% operacional tudo funcionando em perfeito estado e bem conservado.</div>
       <div class="cta"><a class="btn btn-p" href="https://wa.me/5565981476175?text=Ol%C3%A1%2C%20tenho%20interesse%20na%20aeronave%20Beechjet%20400A%20anunciada%20no%20site.">Consultar esta aeronave</a></div>
+      <form class="lead-form" id="leadForm">
+        <h3>Tenho interesse nesta aeronave</h3>
+        <div class="lf-row">
+          <input type="text" id="lf_nome" placeholder="Seu nome" required autocomplete="name">
+          <input type="tel" id="lf_tel" placeholder="WhatsApp (com DDD)" required autocomplete="tel">
+        </div>
+        <input type="email" id="lf_email" placeholder="E-mail (opcional)" autocomplete="email">
+        <button type="submit" class="btn btn-p" id="lf_btn">Falar sobre esta aeronave</button>
+        <p class="lf-note" id="lf_note" hidden></p>
+      </form>
     </div>
   </div>
   <a class="back mono" href="/#aeronaves">‹ Ver todas as aeronaves</a>
 </div></main>
 <footer><div class="wrap">© 2026 V4 Aero Flight · Compra, venda e intermediação de aeronaves · WhatsApp 5565981476175</div></footer>
+<script>
+(function(){
+  var f=document.getElementById('leadForm'); if(!f) return;
+  var AERO="Beechjet 400A", WA="5565981476175", SB="https://hobtolagifjjxcmxreip.supabase.co", KEY="sb_publishable_29hmID65I5x-X0Ieot6f5Q_eLOk_Pkl";
+  var note=document.getElementById('lf_note');
+  function track(){try{if(window.fbq)fbq('track','Lead',{content_name:AERO});}catch(e){}try{if(window.gtag)gtag('event','generate_lead',{aircraft:AERO});}catch(e){}}
+  f.addEventListener('submit',function(ev){
+    ev.preventDefault();
+    var nome=document.getElementById('lf_nome').value.trim();
+    var tel=document.getElementById('lf_tel').value.trim();
+    var email=document.getElementById('lf_email').value.trim();
+    if(!nome||!tel){note.hidden=false;note.className='lf-note err';note.textContent='Preencha nome e WhatsApp.';return;}
+    fetch(SB+'/rest/v1/leads',{method:'POST',headers:{'Content-Type':'application/json',apikey:KEY,Authorization:'Bearer '+KEY,Prefer:'return=minimal'},body:JSON.stringify({nome:nome,telefone:tel,email:email||null,aeronave:AERO,origem:'aeronave:'+AERO})}).catch(function(){});
+    track();
+    var txt='Olá, sou '+nome+'. Tenho interesse na aeronave '+AERO+' anunciada no site.';
+    window.open('https://wa.me/'+WA+'?text='+encodeURIComponent(txt),'_blank','noopener');
+    note.hidden=false;note.className='lf-note ok';note.textContent='Recebido! Abrindo o WhatsApp…';
+    f.reset();
+  });
+})();
+</script>
 <script>
 (function(){
   var lb=document.createElement('div');lb.className='lb';
