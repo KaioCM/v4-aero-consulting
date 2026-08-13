@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, follow">
+<title>V4 Aero Flight</title>
+<link rel="icon" href="/assets/logo-mark.svg" type="image/svg+xml">
+<script>window.V4_TRACK={META_PIXEL_ID:'',GA4_ID:''};</script>
+<script>(function(){var id=window.V4_TRACK.META_PIXEL_ID;if(!id)return;!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init',id);fbq('track','PageView');})();</script>
+<script>(function(){var id=window.V4_TRACK.GA4_ID;if(!id)return;var s=document.createElement('script');s.async=1;s.src='https://www.googletagmanager.com/gtag/js?id='+id;document.head.appendChild(s);window.dataLayer=window.dataLayer||[];window.gtag=function(){dataLayer.push(arguments)};gtag('js',new Date());gtag('config',id);})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--blue-950:#061423;--blue-900:#0B2137;--blue-800:#12314D;--blue-700:#1B4269;--blue-600:#2A5B8C;--blue-500:#3E77AE;--blue-300:#8FB0D8;--blue-100:#DCE9F3;--blue-050:#F1F5FA;--white:#FFFFFF;--ease:cubic-bezier(.4,0,.2,1)}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'IBM Plex Sans',system-ui,sans-serif;color:var(--blue-900);background:var(--white);line-height:1.65;-webkit-font-smoothing:antialiased}
+  .mono{font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.12em;font-size:.7rem;color:var(--blue-600)}
+  a{color:var(--blue-500);text-decoration:none}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 clamp(1.1rem,4vw,2.2rem)}
+  header{position:sticky;top:0;z-index:20;background:var(--white);border-bottom:1px solid var(--blue-100)}
+  header .bar{display:flex;align-items:center;justify-content:space-between;padding:.8rem 0;gap:1rem}
+  .logo{display:inline-flex;align-items:center;gap:.6rem;color:var(--blue-900)}
+  .logo svg{height:38px;width:auto;flex:none}
+  .logo .wm{display:flex;flex-direction:column;line-height:1.05}
+  .logo .wm b{font-weight:700;font-size:1.24rem;letter-spacing:-.01em}.logo .wm b i{font-style:normal;color:var(--blue-500)}
+  .logo .wm small{font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.28em;font-size:.62rem;color:var(--blue-600);margin-top:3px}
+  .btn{display:inline-flex;align-items:center;gap:.4rem;font-weight:500;font-size:.9rem;padding:.6rem 1.05rem;border-radius:3px;border:1px solid transparent;cursor:pointer;transition:.18s;font-family:inherit}
+  .btn-p{background:var(--blue-900);color:#fff;border-color:var(--blue-900)}.btn-p:hover{background:var(--blue-800)}
+  main{padding:1.8rem 0 3rem;min-height:50vh}
+  .crumb{font-size:.8rem;margin-bottom:1.2rem}.crumb a{color:var(--blue-600)}
+  .top{display:grid;grid-template-columns:minmax(0,1.1fr) 1fr;gap:2rem;align-items:start}
+  h1{font-size:clamp(1.5rem,3.4vw,2.2rem);font-weight:600;letter-spacing:-.01em;line-height:1.15}
+  .cat{font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.14em;font-size:.72rem;color:var(--blue-600);margin:.5rem 0 1rem}
+  .sit{display:inline-block;font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.08em;font-size:.64rem;padding:.18rem .5rem;border-radius:2px;border:1px solid var(--blue-300);color:var(--blue-700)}
+  .sit.reservada{background:var(--blue-700);border-color:var(--blue-700);color:#fff}
+  .sit.vendida{background:var(--blue-900);border-color:var(--blue-900);color:#fff;text-decoration:line-through}
+  .preco{font-family:'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums;font-size:1.7rem;font-weight:600;color:var(--blue-900);margin:1.2rem 0}
+  .preco small{font-size:.9rem;color:var(--blue-600);font-weight:400;margin-right:.4rem}
+  .preco.tbc{font-size:1rem;color:var(--blue-600);font-weight:400}
+  .descr{white-space:pre-line;font-size:.98rem;color:var(--blue-800);line-height:1.7;margin:1.2rem 0;border-top:1px solid var(--blue-100);padding-top:1.2rem}
+  .gal{display:flex;flex-direction:column;gap:.55rem}
+  .gal-main{position:relative;display:block;width:100%;border:1px solid var(--blue-100);background:var(--blue-050)}
+  .gal-main img{width:100%;aspect-ratio:3/2;object-fit:cover;display:block}
+  .gal-ths{display:flex;gap:.45rem;flex-wrap:wrap}
+  .gal-th{width:62px;height:46px;padding:0;border:1px solid var(--blue-100);background:var(--blue-050);cursor:pointer;border-radius:2px;overflow:hidden}
+  .gal-th.on{border-color:var(--blue-500);border-width:2px}
+  .gal-th img{width:100%;height:100%;object-fit:cover;display:block}
+  .gal-empty{display:flex;align-items:center;justify-content:center;aspect-ratio:3/2;color:var(--blue-600);font-family:'IBM Plex Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;background:var(--blue-050);border:1px dashed var(--blue-100)}
+  .cta{margin-top:1.4rem;display:flex;gap:.7rem;flex-wrap:wrap}
+  .back{display:inline-block;margin-top:2.4rem;font-size:.9rem}
+  footer{border-top:1px solid var(--blue-100);padding:1.6rem 0;color:var(--blue-600);font-size:.82rem}
+  .center{text-align:center;padding:4rem 0}
+  .center h1{margin-bottom:.6rem}
+  .center p{color:var(--blue-600);margin-bottom:1.6rem}
+  .loading{text-align:center;padding:4rem 0;color:var(--blue-600);font-family:'IBM Plex Mono',monospace;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase}
+  .lead-modal{position:fixed;inset:0;z-index:120;background:rgba(6,20,35,.6);display:flex;align-items:center;justify-content:center;padding:1.2rem;backdrop-filter:blur(2px)}
+  .lead-modal[hidden]{display:none}
+  .lead-box{position:relative;background:#fff;border-radius:6px;padding:1.8rem 1.6rem 1.6rem;width:100%;max-width:440px;box-shadow:0 12px 40px rgba(6,20,35,.28)}
+  .lead-box h3{font-size:1.3rem;margin-bottom:.3rem;color:var(--blue-950)}
+  .lm-sub{color:var(--blue-600);font-size:.92rem;margin-bottom:1.1rem}
+  .lm-x{position:absolute;top:.6rem;right:.8rem;background:none;border:0;font-size:1.7rem;line-height:1;color:var(--blue-500);cursor:pointer;padding:.1rem .3rem}
+  .lm-x:hover{color:var(--blue-900)}
+  .lead-form{display:flex;flex-direction:column;gap:.55rem;max-width:440px}
+  .lead-form input,.lead-form textarea{width:100%;background:#fff;border:1px solid var(--blue-100);border-radius:3px;padding:.7rem .8rem;font:inherit;font-size:.92rem;color:var(--blue-950)}
+  .lead-form textarea{resize:vertical;min-height:70px}
+  .lead-form input::placeholder,.lead-form textarea::placeholder{color:var(--blue-500);opacity:.7}
+  .lead-form input:focus,.lead-form textarea:focus{outline:none;border-color:var(--blue-500);box-shadow:0 0 0 2px rgba(62,119,174,.16)}
+  .lead-form .btn{margin-top:.2rem;border:none;cursor:pointer}
+  .lf-row{display:flex;gap:.55rem}.lf-row>*{flex:1;min-width:0}
+  .lf-note{font-size:.85rem;margin:.1rem 0 0}.lf-note.ok{color:#1a7a4c}.lf-note.err{color:#b3261e}
+  .lb{position:fixed;inset:0;z-index:200;background:rgba(6,20,35,.93);display:none;align-items:center;justify-content:center}
+  .lb.open{display:flex}.lb img{max-width:92vw;max-height:86vh;object-fit:contain}
+  .lb .x{position:absolute;top:.8rem;right:1.1rem;font-size:2rem;color:#fff;background:none;border:0;cursor:pointer}
+  @media (max-width:760px){.top{grid-template-columns:1fr;gap:1.4rem}}
+  @media(max-width:560px){.lf-row{flex-direction:column}}
+</style>
+</head>
+<body>
+<header><div class="wrap bar">
+  <a class="logo" href="/" aria-label="V4 Aero Flight — início">
+    <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="21" fill="none" stroke="#3E77AE" stroke-width="2.4"/><path d="M24 10 L16 33 L24 28 Z" fill="#061423"/><path d="M24 10 L32 33 L24 28 Z" fill="#3E77AE"/></svg>
+    <span class="wm"><b>V4 <i>Aero</i></b><small>Flight</small></span>
+  </a>
+  <a class="btn btn-p" href="/#aeronaves">Ver aeronaves</a>
+</div></header>
+<main><div class="wrap" id="root">
+  <div class="loading">Carregando…</div>
+</div></main>
+<footer><div class="wrap">© <span id="yr"></span> V4 Aero Flight · Compra, venda e intermediação de aeronaves</div></footer>
+
+<div class="lead-modal" id="leadModal" hidden>
+  <div class="lead-box" role="dialog" aria-modal="true" aria-labelledby="lmTitle">
+    <button class="lm-x" id="lmX" type="button" aria-label="Fechar">×</button>
+    <h3 id="lmTitle">Tenho interesse</h3>
+    <p class="lm-sub" id="lmSub">Preencha e continue no WhatsApp com tudo pronto.</p>
+    <form class="lead-form" id="leadForm">
+      <div class="lf-row">
+        <input type="text" id="lf_nome" placeholder="Seu nome" required autocomplete="name">
+        <input type="tel" id="lf_tel" placeholder="WhatsApp (com DDD)" required autocomplete="tel">
+      </div>
+      <input type="email" id="lf_email" placeholder="E-mail (opcional)" autocomplete="email">
+      <textarea id="lf_msg" placeholder="Alguma observação? (opcional)"></textarea>
+      <button type="submit" class="btn btn-p" id="lf_btn">Continuar no WhatsApp</button>
+      <p class="lf-note" id="lf_note" hidden></p>
+    </form>
+  </div>
+</div>
+
+<script>
+(function(){
+  var SB='https://hobtolagifjjxcmxreip.supabase.co', KEY='sb_publishable_29hmID65I5x-X0Ieot6f5Q_eLOk_Pkl', WA='5565981476175';
+  var CATS={monomotor:'Monomotor',bimotor:'Bimotor',turboelice:'Turboélice',helicoptero:'Helicóptero'};
+  var nf=new Intl.NumberFormat('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+  document.getElementById('yr').textContent=new Date().getFullYear();
+  var esc=function(s){return (s==null?'':String(s)).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});};
+  var slug=function(s){return (s||'').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'')||'aeronave';};
+  var root=document.getElementById('root');
+
+  // modal
+  var modal=document.getElementById('leadModal'), note=document.getElementById('lf_note'), CUR=null;
+  function track(){try{if(window.fbq)fbq('track','Lead',{content_name:CUR||'Geral'});}catch(e){}try{if(window.gtag)gtag('event','generate_lead',{aircraft:CUR||'Geral'});}catch(e){}}
+  function openModal(a){CUR=a||null;note.hidden=true;note.textContent='';document.getElementById('lmTitle').textContent=CUR?'Tenho interesse':'Fale com a nossa equipe';document.getElementById('lmSub').textContent=CUR?('Sobre a aeronave '+CUR+'. Preencha e continue no WhatsApp.'):'Preencha e continue no WhatsApp.';modal.hidden=false;setTimeout(function(){document.getElementById('lf_nome').focus();},40);}
+  function closeModal(){modal.hidden=true;}
+  document.getElementById('lmX').addEventListener('click',closeModal);
+  modal.addEventListener('click',function(ev){if(ev.target===modal)closeModal();});
+  addEventListener('keydown',function(ev){if(ev.key==='Escape'&&!modal.hidden)closeModal();});
+  document.getElementById('leadForm').addEventListener('submit',function(ev){
+    ev.preventDefault();
+    var nome=document.getElementById('lf_nome').value.trim(), tel=document.getElementById('lf_tel').value.trim(), email=document.getElementById('lf_email').value.trim(), msg=document.getElementById('lf_msg').value.trim();
+    if(!nome||!tel){note.hidden=false;note.className='lf-note err';note.textContent='Preencha nome e WhatsApp.';return;}
+    fetch(SB+'/rest/v1/leads',{method:'POST',headers:{'Content-Type':'application/json',apikey:KEY,Authorization:'Bearer '+KEY,Prefer:'return=minimal'},body:JSON.stringify({nome:nome,telefone:tel,email:email||null,mensagem:msg||null,aeronave:CUR,origem:CUR?('aeronave:'+CUR):'404'})}).catch(function(){});
+    track();
+    var base=CUR?('Olá, sou '+nome+'. Tenho interesse na aeronave '+CUR+' anunciada no site.'):('Olá, sou '+nome+'. Tenho interesse nas aeronaves anunciadas no site.');
+    window.open('https://wa.me/'+WA+'?text='+encodeURIComponent(msg?base+' '+msg:base),'_blank','noopener');
+    note.hidden=false;note.className='lf-note ok';note.textContent='Perfeito! Abrindo o WhatsApp…';
+    this.reset();setTimeout(closeModal,900);
+  });
+
+  function bindLeads(){Array.prototype.forEach.call(document.querySelectorAll('.js-lead'),function(el){el.addEventListener('click',function(ev){ev.preventDefault();openModal(el.getAttribute('data-aero')||null);});});}
+
+  function notFound(){
+    root.innerHTML='<div class="center"><h1>Página não encontrada</h1><p>O endereço não existe ou a aeronave saiu do catálogo.</p><a class="btn btn-p" href="/#aeronaves">Ver aeronaves disponíveis</a></div>';
+  }
+
+  function gallery(fotos){
+    fotos=(fotos||[]).filter(Boolean);
+    if(!fotos.length) return '<div class="gal"><div class="gal-empty">Fotos em breve</div></div>';
+    var ths=fotos.map(function(f,i){return '<button class="gal-th'+(i===0?' on':'')+'" data-i="'+i+'"><img src="'+esc(f)+'" alt=""></button>';}).join('');
+    return '<div class="gal"><button class="gal-main" id="galMain" data-i="0"><img id="galImg" src="'+esc(fotos[0])+'" alt=""></button>'+(fotos.length>1?'<div class="gal-ths">'+ths+'</div>':'')+'</div>';
+  }
+
+  function render(av){
+    document.title=av.nome+' à venda — V4 Aero Flight';
+    var fotos=(Array.isArray(av.fotos)?av.fotos:[]).filter(Boolean);
+    var sit=av.situacao||'Disponível', sitCls=/reserv/i.test(sit)?'reservada':/vend/i.test(sit)?'vendida':'';
+    var preco=(av.valor==null||+av.valor===0)?'<div class="preco tbc">Valor sob consulta</div>':'<div class="preco"><small>'+(av.moeda==='USD'?'US$':'R$')+'</small>'+esc(nf.format(av.valor))+'</div>';
+    var descr=(av.descricao&&String(av.descricao).trim())?'<div class="descr">'+esc(av.descricao)+'</div>':'';
+    root.innerHTML=''+
+      '<nav class="crumb"><a href="/">Início</a> › <a href="/#aeronaves">Aeronaves</a> › '+esc(av.nome)+'</nav>'+
+      '<div class="top"><div>'+gallery(fotos)+'</div><div>'+
+        '<h1>'+esc(av.nome)+'</h1>'+
+        '<div class="cat">'+esc(CATS[av.categoria]||av.categoria||'')+' · <span class="sit '+sitCls+'">'+esc(sit)+'</span></div>'+
+        preco+descr+
+        '<div class="cta"><a class="btn btn-p js-lead" data-aero="'+esc(av.nome)+'" href="#">Consultar esta aeronave</a></div>'+
+      '</div></div>'+
+      '<a class="back mono" href="/#aeronaves">‹ Ver todas as aeronaves</a>';
+    bindLeads();
+    if(fotos.length>1) wireGallery(fotos);
+  }
+
+  function wireGallery(fotos){
+    var main=document.getElementById('galImg');
+    document.querySelectorAll('.gal-th').forEach(function(b){b.addEventListener('click',function(){
+      var i=+b.getAttribute('data-i'); main.src=fotos[i];
+      document.querySelectorAll('.gal-th').forEach(function(x){x.classList.remove('on');}); b.classList.add('on');
+    });});
+    // lightbox simples
+    var lb=document.createElement('div'); lb.className='lb'; lb.innerHTML='<button class="x">×</button><img alt="">';
+    document.body.appendChild(lb); var lbImg=lb.querySelector('img');
+    document.getElementById('galMain').addEventListener('click',function(){lbImg.src=main.src;lb.classList.add('open');});
+    lb.addEventListener('click',function(){lb.classList.remove('open');});
+  }
+
+  // rota: /aeronaves/<slug>/
+  var m=location.pathname.match(/\/aeronaves\/([^\/]+)\/?$/);
+  if(!m){ notFound(); return; }
+  var want=decodeURIComponent(m[1]);
+  fetch(SB+'/rest/v1/aeronaves?ativo=eq.true&select=*',{headers:{apikey:KEY,Authorization:'Bearer '+KEY}})
+    .then(function(r){return r.ok?r.json():[];})
+    .then(function(list){
+      var av=(list||[]).filter(function(x){return slug(x.nome)===want;})[0];
+      if(av) render(av); else notFound();
+    }).catch(notFound);
+})();
+</script>
+</body>
+</html>
