@@ -24,6 +24,24 @@ const precoTxt = (av) => (av.valor==null || +av.valor===0) ? null : (av.moeda===
 const availability = (s) => /vend/i.test(s)?'https://schema.org/SoldOut' : /reserv/i.test(s)?'https://schema.org/LimitedAvailability' : 'https://schema.org/InStock';
 const waLink = (nome) => `https://wa.me/${WA}?text=`+encodeURIComponent(`Olá, tenho interesse na aeronave ${nome} anunciada no site.`);
 
+// Renderiza a descrição em Markdown simples: **Seção** = rótulo, "- item" = lista, resto = parágrafo.
+const inlineMd = s => esc(s).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+function renderDescricao(txt){
+  const lines = (txt || '').split('\n');
+  let html = '', list = [];
+  const flush = () => { if(list.length){ html += '<ul>'+list.map(li=>`<li>${inlineMd(li)}</li>`).join('')+'</ul>'; list = []; } };
+  for(const raw of lines){
+    const line = raw.trim();
+    if(line === '' || line === '---'){ flush(); continue; }
+    const h = line.match(/^\*\*(.+)\*\*$/);
+    if(h){ flush(); html += `<h4 class="ds-h">${esc(h[1])}</h4>`; continue; }
+    if(/^[-*]\s+/.test(line)){ list.push(line.replace(/^[-*]\s+/, '')); continue; }
+    flush(); html += `<p>${inlineMd(line)}</p>`;
+  }
+  flush();
+  return html;
+}
+
 async function fetchAeronaves(){
   const url = `${SB_URL}/rest/v1/aeronaves?ativo=eq.true&order=ordem.asc&select=*`;
   const r = await fetch(url, { headers: { apikey: SB_KEY, Authorization: `Bearer ${SB_KEY}` } });
@@ -40,7 +58,7 @@ function pageHTML(av, canonical){
   const sitClass = /reserv/i.test(av.situacao)?'reservada' : /vend/i.test(av.situacao)?'vendida' : '';
   const desc = metaDesc(av);
   const descrBlock = av.descricao && av.descricao.trim()
-    ? `<div class="descr">${esc(av.descricao)}</div>`
+    ? `<div class="descr">${renderDescricao(av.descricao)}</div>`
     : `<div class="descr tbc">Ficha técnica sob consulta. Fale conosco no WhatsApp.</div>`;
 
   const gal = fotos.length ? `
@@ -107,8 +125,15 @@ function pageHTML(av, canonical){
   .preco{font-family:'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums;font-size:1.7rem;font-weight:600;color:var(--blue-900);margin:1.2rem 0}
   .preco small{font-size:.9rem;color:var(--blue-600);font-weight:400;margin-right:.4rem}
   .preco.tbc{font-size:1rem;color:var(--blue-600);font-weight:400}
-  .descr{white-space:pre-line;font-size:.98rem;color:var(--blue-800);line-height:1.7;margin:1.2rem 0;border-top:1px solid var(--blue-100);padding-top:1.2rem}
+  .descr{font-size:.96rem;color:var(--blue-800);line-height:1.7;margin:1.2rem 0;border-top:1px solid var(--blue-100);padding-top:1.4rem}
   .descr.tbc{color:var(--blue-600);font-style:italic}
+  .descr .ds-h{font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.12em;font-size:.72rem;font-weight:600;color:var(--blue-600);margin:1.6rem 0 .55rem;padding-bottom:.35rem;border-bottom:1px solid var(--blue-100)}
+  .descr .ds-h:first-child{margin-top:0}
+  .descr ul{list-style:none;margin:0 0 .3rem;padding:0;display:flex;flex-direction:column;gap:.3rem}
+  .descr li{position:relative;padding-left:1.1rem}
+  .descr li::before{content:'';position:absolute;left:.15rem;top:.62em;width:5px;height:5px;background:var(--blue-500);border-radius:50%}
+  .descr p{margin:.4rem 0 .8rem}
+  .descr strong{color:var(--blue-900);font-weight:600}
   .gal{display:flex;flex-direction:column;gap:.55rem}
   .gal-main{position:relative;display:block;width:100%;padding:0;border:1px solid var(--blue-100);background:var(--blue-050);cursor:zoom-in}
   .gal-main img{width:100%;aspect-ratio:3/2;object-fit:cover;display:block}

@@ -39,7 +39,14 @@
   .preco{font-family:'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums;font-size:1.7rem;font-weight:600;color:var(--blue-900);margin:1.2rem 0}
   .preco small{font-size:.9rem;color:var(--blue-600);font-weight:400;margin-right:.4rem}
   .preco.tbc{font-size:1rem;color:var(--blue-600);font-weight:400}
-  .descr{white-space:pre-line;font-size:.98rem;color:var(--blue-800);line-height:1.7;margin:1.2rem 0;border-top:1px solid var(--blue-100);padding-top:1.2rem}
+  .descr{font-size:.96rem;color:var(--blue-800);line-height:1.7;margin:1.2rem 0;border-top:1px solid var(--blue-100);padding-top:1.4rem}
+  .descr .ds-h{font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.12em;font-size:.72rem;font-weight:600;color:var(--blue-600);margin:1.6rem 0 .55rem;padding-bottom:.35rem;border-bottom:1px solid var(--blue-100)}
+  .descr .ds-h:first-child{margin-top:0}
+  .descr ul{list-style:none;margin:0 0 .3rem;padding:0;display:flex;flex-direction:column;gap:.3rem}
+  .descr li{position:relative;padding-left:1.1rem}
+  .descr li::before{content:'';position:absolute;left:.15rem;top:.62em;width:5px;height:5px;background:var(--blue-500);border-radius:50%}
+  .descr p{margin:.4rem 0 .8rem}
+  .descr strong{color:var(--blue-900);font-weight:600}
   .gal{display:flex;flex-direction:column;gap:.55rem}
   .gal-main{position:relative;display:block;width:100%;border:1px solid var(--blue-100);background:var(--blue-050)}
   .gal-main img{width:100%;aspect-ratio:3/2;object-fit:cover;display:block}
@@ -116,6 +123,20 @@
   document.getElementById('yr').textContent=new Date().getFullYear();
   var esc=function(s){return (s==null?'':String(s)).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});};
   var slug=function(s){return (s||'').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'')||'aeronave';};
+  var inlineMd=function(s){return esc(s).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');};
+  function renderDescricao(txt){
+    var lines=(txt||'').split('\n'), html='', list=[];
+    var flush=function(){if(list.length){html+='<ul>'+list.map(function(li){return '<li>'+inlineMd(li)+'</li>';}).join('')+'</ul>';list=[];}};
+    for(var i=0;i<lines.length;i++){
+      var line=lines[i].trim();
+      if(line===''||line==='---'){flush();continue;}
+      var h=line.match(/^\*\*(.+)\*\*$/);
+      if(h){flush();html+='<h4 class="ds-h">'+esc(h[1])+'</h4>';continue;}
+      if(/^[-*]\s+/.test(line)){list.push(line.replace(/^[-*]\s+/,''));continue;}
+      flush();html+='<p>'+inlineMd(line)+'</p>';
+    }
+    flush();return html;
+  }
   var root=document.getElementById('root');
 
   // modal
@@ -156,7 +177,7 @@
     var fotos=(Array.isArray(av.fotos)?av.fotos:[]).filter(Boolean);
     var sit=av.situacao||'Disponível', sitCls=/reserv/i.test(sit)?'reservada':/vend/i.test(sit)?'vendida':'';
     var preco=(av.valor==null||+av.valor===0)?'<div class="preco tbc">Valor sob consulta</div>':'<div class="preco"><small>'+(av.moeda==='USD'?'US$':'R$')+'</small>'+esc(nf.format(av.valor))+'</div>';
-    var descr=(av.descricao&&String(av.descricao).trim())?'<div class="descr">'+esc(av.descricao)+'</div>':'';
+    var descr=(av.descricao&&String(av.descricao).trim())?'<div class="descr">'+renderDescricao(av.descricao)+'</div>':'';
     root.innerHTML=''+
       '<nav class="crumb"><a href="/">Início</a> › <a href="/#aeronaves">Aeronaves</a> › '+esc(av.nome)+'</nav>'+
       '<div class="top"><div>'+gallery(fotos)+'</div><div>'+
