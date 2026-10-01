@@ -53,6 +53,11 @@
   .lead-item .lmsg{font-size:.9rem;color:var(--blue-800);margin-top:.35rem;white-space:pre-line}
   .lead-item.atendido{opacity:.6}
   .tag.novo{border-color:var(--blue-500);color:var(--blue-700)}
+  .lperfil{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.45rem;align-items:center}
+  .lperfil>span:not(.tag){font-size:.78rem;background:var(--blue-050);border:1px solid var(--blue-100);border-radius:2px;padding:.1rem .45rem;color:var(--blue-800)}
+  .tag.quente{background:#FDECEA;border-color:#F3B7B2;color:#B3261E}
+  .tag.morno{background:#FFF4E0;border-color:#F0D29A;color:#8A5A00}
+  .tag.frio{background:var(--blue-050);border-color:var(--blue-100);color:var(--blue-600)}
   .toolbar h2{font-size:1.2rem}
 
   .list{display:grid;gap:.7rem}
@@ -273,6 +278,21 @@
   // ---------- LEADS ----------
   const tel2wa = t => 'https://wa.me/55'+(t||'').replace(/\D/g,'').replace(/^55/,'');
   const fmtDate = s => { try{ return new Date(s).toLocaleString('pt-BR',{day:'2-digit',month:'2-digit',year:'2-digit',hour:'2-digit',minute:'2-digit'}); }catch(e){ return s; } };
+  const LBL = {
+    intencao:{comprar:'Compra',vender:'Venda',pesquisando:'Pesquisando'},
+    categoria:{monomotor:'Monomotor',bimotor:'Bimotor',turboelice:'Turboélice',jato:'Jato',helicoptero:'Helicóptero'},
+    faixa:{ate1:'Até R$ 1 mi','1a3':'R$ 1–3 mi','3a10':'R$ 3–10 mi','10mais':'Acima de R$ 10 mi',nd:'Faixa não informada'},
+    prazo:{ate3m:'Até 3 meses','3a12m':'3 a 12 meses',sem_pressa:'Sem pressa'}
+  };
+  // mesma regra do formulário (assets/lead.js): quente = compra/venda em até 3 meses
+  const leadScore = l => !l.intencao ? null : (l.intencao==='pesquisando'||l.prazo==='sem_pressa') ? 'frio' : l.prazo==='ate3m' ? 'quente' : 'morno';
+  function perfil(l){
+    const sc = leadScore(l);
+    const parts = ['intencao','categoria','faixa','prazo'].map(k=>l[k]&&LBL[k][l[k]]).filter(Boolean);
+    const camp = l.utm && l.utm.utm_campaign;
+    if(!sc && !camp) return '';
+    return `<span class="lperfil">${sc?`<span class="tag ${sc}">${sc}</span>`:''}${parts.map(p=>`<span>${escapeHtml(p)}</span>`).join('')}${camp?`<span>Campanha: ${escapeHtml(camp)}</span>`:''}</span>`;
+  }
   async function refreshLeadsBadge(){
     const { count } = await sb.from('leads').select('id',{count:'exact',head:true}).eq('status','novo');
     const b=$('leadsBadge'); if(count){ b.style.display=''; b.textContent=count+' novo'+(count>1?'s':''); } else b.style.display='none';
@@ -290,6 +310,7 @@
         <div class="info">
           <b>${escapeHtml(l.nome)} ${l.status==='novo'?'<span class="tag novo">novo</span>':'<span class="tag">atendido</span>'}</b>
           <span class="lmeta">${fmtDate(l.created_at)} · ${escapeHtml(l.aeronave||'contato geral')} · ${escapeHtml(l.telefone)}${l.email?' · '+escapeHtml(l.email):''}</span>
+          ${perfil(l)}
           ${l.mensagem?`<span class="lmsg">${escapeHtml(l.mensagem)}</span>`:''}
         </div>
         <div class="acts">
