@@ -91,7 +91,7 @@
   function renderQs(){
     var h = '';
     ORDER.forEach(function(k){
-      if (k === 'categoria' && AERO) return;
+      if (AERO && k !== 'prazo') return;   // na página da aeronave só o prazo faz sentido
       h += '<div class="v4l-q"><div class="v4l-ql">' + label(k, A) + (Q[k].req ? '' : ' <span>opcional</span>') + '</div><div class="v4l-chips">';
       Q[k].opts.forEach(function(o){ h += '<button type="button" class="v4l-chip' + (A[k] === o[0] ? ' on' : '') + '" data-k="' + k + '" data-v="' + o[0] + '">' + o[1] + '</button>'; });
       h += '</div></div>';
@@ -99,16 +99,20 @@
     qs.innerHTML = h;
     next.disabled = !A.intencao;
   }
+  // Com aeronave: etapa única (prazo opcional + contato). Sem aeronave: 2 etapas.
   function go(n){
-    $('.v4l-s1').hidden = n !== 1; f.hidden = n !== 2; $('.v4l-n').textContent = n;
-    if (n === 2) setTimeout(function(){ f.elements.nome.focus(); }, 40);
+    var one = !!AERO;
+    $('.v4l-s1').hidden = !one && n !== 1; f.hidden = !one && n !== 2; $('.v4l-n').textContent = n;
+    next.hidden = one; $('.v4l-back').hidden = one; $('.v4l-step').hidden = one;
+    if (n === 2 && !one) setTimeout(function(){ f.elements.nome.focus(); }, 40);
   }
   function say(type, txt){ note.hidden = false; note.className = 'v4l-note ' + type; note.textContent = txt; }
   function open(aero){
-    AERO = aero || DEF_AERO || null; A = {}; note.hidden = true;
+    AERO = aero || DEF_AERO || null; note.hidden = true;
+    A = AERO ? { intencao: 'comprar' } : {};   // quem consulta uma aeronave específica quer comprar
     $('.v4l-t').textContent = AERO ? 'Tenho interesse' : 'Fale com a nossa equipe';
-    $('.v4l-sub').textContent = AERO ? 'Sobre a aeronave ' + AERO + '. Responda em poucos toques.' : 'Responda em poucos toques e a gente continua no WhatsApp.';
-    renderQs(); go(1); m.hidden = false;
+    $('.v4l-sub').textContent = AERO ? 'Sobre a aeronave ' + AERO + '. Deixe seu contato e seguimos no WhatsApp.' : 'Responda em poucos toques e a gente continua no WhatsApp.';
+    renderQs(); go(AERO ? 2 : 1); m.hidden = false;
   }
   function close(){ m.hidden = true; }
 
@@ -133,7 +137,7 @@
     if (AERO) {
       // link canônico da página (sem domínio local nem parâmetros) — o atendente identifica a aeronave na hora
       var url = 'https://v4aeroflight.com' + location.pathname.replace(/index\.html$/, '');
-      return 'Olá! Encontrei essa aeronave no site ' + url + '. Gostaria de saber se ainda está disponível.' + (vender ? ' Também tenho uma aeronave para negociar.' : '');
+      return 'Olá! Encontrei essa aeronave no site ' + url + '. Gostaria de saber se ainda está disponível.';
     }
     else if (vender) t = 'Olá, sou ' + nome + '. Quero vender minha aeronave' + (cat ? ' (' + cat + ')' : '') + '.';
     else if (A.intencao === 'comprar') t = 'Olá, sou ' + nome + '. Quero comprar uma aeronave' + (cat ? ' (' + cat + ')' : '') + '.';
