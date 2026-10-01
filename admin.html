@@ -282,10 +282,10 @@
     intencao:{comprar:'Compra',vender:'Venda',pesquisando:'Pesquisando'},
     categoria:{monomotor:'Monomotor',bimotor:'Bimotor',turboelice:'Turboélice',jato:'Jato',helicoptero:'Helicóptero'},
     faixa:{ate1:'Até R$ 1 mi','1a3':'R$ 1–3 mi','3a10':'R$ 3–10 mi','10mais':'Acima de R$ 10 mi',nd:'Faixa não informada'},
-    prazo:{ate3m:'Até 3 meses','3a12m':'3 a 12 meses',sem_pressa:'Sem pressa'}
+    prazo:{dias:'Nos próximos dias',ate3m:'Até 3 meses','3a12m':'3 a 12 meses',sem_pressa:'Sem pressa'}
   };
-  // mesma regra do formulário (assets/lead.js): quente = compra/venda em até 3 meses
-  const leadScore = l => !l.intencao ? null : (l.intencao==='pesquisando'||l.prazo==='sem_pressa') ? 'frio' : l.prazo==='ate3m' ? 'quente' : 'morno';
+  // mesma regra do formulário (assets/lead.js): quente = compra/venda nos próximos dias ou em até 3 meses
+  const leadScore = l => !l.intencao ? null : (l.intencao==='pesquisando'||l.prazo==='sem_pressa') ? 'frio' : (l.prazo==='dias'||l.prazo==='ate3m') ? 'quente' : 'morno';
   function perfil(l){
     const sc = leadScore(l);
     const parts = ['intencao','categoria','faixa','prazo'].map(k=>l[k]&&LBL[k][l[k]]).filter(Boolean);
