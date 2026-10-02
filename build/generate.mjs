@@ -1,6 +1,6 @@
 // Gerador de páginas estáticas por aeronave (SEO) — lê o Supabase e escreve HTML pronto.
 // Roda no GitHub Action (Node 20+) e também localmente: `node build/generate.mjs`.
-import { writeFileSync, mkdirSync, rmSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, rmSync, existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 
@@ -43,7 +43,7 @@ function renderDescricao(txt){
 }
 
 async function fetchAeronaves(){
-  const url = `${SB_URL}/rest/v1/aeronaves?ativo=eq.true&order=ordem.asc&select=*`;
+  const url = `${SB_URL}/rest/v1/aeronaves?ativo=eq.true&order=created_at.desc&select=*`;
   const r = await fetch(url, { headers: { apikey: SB_KEY, Authorization: `Bearer ${SB_KEY}` } });
   if(!r.ok) throw new Error('Supabase '+r.status+' '+await r.text());
   return r.json();
@@ -226,9 +226,21 @@ function run(){
       console.log('gerada:', canonical);
     }
 
+    // Catálogo completo em /aeronaves/: derivado do index.html (mesmo visual e script), sem as seções HOME-ONLY.
+    let cat = readFileSync(join(ROOT,'index.html'), 'utf8')
+      .replace(/<!--HOME-ONLY-->[\s\S]*?<!--\/HOME-ONLY-->/g, '')
+      .replace('<body>', '<body class="catalogo">')
+      .replace(/<title>[\s\S]*?<\/title>/, `<title>Aeronaves à venda — catálogo completo | V4 Aero Flight</title>\n<link rel="canonical" href="${SITE}/aeronaves/">`)
+      .replace(/(<meta name="description" content=")[^"]*"/, '$1Catálogo completo de aviões e helicópteros à venda na V4 Aero Flight: monomotores, bimotores, turboélices e helicópteros, com ficha técnica e fotos."')
+      .replace(/href="#aeronaves"/g, 'href="/aeronaves/"')
+      .replace(/href="#/g, 'href="/#')
+      .replace(/(["'(])assets\//g, '$1/assets/');
+    writeFileSync(join(aeronavesDir, 'index.html'), cat);
+
     const today = new Date().toISOString().slice(0,10);
     const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
       `  <url><loc>${SITE}/</loc><lastmod>${today}</lastmod><priority>1.0</priority></url>\n` +
+      `  <url><loc>${SITE}/aeronaves/</loc><lastmod>${today}</lastmod><priority>0.9</priority></url>\n` +
       urls.map(u=>`  <url><loc>${u.loc}</loc><lastmod>${today}</lastmod><priority>0.8</priority></url>`).join('\n') +
       `\n</urlset>\n`;
     writeFileSync(join(ROOT,'sitemap.xml'), sitemap);

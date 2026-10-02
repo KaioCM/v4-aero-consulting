@@ -1,9 +1,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="index, follow">
-<link rel="icon" href="assets/logo-mark.svg" type="image/svg+xml">
-<title>V4 Aero Flight — Aeronaves disponíveis para venda</title>
-<meta name="description" content="Compra, venda e intermediação de aeronaves, com ficha técnica completa e assessoria em todo o processo.">
+<link rel="icon" href="/assets/logo-mark.svg" type="image/svg+xml">
+<title>Aeronaves à venda — catálogo completo | V4 Aero Flight</title>
+<link rel="canonical" href="https://v4aeroflight.com/aeronaves/">
+<meta name="description" content="Catálogo completo de aviões e helicópteros à venda na V4 Aero Flight: monomotores, bimotores, turboélices e helicópteros, com ficha técnica e fotos.">
 
 <!-- ============ TRACKING / PIXELS · V4 Aero ============ -->
 <!-- Preencha os IDs abaixo para ligar o rastreamento. Vazio = desligado (nada carrega). -->
@@ -178,7 +179,7 @@
 
   /* ---------- sobre ---------- */
   .sobre{background:var(--blue-900);color:var(--white);position:relative;overflow:hidden}
-  .sobre::before{content:"";position:absolute;inset:0;background:url(assets/hero.png) center/cover no-repeat;opacity:.10}
+  .sobre::before{content:"";position:absolute;inset:0;background:url(/assets/hero.png) center/cover no-repeat;opacity:.10}
   .sobre .grid{position:relative;z-index:1;display:grid;grid-template-columns:1fr 2fr;gap:clamp(1.5rem,5vw,4rem);align-items:start}
   .sobre h2{color:var(--white);font-size:clamp(1.7rem,3.4vw,2.4rem)}
   .sobre .body p{color:#C3D3E4;font-size:1.05rem;margin-bottom:1.1rem;max-width:62ch}
@@ -252,20 +253,20 @@
 </style>
 </head>
 
-<body>
+<body class="catalogo">
 <!-- ===================== HEADER ===================== -->
 <header id="header">
   <div class="wrap bar">
-    <a href="#top" class="logo" aria-label="V4 Aero Flight — início">
+    <a href="/#top" class="logo" aria-label="V4 Aero Flight — início">
       <svg class="mark" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="21" fill="none" stroke="#3E77AE" stroke-width="2.4"/><path d="M24 10 L16 33 L24 28 Z" fill="currentColor"/><path d="M24 10 L32 33 L24 28 Z" fill="#3E77AE"/></svg>
       <span class="wm"><b>V4 <i>Aero</i></b><small>Flight</small></span>
     </a>
     <nav class="main">
-      <a href="#aeronaves">Aeronaves</a>
-      <a href="#servicos">Serviços</a>
-      <a href="#sobre">Sobre</a>
-      <a href="#instagram">Instagram</a>
-      <a href="#contato">Contato</a>
+      <a href="/aeronaves/">Aeronaves</a>
+      <a href="/#servicos">Serviços</a>
+      <a href="/#sobre">Sobre</a>
+      <a href="/#instagram">Instagram</a>
+      <a href="/#contato">Contato</a>
     </nav>
     <div class="end">
       <a href="https://wa.me/5565981476175" class="btn btn-p js-lead">Falar no WhatsApp</a>
@@ -273,31 +274,15 @@
     </div>
   </div>
   <nav class="mnav" id="mnav">
-    <a href="#aeronaves">Aeronaves</a>
-    <a href="#servicos">Serviços</a>
-    <a href="#sobre">Sobre</a>
-    <a href="#instagram">Instagram</a>
-    <a href="#contato">Contato</a>
+    <a href="/aeronaves/">Aeronaves</a>
+    <a href="/#servicos">Serviços</a>
+    <a href="/#sobre">Sobre</a>
+    <a href="/#instagram">Instagram</a>
+    <a href="/#contato">Contato</a>
   </nav>
 </header>
 
-<!--HOME-ONLY-->
-<!-- ===================== HERO ===================== -->
-<section class="hero" id="top">
-  <!-- Fundo de ambiente (aeronave genérica ao longe, imagem ilustrativa) — pode trocar por foto real da V4 -->
-  <img class="bg" src="assets/hero.png" alt="" aria-hidden="true">
-  <svg class="hero-mark" viewBox="0 0 48 48" aria-hidden="true"><path d="M24 4 L24 33 L6 42 Z" fill="#8FB0D8"/><path d="M24 4 L42 42 L24 33 Z" fill="#3E77AE"/></svg>
-  <div class="wrap">
-    <span class="k mono">Compra · Venda · Intermediação de aeronaves</span>
-    <h1>Aeronaves disponíveis para venda, com ficha técnica completa.</h1>
-    <p>Assessoria em todo o processo — da avaliação e negociação à documentação e transferência.</p>
-    <div class="actions">
-      <a href="#aeronaves" class="btn btn-p">Ver aeronaves</a>
-      <a href="https://wa.me/5565981476175" class="btn btn-s on-dark js-lead">Falar no WhatsApp</a>
-    </div>
-  </div>
-</section>
-<!--/HOME-ONLY-->
+
 
 <!-- ===================== 01 · AERONAVES ===================== -->
 <section class="sec" id="aeronaves">
@@ -338,102 +323,22 @@
   </div>
 </section>
 
-<!--HOME-ONLY-->
-<!-- ===================== 02 · SERVIÇOS ===================== -->
-<section class="sec" id="servicos" style="background:var(--blue-050)">
-  <div class="wrap">
-    <div class="sec-head reveal"><span class="k mono">02 · Serviços</span><h2>O que fazemos</h2></div>
-    <div class="svc-list">
-      <div class="svc reveal"><h3>Compra de aeronaves</h3><p>Busca ativa no mercado conforme o perfil de missão, orçamento e operação do cliente.</p></div>
-      <div class="svc reveal"><h3>Venda de aeronaves</h3><p>Avaliação, precificação, divulgação e condução da negociação até o fechamento.</p></div>
-      <div class="svc reveal"><h3>Intermediação</h3><p>Atuação entre comprador e vendedor, com segurança e transparência em todas as etapas.</p></div>
-      <div class="svc reveal"><h3>Assessoria completa</h3><p>Suporte na documentação, na vistoria e nos trâmites necessários à transferência.</p></div>
-    </div>
-  </div>
-</section>
 
-<!-- ===================== 03 · COMO TRABALHAMOS ===================== -->
-<section class="sec" id="como">
-  <div class="wrap">
-    <div class="sec-head reveal"><span class="k mono">03 · Processo</span><h2>Como trabalhamos</h2></div>
-    <div class="steps reveal">
-      <div class="step"><span class="num">01</span><div><h3>Contato e briefing</h3><p>Entendemos o tipo de missão, o orçamento e o perfil de operação pretendido.</p></div></div>
-      <div class="step"><span class="num">02</span><div><h3>Seleção de opções</h3><p>Apresentamos as aeronaves compatíveis, com ficha técnica e histórico.</p></div></div>
-      <div class="step"><span class="num">03</span><div><h3>Negociação e vistoria</h3><p>Conduzimos as tratativas e acompanhamos a vistoria da aeronave escolhida.</p></div></div>
-      <div class="step"><span class="num">04</span><div><h3>Documentação e transferência</h3><p>Acompanhamos os trâmites até a conclusão da transferência.</p></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== 04 · SOBRE ===================== -->
-<section class="sec sobre" id="sobre">
-  <div class="wrap grid">
-    <h2 class="reveal">Sobre a V4</h2>
-    <div class="body reveal">
-      <p>A V4 Aero Flight atua na compra, venda e intermediação de aeronaves, com assessoria completa em todas as etapas do processo.</p>
-      <p>O trabalho começa antes do anúncio: entender a missão pretendida, o orçamento e o perfil de operação, para apresentar apenas o que faz sentido. Conduzimos a negociação e acompanhamos a documentação até a transferência ser concluída.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== 04 · INSTAGRAM ===================== -->
-<section class="sec ig" id="instagram" style="background:var(--blue-050)">
-  <div class="wrap">
-    <div class="sec-head reveal"><span class="k mono">04 · Instagram</span><h2>As aeronaves novas aparecem primeiro no Instagram.</h2></div>
-    <p class="ig-lead reveal">Publicamos as aeronaves que entram na carteira, os detalhes de cada uma e os negócios já concluídos. Acompanhe para saber das oportunidades antes que elas saiam da lista.</p>
-    <div class="ig-grid reveal">
-      <a class="ig-post" href="https://instagram.com/v4aeroconsulting" target="_blank" rel="noopener noreferrer"><img src="assets/ig/ig-01.jpg" alt="Aeronave à venda — V4 Aero Flight no Instagram" loading="lazy"></a>
-      <a class="ig-post" href="https://instagram.com/v4aeroconsulting" target="_blank" rel="noopener noreferrer"><img src="assets/ig/ig-02.jpg" alt="Aeronave à venda — V4 Aero Flight no Instagram" loading="lazy"></a>
-      <a class="ig-post" href="https://instagram.com/v4aeroconsulting" target="_blank" rel="noopener noreferrer"><img src="assets/ig/ig-03.jpg" alt="Aeronave à venda — V4 Aero Flight no Instagram" loading="lazy"></a>
-      <a class="ig-post" href="https://instagram.com/v4aeroconsulting" target="_blank" rel="noopener noreferrer"><img src="assets/ig/ig-05.jpg" alt="Aeronave à venda — V4 Aero Flight no Instagram" loading="lazy"></a>
-      <a class="ig-post" href="https://instagram.com/v4aeroconsulting" target="_blank" rel="noopener noreferrer"><img src="assets/ig/ig-06.jpg" alt="Aeronave à venda — V4 Aero Flight no Instagram" loading="lazy"></a>
-      <a class="ig-post" href="https://instagram.com/v4aeroconsulting" target="_blank" rel="noopener noreferrer"><img src="assets/ig/ig-07.jpg" alt="Aeronave à venda — V4 Aero Flight no Instagram" loading="lazy"></a>
-      <a class="ig-post" href="https://instagram.com/v4aeroconsulting" target="_blank" rel="noopener noreferrer"><img src="assets/ig/ig-09.jpg" alt="Aeronave à venda — V4 Aero Flight no Instagram" loading="lazy"></a>
-      <a class="ig-post" href="https://instagram.com/v4aeroconsulting" target="_blank" rel="noopener noreferrer"><img src="assets/ig/ig-10.jpg" alt="Aeronave à venda — V4 Aero Flight no Instagram" loading="lazy"></a>      <a class="ig-post" href="https://instagram.com/v4aeroconsulting" target="_blank" rel="noopener noreferrer"><img src="assets/ig/ig-12.jpg" alt="Aeronave à venda — V4 Aero Flight no Instagram" loading="lazy"></a>
-      <a class="ig-post" href="https://instagram.com/v4aeroconsulting" target="_blank" rel="noopener noreferrer"><img src="assets/ig/ig-13.jpg" alt="Aeronave à venda — V4 Aero Flight no Instagram" loading="lazy"></a>    </div>
-    <div class="ig-bar reveal">
-      <a class="ig-handle" href="https://instagram.com/v4aeroconsulting" target="_blank" rel="noopener noreferrer">
-        <svg class="ig-glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.2"/><circle cx="12" cy="12" r="4.6"/><circle cx="17.6" cy="6.4" r="1.15" fill="currentColor" stroke="none"/></svg>
-        @v4aeroconsulting
-      </a>
-      <!-- ATUALIZAR PERIODICAMENTE: contagem verificada em jul/2026 -->
-      <span class="ig-stats tnum">+4.600 seguidores · +240 publicações</span>
-    </div>
-    <div class="ig-cta reveal"><a class="btn btn-p" href="https://instagram.com/v4aeroconsulting" target="_blank" rel="noopener noreferrer">Ver perfil no Instagram →</a></div>
-  </div>
-</section>
-
-<!-- ===================== 05 · CONTATO ===================== -->
-<section class="sec contato" id="contato">
-  <div class="wrap grid">
-    <div class="cdata reveal">
-      <div class="row"><span class="k mono">WhatsApp</span><a class="v" href="https://wa.me/5565981476175">(65) 98147-6175</a></div>
-      <div class="row"><span class="k mono">Instagram</span><a class="v" href="https://instagram.com/v4aeroconsulting">@v4aeroconsulting</a></div>
-      <div class="row"><span class="k mono">E-mail</span><a class="v" href="mailto:v4consulting@hotmail.com">v4consulting@hotmail.com</a></div>
-    </div>
-    <div class="ccall reveal">
-      <h2>Vamos encontrar a sua aeronave.</h2>
-      <p>Preencha rapidinho e nossa equipe continua com você no WhatsApp, já com o seu perfil em mãos.</p>
-      <a class="btn btn-p js-lead" href="https://wa.me/5565981476175">Falar com a nossa equipe</a>
-    </div>
-  </div>
-</section>
-<!--/HOME-ONLY-->
 
 <!-- ===================== FOOTER ===================== -->
 <footer>
   <div class="wrap">
     <div class="foot">
-      <a href="#top" class="logo" aria-label="V4 Aero Flight — início">
+      <a href="/#top" class="logo" aria-label="V4 Aero Flight — início">
       <svg class="mark" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="21" fill="none" stroke="#3E77AE" stroke-width="2.4"/><path d="M24 10 L16 33 L24 28 Z" fill="currentColor"/><path d="M24 10 L32 33 L24 28 Z" fill="#3E77AE"/></svg>
       <span class="wm"><b>V4 <i>Aero</i></b><small>Flight</small></span>
     </a>
       <p class="desc">Compra, venda e intermediação de aeronaves.</p>
       <nav class="foot-nav">
-        <a href="#aeronaves">Aeronaves</a>
-        <a href="#servicos">Serviços</a>
-        <a href="#sobre">Sobre</a>
-        <a href="#contato">Contato</a>
+        <a href="/aeronaves/">Aeronaves</a>
+        <a href="/#servicos">Serviços</a>
+        <a href="/#sobre">Sobre</a>
+        <a href="/#contato">Contato</a>
       </nav>
     </div>
     <div class="foot-copy">© 2026 V4 Aero Flight</div>
@@ -498,7 +403,7 @@
   function valorCell(av){if(av.valor==null||+av.valor===0)return `<span class="c-valor tbc" data-label="Valor">[a confirmar]</span>`;const m=av.moeda==='USD'?'US$':'R$';return `<span class="c-valor" data-label="Valor"><span class="vwrap"><span class="moeda">${m}</span><span class="cifra">${nf.format(av.valor)}</span></span></span>`;}
   function wa(av){const t=av.nome&&!av.nome.includes('[')?`Olá, tenho interesse na aeronave ${av.nome} anunciada no site.`:'Olá, tenho interesse na aeronave anunciada no site.';return 'https://wa.me/5565981476175?text='+encodeURIComponent(t);}
   function rowHTML(av){const nome=esc(av.nome||'[a confirmar]');const dv=av.valor==null?'0':String(av.valor);
-    const fotos=(Array.isArray(av.fotos)?av.fotos:[]).filter(Boolean);const foto=esc(fotos[0]||av.foto_url||'assets/logo-mark.svg');
+    const fotos=(Array.isArray(av.fotos)?av.fotos:[]).filter(Boolean);const foto=esc(fotos[0]||av.foto_url||'/assets/logo-mark.svg');
     const sit=av.situacao||'Disponível';const sitCls=/reserv/i.test(sit)?'reservada':/vend/i.test(sit)?'vendida':'';
     return `<div class="av" data-tipo="${esc(av.categoria)}" data-moeda="${esc(av.moeda||'BRL')}" data-valor="${dv}" data-criado="${Date.parse(av.created_at)||0}" data-nome="${nome}">
       <a class="av-row" href="/aeronaves/${slug(av.nome)}/">

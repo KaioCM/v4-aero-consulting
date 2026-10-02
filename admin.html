@@ -175,10 +175,9 @@
           </select>
         </div>
       </div>
-      <div class="grid3" style="margin-top:.9rem">
+      <div class="grid2" style="margin-top:.9rem">
         <div><label>Moeda</label><select id="f_moeda"><option value="BRL">R$ (Real)</option><option value="USD">US$ (Dólar)</option></select></div>
         <div><label>Valor (só números)</label><input id="f_valor" inputmode="decimal" placeholder="ex.: 3000000"><div class="hint">Em branco = "a confirmar"</div></div>
-        <div><label>Ordem</label><input id="f_ordem" inputmode="numeric" placeholder="1"></div>
       </div>
       <div class="full" style="margin-top:.9rem">
         <label>Descrição (todas as informações da aeronave)</label>
@@ -254,7 +253,7 @@
   // ---------- LIST ----------
   async function loadList(){
     msg($('appMsg'),'ok','Carregando…');
-    const { data, error } = await sb.from('aeronaves').select('*').order('ordem',{ascending:true});
+    const { data, error } = await sb.from('aeronaves').select('*').order('created_at',{ascending:false});
     if(error){ msg($('appMsg'),'err','Erro ao carregar: '+error.message); return; }
     msg($('appMsg'),'');
     $('counter').textContent = '· '+data.length;
@@ -263,7 +262,7 @@
         <img class="thumb" src="${(av.fotos&&av.fotos[0])||av.foto_url||'assets/logo-mark.svg'}" alt="">
         <div class="info">
           <b>${escapeHtml(av.nome)}</b>
-          <span class="meta">${CATS[av.categoria]||av.categoria} · ordem ${av.ordem} · ${(av.fotos?av.fotos.length:0)} foto(s) · ${escapeHtml(av.situacao)} ${av.ativo?'<span class="tag">no site</span>':'<span class="tag off">oculta</span>'}</span>
+          <span class="meta">${CATS[av.categoria]||av.categoria} · ${(av.fotos?av.fotos.length:0)} foto(s) · ${escapeHtml(av.situacao)} ${av.ativo?'<span class="tag">no site</span>':'<span class="tag off">oculta</span>'}</span>
           <span class="val">${fmtVal(av)}</span>
         </div>
         <div class="acts">
@@ -336,7 +335,7 @@
   $('tabLeads').addEventListener('click',()=>switchTab(false));
 
   // ---------- FORM ----------
-  const F=['id','nome','categoria','situacao','moeda','valor','ordem','descricao'];
+  const F=['id','nome','categoria','situacao','moeda','valor','descricao'];
   let editing=null, fotosArr=[];
   function openForm(av){
     editing=av||null;
@@ -395,7 +394,6 @@
         situacao: $('f_situacao').value,
         moeda: $('f_moeda').value,
         valor: valRaw==='' ? null : Number(valRaw),
-        ordem: $('f_ordem').value.trim()===''?0:parseInt($('f_ordem').value,10),
         descricao: nn($('f_descricao').value),
         ativo: $('f_ativo').checked, fotos: fotosArr, foto_url: fotosArr[0]||null
       };
