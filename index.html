@@ -315,6 +315,7 @@
         <button class="opt filtro" data-f="monomotor">Monomotor</button>
         <button class="opt filtro" data-f="bimotor">Bimotor</button>
         <button class="opt filtro" data-f="turboelice">Turboélice</button>
+        <button class="opt filtro" data-f="jato">Jato</button>
         <button class="opt filtro" data-f="helicoptero">Helicóptero</button>
         <span class="count mono" id="count">06 aeronaves</span>
       </div>
@@ -489,7 +490,7 @@
   apply();
 
   // render a partir do banco
-  const CATS={monomotor:'Monomotor',bimotor:'Bimotor',turboelice:'Turboélice',helicoptero:'Helicóptero'};
+  const CATS={monomotor:'Monomotor',bimotor:'Bimotor',turboelice:'Turboélice',jato:'Jato',helicoptero:'Helicóptero'};
   const nf=new Intl.NumberFormat('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
   const esc=s=>(s??'').toString().replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
   const slug=s=>(s||'').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'')||'aeronave';

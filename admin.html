@@ -166,6 +166,7 @@
             <option value="monomotor">Monomotor</option>
             <option value="bimotor">Bimotor</option>
             <option value="turboelice">Turboélice</option>
+            <option value="jato">Jato</option>
             <option value="helicoptero">Helicóptero</option>
           </select>
         </div>
@@ -219,7 +220,7 @@
   const $ = id => document.getElementById(id);
   const show = (el,on)=>el.style.display = on ? '' : 'none';
   const msg = (el,type,text)=>{el.className='msg '+(type||'');el.textContent=text||'';};
-  const CATS={monomotor:'Monomotor',bimotor:'Bimotor',turboelice:'Turboélice',helicoptero:'Helicóptero'};
+  const CATS={monomotor:'Monomotor',bimotor:'Bimotor',turboelice:'Turboélice',jato:'Jato',helicoptero:'Helicóptero'};
   const nf = new Intl.NumberFormat('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
   const fmtVal = av => (av.valor==null||+av.valor===0) ? '[a confirmar]' : (av.moeda==='USD'?'US$ ':'R$ ')+nf.format(av.valor);
 

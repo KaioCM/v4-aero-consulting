@@ -9,7 +9,7 @@ const SITE = 'https://v4aeroflight.com';
 const WA = '5565981476175';
 const SB_URL = 'https://hobtolagifjjxcmxreip.supabase.co';
 const SB_KEY = 'sb_publishable_29hmID65I5x-X0Ieot6f5Q_eLOk_Pkl';
-const CATS = { monomotor:'Monomotor', bimotor:'Bimotor', turboelice:'Turboélice', helicoptero:'Helicóptero' };
+const CATS = { monomotor:'Monomotor', bimotor:'Bimotor', turboelice:'Turboélice', jato:'Jato', helicoptero:'Helicóptero' };
 const nf = new Intl.NumberFormat('pt-BR', { minimumFractionDigits:2, maximumFractionDigits:2 });
 
 const esc = s => (s ?? '').toString().replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
