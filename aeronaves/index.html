@@ -9,13 +9,13 @@
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <meta name="theme-color" content="#0B2137">
 <title>Aeronaves à venda — catálogo completo | V4 Aero Flight</title>
-<meta name="description" content="Catálogo completo de aviões e helicópteros à venda na V4 Aero Flight: monomotores, bimotores, turboélices, jatos e helicópteros, com fotos, ficha técnica e valor.">
+<meta name="description" content="Catálogo completo de aviões e helicópteros à venda na V4 Aero Flight: monomotores e bimotores a pistão e turboélice, jatos e helicópteros, com fotos, ficha técnica e valor.">
 <link rel="canonical" href="https://v4aeroflight.com/aeronaves/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="V4 Aero Flight">
 <meta property="og:locale" content="pt_BR">
 <meta property="og:title" content="Aeronaves à venda — catálogo completo | V4 Aero Flight">
-<meta property="og:description" content="Catálogo completo de aviões e helicópteros à venda na V4 Aero Flight: monomotores, bimotores, turboélices, jatos e helicópteros, com fotos, ficha técnica e valor.">
+<meta property="og:description" content="Catálogo completo de aviões e helicópteros à venda na V4 Aero Flight: monomotores e bimotores a pistão e turboélice, jatos e helicópteros, com fotos, ficha técnica e valor.">
 <meta property="og:url" content="https://v4aeroflight.com/aeronaves/">
 <meta property="og:image" content="https://v4aeroflight.com/assets/og.jpg">
 <meta property="og:image:width" content="1200">
@@ -38,273 +38,221 @@
 
 <style>
   :root{
-    --blue-950:#061423;
-    --blue-900:#0B2137;
-    --blue-800:#12314D;
-    --blue-700:#1B4269;
-    --blue-600:#2A5B8C;
-    --blue-500:#3E77AE;
-    --blue-300:#8FB0D8;
-    --blue-100:#DCE9F3;
-    --blue-050:#F1F5FA;
-    --white:#FFFFFF;
-    --ease:cubic-bezier(.2,.6,.2,1);
-    --maxw:1160px;
+    --blue-950:#061423;--blue-900:#0B2137;--blue-800:#12314D;--blue-700:#1B4269;--blue-600:#2A5B8C;
+    --blue-500:#3E77AE;--blue-300:#8FB0D8;--blue-100:#DCE9F3;--blue-050:#F1F5FA;--white:#FFFFFF;
+    --ease:cubic-bezier(.16,1,.3,1);
+    --maxw:1240px;--gut:clamp(1.1rem,4vw,2.4rem);--bar:64px;
   }
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  body{
-    font-family:'IBM Plex Sans',system-ui,sans-serif;
-    color:var(--blue-900);background:var(--white);line-height:1.65;
-    -webkit-font-smoothing:antialiased;
-  }
+  html{scroll-behavior:smooth;scrollbar-color:var(--blue-300) var(--blue-050)}
+  body{font-family:'IBM Plex Sans',system-ui,sans-serif;color:var(--blue-900);background:var(--white);line-height:1.6;-webkit-font-smoothing:antialiased;caret-color:var(--blue-500)}
+  ::selection{background:var(--blue-100);color:var(--blue-950)}
   img{display:block;max-width:100%}
   a{color:inherit;text-decoration:none}
   button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
-
-  .mono{font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.14em;font-size:.72rem;color:var(--blue-600)}
+  :focus-visible{outline:2px solid var(--blue-500);outline-offset:3px}
   .tnum{font-family:'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums}
-  .wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:clamp(1.1rem,4vw,2.2rem)}
+  .lbl{font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.12em;font-size:.72rem;color:var(--blue-600)}
+  .wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gut)}
+  h1,h2,h3{font-weight:600;letter-spacing:-.02em;line-height:1.12;text-wrap:balance}
+  .sec{padding-block:clamp(3.5rem,8vw,6.5rem)}
+  .sec h2{font-size:clamp(1.7rem,3.2vw,2.4rem);margin-bottom:clamp(1.6rem,3vw,2.4rem)}
 
-  h1,h2,h3{font-weight:600;letter-spacing:-.01em;line-height:1.2}
-  .sec{padding-block:clamp(3.5rem,7vw,6rem)}
-  .sec-head{margin-bottom:2.4rem}
-  .sec-head .k{display:block;margin-bottom:.7rem}
-  .sec-head h2,.sec-head h1{font-size:clamp(1.7rem,3.4vw,2.5rem)}
-
-  /* ---------- buttons ---------- */
-  .btn{display:inline-flex;align-items:center;gap:.5rem;font-weight:500;font-size:.95rem;padding:.7rem 1.3rem;border-radius:3px;border:1px solid transparent;transition:.2s var(--ease);cursor:pointer}
-  .btn-p{background:var(--blue-900);color:var(--white);border-color:var(--blue-900)}
-  .btn-p:hover{background:var(--blue-800)}
+  /* botões */
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:.55rem;font-weight:500;font-size:.98rem;padding:.85rem 1.4rem;border-radius:3px;border:1px solid transparent;transition:background .2s var(--ease),color .2s var(--ease),border-color .2s var(--ease)}
+  .btn svg{width:16px;height:16px;flex:none;transition:transform .3s var(--ease)}
+  .btn:hover svg{transform:translateX(3px)}
+  .btn-p{background:var(--blue-900);color:var(--white)}
+  .btn-p:hover{background:var(--blue-700)}
+  .btn-w{background:var(--white);color:var(--blue-900)}
+  .btn-w:hover{background:var(--blue-100)}
   .btn-s{border-color:var(--blue-300);color:var(--blue-900)}
-  .btn-s:hover{border-color:var(--blue-500);color:var(--blue-500)}
-  .btn-s.on-dark{border-color:var(--blue-700);color:var(--white)}
-  .btn-s.on-dark:hover{border-color:var(--blue-300);color:var(--blue-300)}
+  .btn-s:hover{border-color:var(--blue-900)}
 
-  /* ---------- header ---------- */
-  header{position:fixed;top:0;left:0;right:0;z-index:60;background:var(--white);border-bottom:1px solid transparent;transition:.25s var(--ease)}
-  header.scrolled{border-bottom-color:var(--blue-100);box-shadow:0 1px 3px rgba(6,20,35,.06)}
-  .bar{display:flex;align-items:center;justify-content:space-between;height:60px}
+  /* topo */
+  header{position:sticky;top:0;z-index:60;background:var(--white);border-bottom:1px solid var(--blue-100)}
+  .bar{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;height:var(--bar)}
   .logo{display:inline-flex;align-items:center;gap:.6rem;color:var(--blue-900)}
-  .logo .mark{height:38px;width:auto;flex:none;display:block}
+  .logo .mark{height:36px;width:auto;flex:none}
   .logo .wm{display:flex;flex-direction:column;line-height:1.05}
-  .logo .wm b{font-weight:700;font-size:1.24rem;letter-spacing:-.01em;color:var(--blue-900)}
+  .logo .wm b{font-weight:700;font-size:1.2rem;letter-spacing:-.01em}
   .logo .wm b i{font-style:normal;color:var(--blue-500)}
-  .logo .wm small{font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.28em;font-size:.62rem;color:var(--blue-600);margin-top:3px}
-  nav.main{display:flex;gap:1.7rem}
-  nav.main a{font-size:.92rem;color:var(--blue-600);font-weight:500;transition:.2s}
-  nav.main a:hover{color:var(--blue-900)}
+  .logo .wm small{font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.28em;font-size:.6rem;color:var(--blue-600);margin-top:3px}
+  nav.main{display:flex;gap:1.8rem}
+  nav.main a{font-size:.93rem;color:var(--blue-700);font-weight:500;padding-block:.3rem;border-bottom:1px solid transparent;transition:border-color .2s var(--ease),color .2s var(--ease)}
+  nav.main a:hover{color:var(--blue-900);border-bottom-color:var(--blue-900)}
   .bar .end{display:flex;align-items:center;gap:1rem}
-  .menu-btn{display:none;width:26px;height:20px;position:relative}
-  .menu-btn span{position:absolute;left:0;right:0;height:2px;background:var(--blue-900);transition:.25s}
-  .menu-btn span:nth-child(1){top:0}.menu-btn span:nth-child(2){top:9px}.menu-btn span:nth-child(3){top:18px}
-  .mnav{display:none;flex-direction:column;background:var(--white);border-bottom:1px solid var(--blue-100)}
-  .mnav a{padding:.9rem clamp(1.1rem,4vw,2.2rem);border-top:1px solid var(--blue-050);font-size:.98rem;color:var(--blue-800)}
+  .bar .end .btn{padding:.6rem 1.05rem;font-size:.9rem}
+  .menu-btn{display:none;width:40px;height:40px;position:relative}
+  .menu-btn span{position:absolute;left:8px;right:8px;height:2px;background:var(--blue-900);transition:transform .25s var(--ease),opacity .2s}
+  .menu-btn span:nth-child(1){top:13px}.menu-btn span:nth-child(2){top:19px}.menu-btn span:nth-child(3){top:25px}
+  .menu-btn[aria-expanded="true"] span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+  .menu-btn[aria-expanded="true"] span:nth-child(2){opacity:0}
+  .menu-btn[aria-expanded="true"] span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+  .mnav{display:none;flex-direction:column;background:var(--white);border-top:1px solid var(--blue-100)}
+  .mnav a{padding:1rem var(--gut);border-bottom:1px solid var(--blue-050);font-size:1rem;color:var(--blue-800)}
 
-  /* ---------- hero ---------- */
-  .hero{position:relative;min-height:62vh;background:var(--blue-950);color:var(--white);display:flex;align-items:center;overflow:hidden;padding-top:60px}
-  .hero .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.9}
-  .hero::after{content:"";position:absolute;inset:0;background:rgba(6,20,35,.6)}
-  .hero .wrap{position:relative;z-index:1;padding-block:clamp(1.4rem,3vw,2.4rem)}
-  .hero .k{color:var(--blue-300);display:block;margin-bottom:.8rem}
-  .hero h1{font-size:clamp(1.9rem,3.8vw,3rem);color:var(--white);max-width:20ch;margin-bottom:.85rem}
-  .hero p{color:#C3D3E4;max-width:52ch;font-size:1.05rem;margin-bottom:1.35rem}
-  .hero .actions{display:flex;flex-wrap:wrap;gap:.8rem}
-  .hero-mark{position:absolute;right:-2%;top:50%;transform:translateY(-50%);height:135%;width:auto;z-index:0;opacity:.16;pointer-events:none}
-  @media (max-width:760px){.hero-mark{height:80%;right:-14%;opacity:.09}}
-
-  /* ---------- catálogo ---------- */
-  .controls{display:flex;flex-direction:column;gap:.7rem;padding-bottom:1.4rem;border-bottom:1px solid var(--blue-300)}
-  .ctrl-line{display:flex;flex-wrap:wrap;align-items:baseline;gap:.4rem 1.1rem}
-  .ctrl-line > .lbl{margin-right:.2rem}
-  .opt{font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.1em;font-size:.72rem;color:var(--blue-600);padding-bottom:2px;border-bottom:1px solid transparent;transition:.18s}
-  .opt:hover{color:var(--blue-900)}
-  .opt.active{color:var(--blue-900);font-weight:600;border-bottom-color:var(--blue-900)}
-  .count{margin-left:auto;align-self:center}
-  .cat-note{font-family:'IBM Plex Mono',monospace;text-transform:none;letter-spacing:.02em;font-size:.7rem;color:var(--blue-600);margin-top:1rem}
-
-  .cat-head,.av-row{
-    display:grid;
-    grid-template-columns:84px minmax(140px,1fr) minmax(96px,auto) 150px 24px;
-    align-items:center;column-gap:.6rem;
+  /* ---------- duas portas ---------- */
+  .doors{display:grid;grid-template-columns:1.25fr 1fr;min-height:clamp(520px,calc(100svh - var(--bar) - 7rem),720px)}
+  .door{display:flex;flex-direction:column;padding:clamp(2rem,5vw,4.5rem) var(--gut) clamp(2rem,4vw,3.5rem);transition:opacity .35s var(--ease)}
+  .door-buy{background:var(--blue-900);color:var(--white);padding-left:max(var(--gut),calc((100vw - var(--maxw))/2 + var(--gut)))}
+  .door-sell{background:var(--blue-050);padding-right:max(var(--gut),calc((100vw - var(--maxw))/2 + var(--gut)))}
+  .doors:has(.door-buy:hover) .door-sell,.doors:has(.door-sell:hover) .door-buy{opacity:.86}
+  .door h1{font-size:clamp(2rem,4vw,3.3rem);max-width:15ch;margin-bottom:.9rem}
+  .door-buy .meta{color:var(--blue-300);font-size:1rem;margin-bottom:clamp(1.6rem,3vw,2.4rem)}
+  .door-buy .meta .tnum{color:var(--white);font-weight:600}
+  .tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(.7rem,1.4vw,1rem);margin-top:auto}
+  .tile{display:block;color:var(--white)}
+  .tile .ph{position:relative;display:block;aspect-ratio:4/3;overflow:hidden;background:var(--blue-800)}
+  .tile .ph img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
+  .tile:hover .ph img,.tile:focus-visible .ph img{transform:scale(1.05)}
+  .tile .ph .sit{position:absolute;left:.5rem;top:.5rem}
+  .tile b{display:block;font-weight:600;font-size:1rem;line-height:1.25;margin-top:.7rem}
+  .tile .pr{display:block;margin-top:.2rem;color:var(--blue-300);font-size:.92rem}
+  .tile .pr.tbc{font-size:.8rem}
+  .door-buy .go{margin-top:clamp(1.4rem,3vw,2rem);align-self:flex-start}
+  .door-sell h2{font-size:clamp(1.6rem,2.8vw,2.3rem);max-width:16ch;margin-bottom:.8rem}
+  .door-sell .sub{color:var(--blue-600);max-width:38ch;margin-bottom:clamp(1.4rem,3vw,2rem)}
+  .ruled{list-style:none;border-top:1px solid var(--blue-300)}
+  .ruled li{display:grid;grid-template-columns:2.2rem 1fr;gap:.6rem;padding:1rem 0;border-bottom:1px solid var(--blue-100);color:var(--blue-800)}
+  .ruled .tnum{color:var(--blue-600);font-weight:600}
+  .door-sell .ruled{margin-top:auto}
+  .door-sell .go{margin-top:clamp(1.4rem,3vw,2rem);align-self:flex-start}
+  @media (prefers-reduced-motion:no-preference){
+    .tile{animation:rise .9s var(--ease) both}
+    .tile:nth-child(2){animation-delay:.08s}.tile:nth-child(3){animation-delay:.16s}
+    @keyframes rise{from{transform:translateY(14px)}to{transform:none}}
   }
-  .cat-head{background:var(--blue-050);padding:.7rem .9rem;margin-top:1.4rem;border:1px solid var(--blue-100);border-bottom:0}
-  .cat-head span{font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.1em;font-size:.66rem;color:var(--blue-600)}
-  .cat-list{border:1px solid var(--blue-100);border-top:0}
 
-  .av{border-top:1px solid var(--blue-100)}
-  .av:first-child{border-top:0}
-  .av-row{width:100%;text-align:left;padding:.9rem;transition:background .18s var(--ease);color:inherit;text-decoration:none;cursor:pointer}
-  .av:nth-child(odd) .av-row{background:rgba(241,245,250,.55)}
-  .av-row:hover{background:var(--blue-100)}
-  .c-img{width:88px;height:58px;overflow:hidden;background:var(--blue-050);border:1px solid var(--blue-100)}
-  .c-img img{width:100%;height:100%;object-fit:cover}
-  .c-nome b{display:block;font-family:'IBM Plex Sans';font-size:1.18rem;font-weight:600;color:var(--blue-900);line-height:1.25}
-  .c-nome .cat{font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.12em;font-size:.66rem;color:var(--blue-600);margin-top:.15rem}
-  .cell{font-family:'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums;font-size:.82rem;color:var(--blue-800)}
-  .cell.tbc{font-size:.72rem;color:var(--blue-600)}
-  .c-valor{font-family:'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums;text-align:right;color:var(--blue-900);white-space:nowrap}
-  .c-valor .vwrap{white-space:nowrap}
-  .c-valor .moeda{font-size:.72rem;color:var(--blue-600);margin-right:.35em}
-  .c-valor .cifra{font-weight:600;font-size:.94rem;color:var(--blue-900)}
-  .c-valor.tbc{font-weight:400;font-size:.72rem;color:var(--blue-600)}
-  .c-caret{justify-self:end;color:var(--blue-500);font-size:.9rem;transition:transform .25s var(--ease)}
-  .av.open .c-caret{transform:rotate(90deg)}
-  .c-sit{justify-self:start}
-  .sit{display:inline-block;font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.08em;font-size:.62rem;padding:.16rem .45rem;border-radius:2px;border:1px solid var(--blue-300);color:var(--blue-700);white-space:nowrap}
+  /* ---------- selo de situação ---------- */
+  .sit{display:inline-block;font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.08em;font-size:.7rem;padding:.24rem .55rem;border-radius:2px;border:1px solid var(--blue-300);color:var(--blue-700);background:var(--white);white-space:nowrap}
   .sit.reservada{background:var(--blue-700);border-color:var(--blue-700);color:#fff}
   .sit.vendida{background:var(--blue-900);border-color:var(--blue-900);color:#fff;text-decoration:line-through}
-  .av-detail .descr{white-space:pre-line;font-size:.95rem;color:var(--blue-800);line-height:1.6}
-  .av-detail .descr.tbc{color:var(--blue-600);font-style:italic}
 
-  .av-detail{max-height:0;overflow:hidden;transition:max-height .32s var(--ease);background:var(--white)}
-  .av-detail .inner{padding:1.4rem .9rem 1.8rem;display:grid;grid-template-columns:minmax(220px,340px) 1fr;gap:1.8rem;border-top:1px dashed var(--blue-100)}
-  .av-detail .plate>img{width:100%;aspect-ratio:3/2;object-fit:cover;border:1px solid var(--blue-100);background:var(--blue-050)}
-  .gal{display:flex;flex-direction:column;gap:.5rem}
-  .gal-main{position:relative;display:block;width:100%;padding:0;border:1px solid var(--blue-100);background:var(--blue-050);cursor:zoom-in}
-  .gal-main img{width:100%;aspect-ratio:3/2;object-fit:cover;display:block}
-  .gal-main .gal-zoom{position:absolute;right:.4rem;bottom:.4rem;background:rgba(6,20,35,.72);color:#fff;font-size:.72rem;padding:.12rem .4rem;border-radius:2px;font-family:'IBM Plex Mono',monospace}
-  .gal-ths{display:flex;gap:.4rem;flex-wrap:wrap}
-  .gal-th{width:54px;height:40px;padding:0;border:1px solid var(--blue-100);background:var(--blue-050);cursor:pointer;border-radius:2px;overflow:hidden}
-  .gal-th.on{border-color:var(--blue-500);border-width:2px}
-  .gal-th img{width:100%;height:100%;object-fit:cover;display:block}
-  .gal-empty{display:flex;align-items:center;justify-content:center;aspect-ratio:3/2;color:var(--blue-600);font-family:'IBM Plex Mono',monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;background:var(--blue-050);border:1px dashed var(--blue-100)}
-  .lb{position:fixed;inset:0;z-index:200;background:rgba(6,20,35,.93);display:none;align-items:center;justify-content:center}
-  .lb.open{display:flex}
-  .lb img{max-width:92vw;max-height:86vh;object-fit:contain}
-  .lb .lb-x{position:absolute;top:.8rem;right:1.1rem;font-size:2rem;color:#fff;background:none;border:0;cursor:pointer;line-height:1}
-  .lb .lb-nav{position:absolute;top:50%;transform:translateY(-50%);font-size:2.6rem;color:#fff;background:none;border:0;cursor:pointer;padding:.3rem .9rem;opacity:.8}
-  .lb .lb-nav:hover{opacity:1}
-  .lb .lb-prev{left:.2rem}.lb .lb-next{right:.2rem}
-  .lb .lb-count{position:absolute;bottom:1rem;left:0;right:0;text-align:center;color:#fff;font-family:'IBM Plex Mono',monospace;font-size:.78rem;letter-spacing:.1em}
-  .ficha{display:grid;grid-template-columns:1fr 1fr;gap:.1rem 1.6rem;align-content:start}
-  .ficha .f{display:flex;justify-content:space-between;gap:1rem;padding:.6rem 0;border-bottom:1px solid var(--blue-050)}
-  .ficha .f .k{font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.1em;font-size:.66rem;color:var(--blue-600)}
-  .ficha .f .v{font-family:'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums;font-size:.8rem;color:var(--blue-800);text-align:right}
-  .av-detail .cta{grid-column:1/-1;margin-top:.4rem}
+  /* ---------- catálogo (cards) ---------- */
+  .cat-top{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:1.6rem}
+  .cat-top h2{margin:0}
+  .controls{display:flex;flex-direction:column;gap:.7rem;padding-bottom:1.2rem;border-bottom:1px solid var(--blue-300);margin-bottom:1.6rem}
+  .ctrl-line{display:flex;flex-wrap:wrap;align-items:baseline;gap:.5rem 1.1rem}
+  .opt{font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.1em;font-size:.74rem;color:var(--blue-600);padding:.35rem 0;border-bottom:1px solid transparent;transition:color .18s,border-color .18s}
+  .opt:hover{color:var(--blue-900)}
+  .opt.active{color:var(--blue-900);font-weight:600;border-bottom-color:var(--blue-900)}
+  .count{margin-left:auto}
+  .cat-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.3rem}
+  .av{border:1px solid var(--blue-100);background:var(--white);transition:border-color .25s var(--ease),transform .35s var(--ease)}
+  .av:hover{border-color:var(--blue-300);transform:translateY(-3px)}
+  .av-row{position:relative;display:grid;grid-template-columns:1fr auto;align-items:end;height:100%}
+  .c-img{grid-column:1/-1;aspect-ratio:4/3;overflow:hidden;background:var(--blue-050);border-bottom:1px solid var(--blue-100)}
+  .c-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
+  .av:hover .c-img img{transform:scale(1.04)}
+  .c-nome{grid-column:1/-1;padding:1rem 1.1rem .3rem;align-self:start}
+  .c-nome b{display:block;font-size:1.1rem;font-weight:600;line-height:1.25}
+  .c-nome .cat{display:block;font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.12em;font-size:.72rem;color:var(--blue-600);margin-top:.25rem}
+  .c-sit{position:absolute;top:.75rem;left:.75rem}
+  .c-valor{padding:.6rem 1.1rem 1.1rem;font-family:'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums;white-space:nowrap}
+  .c-valor .moeda{font-size:.72rem;color:var(--blue-600);margin-right:.35em}
+  .c-valor .cifra{font-weight:600;font-size:1.05rem}
+  .c-valor.tbc{font-size:.74rem;color:var(--blue-600)}
+  .ic{width:15px;height:15px;flex:none;display:inline-block;vertical-align:-2px}
+  .c-caret .ic{width:16px;height:16px}
+  .c-caret{padding:0 1.1rem 1.15rem 0;color:var(--blue-500);font-size:1.15rem;transition:transform .3s var(--ease)}
+  .av:hover .c-caret{transform:translateX(3px)}
+  .cat-note{font-family:'IBM Plex Mono',monospace;font-size:.78rem;color:var(--blue-600);margin-top:1.4rem}
+  body:not(.catalogo) .cat-list{grid-template-columns:repeat(3,1fr)}
+  .cat-more{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:2rem}
 
-  /* ---------- serviços ---------- */
-  .svc-list{display:grid;grid-template-columns:1fr 1fr;gap:0 3rem}
-  .svc{padding:1.5rem 0;border-top:1px solid var(--blue-300)}
-  .svc h3{font-size:1.15rem;margin-bottom:.4rem}
-  .svc p{color:var(--blue-600);font-size:.96rem;max-width:44ch}
-
-  /* ---------- como trabalhamos ---------- */
-  .steps{border-top:1px solid var(--blue-100)}
-  .step{display:grid;grid-template-columns:64px 1fr;gap:1.4rem;padding:1.5rem 0;border-bottom:1px solid var(--blue-100);align-items:baseline}
-  .step .num{font-family:'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums;color:var(--blue-500);font-weight:600;font-size:1.05rem}
-  .step h3{font-size:1.12rem;margin-bottom:.3rem}
-  .step p{color:var(--blue-600);font-size:.96rem;max-width:60ch}
+  /* ---------- como a V4 trabalha ---------- */
+  .how{background:var(--blue-050)}
+  .how-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,4.5rem)}
+  .how h3{font-size:1.25rem;margin-bottom:1rem}
+  .how .ruled li b{display:block;font-weight:600;color:var(--blue-900)}
+  .how .ruled li span:last-child{color:var(--blue-600);font-size:.95rem}
+  .how .lnk{display:inline-flex;align-items:center;gap:.4rem;margin-top:1.2rem;font-weight:500;color:var(--blue-900);border-bottom:1px solid var(--blue-300);padding-bottom:2px;transition:border-color .2s}
+  .how .lnk:hover{border-color:var(--blue-900)}
 
   /* ---------- sobre ---------- */
-  .sobre{background:var(--blue-900);color:var(--white);position:relative;overflow:hidden}
-  .sobre::before{content:"";position:absolute;inset:0;background:url(/assets/hero-1600.webp) center/cover no-repeat;opacity:.10}
-  .sobre .grid{position:relative;z-index:1;display:grid;grid-template-columns:1fr 2fr;gap:clamp(1.5rem,5vw,4rem);align-items:start}
-  .sobre h2{color:var(--white);font-size:clamp(1.7rem,3.4vw,2.4rem)}
-  .sobre .body p{color:#C3D3E4;font-size:1.05rem;margin-bottom:1.1rem;max-width:62ch}
-  .sobre .body p.ph{color:var(--blue-300);border-left:2px solid var(--blue-700);padding-left:1rem}
-
-  /* ---------- contato ---------- */
-  .contato .grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.5rem,5vw,4rem);align-items:center}
-  .cdata .row{display:grid;grid-template-columns:130px 1fr;gap:1rem;padding:.7rem 0;border-bottom:1px solid var(--blue-100)}
-  .cdata .row .v{font-weight:500}
-  .cdata .row a.v:hover{color:var(--blue-500)}
-  .ccall h2{font-size:clamp(1.5rem,3vw,2.1rem);margin-bottom:1rem}
-  .ccall p{color:var(--blue-600);margin-bottom:1.4rem;max-width:40ch}
+  .sobre{background:var(--blue-900);color:var(--white)}
+  .sobre .grid{display:grid;grid-template-columns:1fr 1.6fr;gap:clamp(1.5rem,5vw,4.5rem);align-items:start}
+  .sobre h2{color:var(--white);margin:0}
+  .sobre p{color:#C3D3E4;font-size:1.05rem;max-width:60ch}
+  .sobre p+p{margin-top:1rem}
 
   /* ---------- instagram ---------- */
-  .ig-lead{color:var(--blue-600);max-width:62ch;margin-bottom:2.2rem;font-size:1.02rem}
-  .ig-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:2px}
+  .ig-top{display:flex;align-items:end;justify-content:space-between;gap:1rem 2rem;flex-wrap:wrap;margin-bottom:1.6rem}
+  .ig-top h2{margin:0;max-width:22ch}
+  .ig-handle{display:inline-flex;align-items:center;gap:.55rem;font-weight:500;color:var(--blue-900);border-bottom:1px solid var(--blue-300);padding-bottom:2px}
+  .ig-handle:hover{border-color:var(--blue-900)}
+  .ig-glyph{width:20px;height:20px;flex:none}
+  .ig-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:3px}
   .ig-post{overflow:hidden;display:block;aspect-ratio:1/1;background:var(--blue-100)}
-  .ig-post img{width:100%;height:100%;object-fit:cover;transition:transform .25s var(--ease)}
-  .ig-post:hover img{transform:scale(1.02)}
-  .ig-bar{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;border-top:1px solid var(--blue-300);margin-top:1.4rem;padding-top:1.2rem}
-  .ig-handle{display:inline-flex;align-items:center;gap:.55rem;color:var(--blue-900);font-weight:500}
-  .ig-handle:hover{color:var(--blue-500)}
-  .ig-glyph{width:20px;height:20px;flex:none;display:block}
-  .ig-stats{font-family:'IBM Plex Mono',monospace;font-size:.75rem;color:var(--blue-600)}
-  .ig-cta{margin-top:1.8rem;text-align:center}
+  .ig-post img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
+  .ig-post:hover img{transform:scale(1.04)}
+  .ig-stats{display:block;margin-top:1rem}
 
-  /* ---------- footer ---------- */
-  footer{background:var(--blue-950);color:#9DB4CC;padding-block:2.6rem}
+  /* ---------- contato ---------- */
+  .contato{border-top:1px solid var(--blue-100)}
+  .contato .grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.5rem,5vw,4.5rem);align-items:center}
+  .contato h2{margin-bottom:.9rem}
+  .contato .sub{color:var(--blue-600);max-width:40ch;margin-bottom:1.6rem}
+  .cdata .row{display:grid;grid-template-columns:120px 1fr;gap:1rem;padding:.85rem 0;border-bottom:1px solid var(--blue-100);align-items:baseline}
+  .cdata .row:first-child{border-top:1px solid var(--blue-300)}
+  .cdata .v{font-weight:500;text-underline-offset:3px}
+  .cdata a.v:hover{text-decoration:underline;text-decoration-color:var(--blue-300)}
+
+  /* ---------- rodapé ---------- */
+  footer{background:var(--blue-950);color:#9DB4CC;padding-block:2.8rem 2rem}
   .foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1.4rem;align-items:center}
-  footer .logo{color:var(--white)}
-  footer .logo .wm b{color:var(--white)}footer .logo .wm b i{color:var(--blue-300)}
-  footer .logo .wm small{color:var(--blue-300)}
+  footer .logo,footer .logo .wm b{color:var(--white)}footer .logo .wm b i{color:var(--blue-300)}footer .logo .wm small{color:var(--blue-300)}
   footer .desc{font-size:.9rem;max-width:34ch}
-  .foot-nav{display:flex;flex-wrap:wrap;gap:.4rem 1.2rem}
-  .foot-nav a{font-size:.86rem}.foot-nav a:hover{color:var(--white)}
-  .foot-copy{margin-top:1.6rem;padding-top:1.2rem;border-top:1px solid var(--blue-800);font-size:.82rem;color:#5E7897}
+  .foot-nav{display:flex;flex-wrap:wrap;gap:.4rem 1.3rem}
+  .foot-nav a{font-size:.88rem}.foot-nav a:hover{color:var(--white)}
+  .foot-copy{margin-top:1.8rem;padding-top:1.2rem;border-top:1px solid var(--blue-800);font-size:.82rem;color:#7F98B3}
+  .foot-copy a{text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--blue-700)}
 
-  /* ---------- whatsapp float ---------- */
-  .wa{position:fixed;right:18px;bottom:18px;z-index:70;background:var(--blue-900);color:var(--white);border-radius:3px;padding:.75rem 1.05rem;font-size:.9rem;font-weight:500;box-shadow:0 1px 3px rgba(6,20,35,.12);transition:.2s var(--ease)}
-  .wa:hover{background:var(--blue-800)}
+  /* ---------- whatsapp flutuante ---------- */
+  .wa{position:fixed;right:18px;bottom:18px;z-index:70;display:inline-flex;align-items:center;gap:.5rem;background:var(--blue-900);color:var(--white);border-radius:3px;padding:.8rem 1.1rem;font-size:.92rem;font-weight:500;box-shadow:0 4px 14px rgba(6,20,35,.22);transition:background .2s var(--ease)}
+  .wa:hover{background:var(--blue-700)}
+  .wa svg{width:18px;height:18px}
 
-  /* ---------- movimento ---------- */
-  .reveal{opacity:0;transform:translateY(10px);transition:opacity .4s var(--ease),transform .4s var(--ease)}
-  .reveal.in{opacity:1;transform:none}
-  @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}.av-detail{transition:none}}
+  /* ---------- home x catálogo (/aeronaves/ é gerada deste arquivo) ---------- */
+  body:not(.catalogo) .cat-only,body.catalogo .home-only{display:none!important}
+  body.catalogo #aeronaves{padding-top:clamp(2.4rem,5vw,3.6rem)}
+  body.catalogo #aeronaves h1{font-size:clamp(1.9rem,3.6vw,2.7rem)}
 
   /* ---------- responsivo ---------- */
   @media (max-width:1024px){
-    nav.main{display:none}.menu-btn{display:block}
-    .svc-list,.sobre .grid,.contato .grid{grid-template-columns:1fr;gap:1.4rem}
+    nav.main,.bar .end .btn{display:none}.menu-btn{display:block}
+    .doors{grid-template-columns:1fr;min-height:0;max-height:none}
+    .door-buy{padding-left:var(--gut)}.door-sell{padding-right:var(--gut)}
+    .how-grid,.sobre .grid,.contato .grid{grid-template-columns:1fr}
     .ig-grid{grid-template-columns:repeat(3,1fr)}
-    .av-detail .inner{grid-template-columns:1fr}
-    .cat-head{display:none}
-    .av-row{grid-template-columns:88px 1fr 26px;column-gap:.8rem;row-gap:.5rem;padding:1rem;align-items:start}
-    .c-img{grid-row:span 2}
-    .c-caret{grid-column:3;grid-row:1}
-    .c-nome{grid-column:2}
-    .cell,.c-valor,.c-sit{grid-column:2/-1;display:flex;justify-content:space-between;align-items:center;font-size:.82rem;border-top:1px solid var(--blue-050);padding-top:.35rem}
-    .cell::before,.c-valor::before,.c-sit::before{content:attr(data-label);font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.1em;font-size:.62rem;color:var(--blue-600);font-weight:400}
-    .ficha{grid-template-columns:1fr}
+    .ig-grid .ig-post:nth-child(n+7){display:none}
   }
-  @media (max-width:600px){
+  @media (max-width:640px){
+    .tiles{grid-template-columns:1fr 1fr}
+    .tiles .tile:nth-child(3){display:none}
+    .door-buy .go,.door-sell .go{align-self:stretch}
+    .cat-list,body:not(.catalogo) .cat-list{grid-template-columns:1fr}
     .ig-grid{grid-template-columns:repeat(2,1fr)}
-    .ig-bar{flex-direction:column;align-items:flex-start}
+    .ig-grid .ig-post:nth-child(n+5){display:none}
+    .count{margin-left:0;width:100%}
+    .wa span{display:none}.wa{padding:.85rem}
   }
-  @media (max-width:400px){.hero .actions .btn{flex:1;justify-content:center}}
-  /* home x catálogo (/aeronaves/ é gerada a partir deste arquivo pelo build/generate.mjs) */
-  body:not(.catalogo) .cat-only,body.catalogo .home-only{display:none!important}
-  body.catalogo .reveal{opacity:1;transform:none}   /* no catálogo os cards são o conteúdo principal: aparecem já */
-  :focus-visible{outline:2px solid var(--blue-500);outline-offset:3px}
-  body.catalogo #aeronaves{padding-top:7.5rem}
-  .cat-more{text-align:center;margin-top:1.6rem}
-  /* catálogo em cards (só na /aeronaves/; a home segue em lista) */
-  body.catalogo .cat-head{display:none}
-  body.catalogo .cat-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.3rem;border:0;margin-top:1.6rem}
-  body.catalogo .av{border:1px solid var(--blue-100);background:var(--white);transition:border-color .2s var(--ease),box-shadow .2s var(--ease),transform .2s var(--ease)}
-  body.catalogo .av:hover{border-color:var(--blue-300);box-shadow:0 10px 28px rgba(6,20,35,.10);transform:translateY(-2px)}
-  body.catalogo .av-row{position:relative;display:grid;grid-template-columns:1fr auto;align-items:center;column-gap:.6rem;row-gap:0;padding:0;height:100%;background:var(--white)!important}
-  body.catalogo .c-img{grid-column:1/-1;grid-row:auto;width:100%;height:auto;aspect-ratio:4/3;border:0;border-bottom:1px solid var(--blue-100)}
-  body.catalogo .c-img img{transition:transform .4s var(--ease)}
-  body.catalogo .av:hover .c-img img{transform:scale(1.04)}
-  body.catalogo .c-nome{grid-column:1/-1;padding:1rem 1.1rem .2rem;align-self:start}
-  body.catalogo .c-sit{position:absolute;top:.75rem;left:.75rem;grid-column:auto;display:block;border:0;padding:0}
-  body.catalogo .c-sit .sit{font-size:.6rem;padding:.25rem .55rem;box-shadow:0 2px 8px rgba(6,20,35,.15)}
-  body.catalogo .c-sit .sit:not(.reservada):not(.vendida){background:var(--white)}
-  body.catalogo .c-valor{grid-column:1;display:block;text-align:left;border-top:0;padding:.7rem 1.1rem 1.1rem;font-size:inherit;align-self:end}
-  body.catalogo .c-valor .cifra{font-size:1.05rem}
-  body.catalogo .c-caret{grid-column:2;grid-row:auto;align-self:end;padding:0 1.1rem 1.15rem 0;font-size:1.1rem}
-  body.catalogo .av:hover .c-caret{transform:translateX(3px)}
-  body.catalogo .c-sit::before,body.catalogo .c-valor::before{content:none}
 </style>
 </head>
 
 <body class="catalogo">
-<!-- ===================== HEADER ===================== -->
 <header id="header">
   <div class="wrap bar">
     <a href="/#top" class="logo" aria-label="V4 Aero Flight — início">
       <svg class="mark" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="21" fill="none" stroke="#3E77AE" stroke-width="2.4"/><path d="M24 10 L16 33 L24 28 Z" fill="currentColor"/><path d="M24 10 L32 33 L24 28 Z" fill="#3E77AE"/></svg>
       <span class="wm"><b>V4 <i>Aero</i></b><small>Flight</small></span>
     </a>
-    <nav class="main">
+    <nav class="main" aria-label="Principal">
       <a href="/aeronaves/">Aeronaves</a>
-      <a href="/#servicos">Serviços</a>
+      <a href="/vender/">Vender</a>
+      <a href="/#como">Como trabalhamos</a>
       <a href="/#sobre">Sobre</a>
-      <a href="/#instagram">Instagram</a>
       <a href="/#contato">Contato</a>
     </nav>
     <div class="end">
@@ -312,287 +260,283 @@
       <button class="menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false" aria-controls="mnav"><span></span><span></span><span></span></button>
     </div>
   </div>
-  <nav class="mnav" id="mnav">
-    <a href="/aeronaves/">Aeronaves</a>
-    <a href="/#servicos">Serviços</a>
+  <nav class="mnav" id="mnav" aria-label="Menu">
+    <a href="/aeronaves/">Aeronaves à venda</a>
+    <a href="/vender/">Vender minha aeronave</a>
+    <a href="/#como">Como trabalhamos</a>
     <a href="/#sobre">Sobre</a>
-    <a href="/#instagram">Instagram</a>
     <a href="/#contato">Contato</a>
   </nav>
 </header>
 
+<main>
 
 
-<!-- ===================== 01 · AERONAVES ===================== -->
 <section class="sec" id="aeronaves">
   <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="k mono home-only">01 · Catálogo</span><span class="k mono cat-only">Catálogo completo</span>
-      <h2 class="home-only">Anunciadas recentemente</h2>
+    <div class="cat-top">
+      <h2 class="home-only">Também à venda</h2>
       <h1 class="cat-only">Todas as aeronaves à venda</h1>
+      <span class="lbl count cat-only" id="count">32 aeronaves</span>
     </div>
 
-    <div class="controls reveal cat-only">
-      <div class="ctrl-line">
-        <span class="lbl mono">Categoria:</span>
+    <div class="controls cat-only">
+      <div class="ctrl-line" role="group" aria-label="Categoria">
+        <span class="lbl">Categoria</span>
         <button class="opt filtro active" data-f="todas">Todas</button>
-        <button class="opt filtro" data-f="monomotor">Monomotor</button>
-        <button class="opt filtro" data-f="bimotor">Bimotor</button>
-        <button class="opt filtro" data-f="turboelice">Turboélice</button>
+        <button class="opt filtro" data-f="monomotor_pistao">Monomotor a pistão</button>
+        <button class="opt filtro" data-f="monomotor_turboelice">Monomotor turboélice</button>
+        <button class="opt filtro" data-f="bimotor_pistao">Bimotor a pistão</button>
+        <button class="opt filtro" data-f="bimotor_turboelice">Bimotor turboélice</button>
         <button class="opt filtro" data-f="jato">Jato</button>
         <button class="opt filtro" data-f="helicoptero">Helicóptero</button>
-        <span class="count mono" id="count">32 aeronaves</span>
       </div>
-      <div class="ctrl-line">
-        <span class="lbl mono">Ordenar:</span>
+      <div class="ctrl-line" role="group" aria-label="Ordenar">
+        <span class="lbl">Ordenar</span>
         <button class="opt ord active" data-s="recentes">Mais recentes</button>
         <button class="opt ord" data-s="valor">Menor valor</button>
       </div>
     </div>
 
-    <div class="cat-head reveal">
-      <span></span><span>Aeronave</span><span>Situação</span><span>Valor</span><span></span>
-    </div>
-
-    <div class="cat-list reveal" id="catList" data-sig="mzk4ss"><!--CAT-ROWS--><div class="av" data-tipo="bimotor" data-moeda="BRL" data-valor="4000000" data-criado="1793290121506" data-nome="Baron B58 (Série Ouro) - 1982">
+    <div class="cat-list" id="catList" data-sig="himl0x"><!--CAT-ROWS--><div class="av" data-tipo="bimotor_pistao" data-moeda="BRL" data-valor="4000000" data-criado="1793290121506" data-nome="Baron B58 (Série Ouro) - 1982">
       <a class="av-row" href="/aeronaves/baron-b58-serie-ouro-1982/">
         <span class="c-img"><img src="/assets/thumbs/bef6be58-a0f0-4e7d-9f24-1784109711d9-480.webp" data-orig="https://hobtolagifjjxcmxreip.supabase.co/storage/v1/object/public/aeronaves/bef6be58-a0f0-4e7d-9f24-1784109711d9.jpeg" onerror="this.onerror=null;this.src=this.dataset.orig" alt="Baron B58 (Série Ouro) - 1982" width="480" height="360" fetchpriority="high" decoding="async"></span>
-        <span class="c-nome"><b>Baron B58 (Série Ouro) - 1982</b><span class="cat">Bimotor</span></span>
+        <span class="c-nome"><b>Baron B58 (Série Ouro) - 1982</b><span class="cat">Bimotor a pistão</span></span>
         <span class="c-sit" data-label="Situação"><span class="sit ">Disponível</span></span>
         <span class="c-valor" data-label="Valor"><span class="vwrap"><span class="moeda">R$</span><span class="cifra">4.000.000,00</span></span></span>
-        <span class="c-caret" aria-hidden="true">›</span>
+        <span class="c-caret" aria-hidden="true"><svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg></span>
       </a>
-    </div><div class="av" data-tipo="monomotor" data-moeda="BRL" data-valor="1400000" data-criado="1793290053455" data-nome="Cessna Skylane - 1963">
+    </div><div class="av" data-tipo="monomotor_pistao" data-moeda="BRL" data-valor="1400000" data-criado="1793290053455" data-nome="Cessna Skylane - 1963">
       <a class="av-row" href="/aeronaves/cessna-skylane-1963/">
         <span class="c-img"><img src="/assets/thumbs/046dde2d-02a4-467f-b465-b4063dfb62dc-480.webp" data-orig="https://hobtolagifjjxcmxreip.supabase.co/storage/v1/object/public/aeronaves/046dde2d-02a4-467f-b465-b4063dfb62dc.jpeg" onerror="this.onerror=null;this.src=this.dataset.orig" alt="Cessna Skylane - 1963" width="480" height="360" decoding="async"></span>
-        <span class="c-nome"><b>Cessna Skylane - 1963</b><span class="cat">Monomotor</span></span>
+        <span class="c-nome"><b>Cessna Skylane - 1963</b><span class="cat">Monomotor a pistão</span></span>
         <span class="c-sit" data-label="Situação"><span class="sit ">Disponível</span></span>
         <span class="c-valor" data-label="Valor"><span class="vwrap"><span class="moeda">R$</span><span class="cifra">1.400.000,00</span></span></span>
-        <span class="c-caret" aria-hidden="true">›</span>
+        <span class="c-caret" aria-hidden="true"><svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg></span>
       </a>
-    </div><div class="av" data-tipo="monomotor" data-moeda="BRL" data-valor="690000" data-criado="1793290020010" data-nome="Corisco Aspirado - 1980">
+    </div><div class="av" data-tipo="monomotor_pistao" data-moeda="BRL" data-valor="690000" data-criado="1793290020010" data-nome="Corisco Aspirado - 1980">
       <a class="av-row" href="/aeronaves/corisco-aspirado-1980/">
         <span class="c-img"><img src="/assets/thumbs/4f8f357d-5fbd-4440-90a9-690f3db40068-480.webp" data-orig="https://hobtolagifjjxcmxreip.supabase.co/storage/v1/object/public/aeronaves/4f8f357d-5fbd-4440-90a9-690f3db40068.jpeg" onerror="this.onerror=null;this.src=this.dataset.orig" alt="Corisco Aspirado - 1980" width="480" height="360" decoding="async"></span>
-        <span class="c-nome"><b>Corisco Aspirado - 1980</b><span class="cat">Monomotor</span></span>
+        <span class="c-nome"><b>Corisco Aspirado - 1980</b><span class="cat">Monomotor a pistão</span></span>
         <span class="c-sit" data-label="Situação"><span class="sit ">Disponível</span></span>
         <span class="c-valor" data-label="Valor"><span class="vwrap"><span class="moeda">R$</span><span class="cifra">690.000,00</span></span></span>
-        <span class="c-caret" aria-hidden="true">›</span>
+        <span class="c-caret" aria-hidden="true"><svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg></span>
       </a>
-    </div><div class="av" data-tipo="monomotor" data-moeda="BRL" data-valor="1950000" data-criado="1793289967474" data-nome="Bonanza V35B - 1975">
+    </div><div class="av" data-tipo="monomotor_pistao" data-moeda="BRL" data-valor="1950000" data-criado="1793289967474" data-nome="Bonanza V35B - 1975">
       <a class="av-row" href="/aeronaves/bonanza-v35b-1975/">
         <span class="c-img"><img src="/assets/thumbs/840e81c2-ae55-40a2-9aaa-7d9430df62a1-480.webp" data-orig="https://hobtolagifjjxcmxreip.supabase.co/storage/v1/object/public/aeronaves/840e81c2-ae55-40a2-9aaa-7d9430df62a1.jpeg" onerror="this.onerror=null;this.src=this.dataset.orig" alt="Bonanza V35B - 1975" width="480" height="360" loading="lazy" decoding="async"></span>
-        <span class="c-nome"><b>Bonanza V35B - 1975</b><span class="cat">Monomotor</span></span>
+        <span class="c-nome"><b>Bonanza V35B - 1975</b><span class="cat">Monomotor a pistão</span></span>
         <span class="c-sit" data-label="Situação"><span class="sit ">Disponível</span></span>
         <span class="c-valor" data-label="Valor"><span class="vwrap"><span class="moeda">R$</span><span class="cifra">1.950.000,00</span></span></span>
-        <span class="c-caret" aria-hidden="true">›</span>
+        <span class="c-caret" aria-hidden="true"><svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg></span>
       </a>
-    </div><div class="av" data-tipo="bimotor" data-moeda="BRL" data-valor="5300000" data-criado="1793289873141" data-nome="Beechcraft Baron G58 - 2006">
+    </div><div class="av" data-tipo="bimotor_pistao" data-moeda="BRL" data-valor="5300000" data-criado="1793289873141" data-nome="Beechcraft Baron G58 - 2006">
       <a class="av-row" href="/aeronaves/beechcraft-baron-g58-2006/">
         <span class="c-img"><img src="/assets/thumbs/1115aa4c-ecc7-4644-9d8f-a878bd90707f-480.webp" data-orig="https://hobtolagifjjxcmxreip.supabase.co/storage/v1/object/public/aeronaves/1115aa4c-ecc7-4644-9d8f-a878bd90707f.jpeg" onerror="this.onerror=null;this.src=this.dataset.orig" alt="Beechcraft Baron G58 - 2006" width="480" height="360" loading="lazy" decoding="async"></span>
-        <span class="c-nome"><b>Beechcraft Baron G58 - 2006</b><span class="cat">Bimotor</span></span>
+        <span class="c-nome"><b>Beechcraft Baron G58 - 2006</b><span class="cat">Bimotor a pistão</span></span>
         <span class="c-sit" data-label="Situação"><span class="sit ">Disponível</span></span>
         <span class="c-valor" data-label="Valor"><span class="vwrap"><span class="moeda">R$</span><span class="cifra">5.300.000,00</span></span></span>
-        <span class="c-caret" aria-hidden="true">›</span>
+        <span class="c-caret" aria-hidden="true"><svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg></span>
       </a>
-    </div><div class="av" data-tipo="monomotor" data-moeda="BRL" data-valor="2500000" data-criado="1793289729411" data-nome="Cessna 210L - 1974">
+    </div><div class="av" data-tipo="monomotor_pistao" data-moeda="BRL" data-valor="2500000" data-criado="1793289729411" data-nome="Cessna 210L - 1974">
       <a class="av-row" href="/aeronaves/cessna-210l-1974/">
         <span class="c-img"><img src="/assets/thumbs/c1229214-c9bb-462a-8576-82fe71e8a5c5-480.webp" data-orig="https://hobtolagifjjxcmxreip.supabase.co/storage/v1/object/public/aeronaves/c1229214-c9bb-462a-8576-82fe71e8a5c5.jpeg" onerror="this.onerror=null;this.src=this.dataset.orig" alt="Cessna 210L - 1974" width="480" height="360" loading="lazy" decoding="async"></span>
-        <span class="c-nome"><b>Cessna 210L - 1974</b><span class="cat">Monomotor</span></span>
+        <span class="c-nome"><b>Cessna 210L - 1974</b><span class="cat">Monomotor a pistão</span></span>
         <span class="c-sit" data-label="Situação"><span class="sit ">Disponível</span></span>
         <span class="c-valor" data-label="Valor"><span class="vwrap"><span class="moeda">R$</span><span class="cifra">2.500.000,00</span></span></span>
-        <span class="c-caret" aria-hidden="true">›</span>
+        <span class="c-caret" aria-hidden="true"><svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg></span>
       </a>
-    </div><div class="av" data-tipo="bimotor" data-moeda="BRL" data-valor="3900000" data-criado="1793289676226" data-nome="Beechcraft Baron B58 - 1998">
+    </div><div class="av" data-tipo="bimotor_pistao" data-moeda="BRL" data-valor="3900000" data-criado="1793289676226" data-nome="Beechcraft Baron B58 - 1998">
       <a class="av-row" href="/aeronaves/beechcraft-baron-b58-1998/">
         <span class="c-img"><img src="/assets/thumbs/fecdbbcc-d2a0-4bfb-b319-c691705d4652-480.webp" data-orig="https://hobtolagifjjxcmxreip.supabase.co/storage/v1/object/public/aeronaves/fecdbbcc-d2a0-4bfb-b319-c691705d4652.jpeg" onerror="this.onerror=null;this.src=this.dataset.orig" alt="Beechcraft Baron B58 - 1998" width="480" height="360" loading="lazy" decoding="async"></span>
-        <span class="c-nome"><b>Beechcraft Baron B58 - 1998</b><span class="cat">Bimotor</span></span>
+        <span class="c-nome"><b>Beechcraft Baron B58 - 1998</b><span class="cat">Bimotor a pistão</span></span>
         <span class="c-sit" data-label="Situação"><span class="sit ">Disponível</span></span>
         <span class="c-valor" data-label="Valor"><span class="vwrap"><span class="moeda">R$</span><span class="cifra">3.900.000,00</span></span></span>
-        <span class="c-caret" aria-hidden="true">›</span>
+        <span class="c-caret" aria-hidden="true"><svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg></span>
       </a>
-    </div><div class="av" data-tipo="monomotor" data-moeda="BRL" data-valor="1600000" data-criado="1793289605288" data-nome="Cessna Skylane C-182P - 1973">
+    </div><div class="av" data-tipo="monomotor_pistao" data-moeda="BRL" data-valor="1600000" data-criado="1793289605288" data-nome="Cessna Skylane C-182P - 1973">
       <a class="av-row" href="/aeronaves/cessna-skylane-c-182p-1973/">
         <span class="c-img"><img src="/assets/thumbs/18dfd371-2fd8-4f1f-b0ff-72b8242d19ef-480.webp" data-orig="https://hobtolagifjjxcmxreip.supabase.co/storage/v1/object/public/aeronaves/18dfd371-2fd8-4f1f-b0ff-72b8242d19ef.jpeg" onerror="this.onerror=null;this.src=this.dataset.orig" alt="Cessna Skylane C-182P - 1973" width="480" height="360" loading="lazy" decoding="async"></span>
-        <span class="c-nome"><b>Cessna Skylane C-182P - 1973</b><span class="cat">Monomotor</span></span>
+        <span class="c-nome"><b>Cessna Skylane C-182P - 1973</b><span class="cat">Monomotor a pistão</span></span>
         <span class="c-sit" data-label="Situação"><span class="sit ">Disponível</span></span>
         <span class="c-valor" data-label="Valor"><span class="vwrap"><span class="moeda">R$</span><span class="cifra">1.600.000,00</span></span></span>
-        <span class="c-caret" aria-hidden="true">›</span>
+        <span class="c-caret" aria-hidden="true"><svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg></span>
       </a>
-    </div><div class="av" data-tipo="monomotor" data-moeda="BRL" data-valor="2180000" data-criado="1793288443508" data-nome="Bonanza F33A - 1975">
+    </div><div class="av" data-tipo="monomotor_pistao" data-moeda="BRL" data-valor="2180000" data-criado="1793288443508" data-nome="Bonanza F33A - 1975">
       <a class="av-row" href="/aeronaves/bonanza-f33a-1975/">
         <span class="c-img"><img src="/assets/thumbs/36d6cd8f-5263-4771-8281-6ea2ef8af273-480.webp" data-orig="https://hobtolagifjjxcmxreip.supabase.co/storage/v1/object/public/aeronaves/36d6cd8f-5263-4771-8281-6ea2ef8af273.jpeg" onerror="this.onerror=null;this.src=this.dataset.orig" alt="Bonanza F33A - 1975" width="480" height="360" loading="lazy" decoding="async"></span>
-        <span class="c-nome"><b>Bonanza F33A - 1975</b><span class="cat">Monomotor</span></span>
+        <span class="c-nome"><b>Bonanza F33A - 1975</b><span class="cat">Monomotor a pistão</span></span>
         <span class="c-sit" data-label="Situação"><span class="sit ">Disponível</span></span>
         <span class="c-valor" data-label="Valor"><span class="vwrap"><span class="moeda">R$</span><span class="cifra">2.180.000,00</span></span></span>
-        <span class="c-caret" aria-hidden="true">›</span>
+        <span class="c-caret" aria-hidden="true"><svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg></span>
       </a>
-    </div><div class="av" data-tipo="turboelice" data-moeda="BRL" data-valor="9500000" data-criado="1793288384296" data-nome="Piper JetProp - 1999">
+    </div><div class="av" data-tipo="monomotor_turboelice" data-moeda="BRL" data-valor="9500000" data-criado="1793288384296" data-nome="Piper JetProp - 1999">
       <a class="av-row" href="/aeronaves/piper-jetprop-1999/">
         <span class="c-img"><img src="/assets/thumbs/7adfdebb-f843-4ac2-89ca-2fa84ef66097-480.webp" data-orig="https://hobtolagifjjxcmxreip.supabase.co/storage/v1/object/public/aeronaves/7adfdebb-f843-4ac2-89ca-2fa84ef66097.jpeg" onerror="this.onerror=null;this.src=this.dataset.orig" alt="Piper JetProp - 1999" width="480" height="360" loading="lazy" decoding="async"></span>
-        <span class="c-nome"><b>Piper JetProp - 1999</b><span class="cat">Turboélice</span></span>
+        <span class="c-nome"><b>Piper JetProp - 1999</b><span class="cat">Monomotor turboélice</span></span>
         <span class="c-sit" data-label="Situação"><span class="sit ">Disponível</span></span>
         <span class="c-valor" data-label="Valor"><span class="vwrap"><span class="moeda">R$</span><span class="cifra">9.500.000,00</span></span></span>
-        <span class="c-caret" aria-hidden="true">›</span>
+        <span class="c-caret" aria-hidden="true"><svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg></span>
       </a>
-    </div><div class="av" data-tipo="bimotor" data-moeda="BRL" data-valor="3300000" data-criado="1793288272430" data-nome="Baron 58 - 1981">
+    </div><div class="av" data-tipo="bimotor_pistao" data-moeda="BRL" data-valor="3300000" data-criado="1793288272430" data-nome="Baron 58 - 1981">
       <a class="av-row" href="/aeronaves/baron-58-1981/">
         <span class="c-img"><img src="/assets/thumbs/04c6d0ec-93a8-4ed7-a6d1-f51458c7be93-480.webp" data-orig="https://hobtolagifjjxcmxreip.supabase.co/storage/v1/object/public/aeronaves/04c6d0ec-93a8-4ed7-a6d1-f51458c7be93.jpeg" onerror="this.onerror=null;this.src=this.dataset.orig" alt="Baron 58 - 1981" width="480" height="360" loading="lazy" decoding="async"></span>
-        <span class="c-nome"><b>Baron 58 - 1981</b><span class="cat">Bimotor</span></span>
+        <span class="c-nome"><b>Baron 58 - 1981</b><span class="cat">Bimotor a pistão</span></span>
         <span class="c-sit" data-label="Situação"><span class="sit ">Disponível</span></span>
         <span class="c-valor" data-label="Valor"><span class="vwrap"><span class="moeda">R$</span><span class="cifra">3.300.000,00</span></span></span>
-        <span class="c-caret" aria-hidden="true">›</span>
+        <span class="c-caret" aria-hidden="true"><svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg></span>
       </a>
-    </div><div class="av" data-tipo="turboelice" data-moeda="USD" data-valor="5600000" data-criado="1793288091418" data-nome="King Air 260 (B200GT) - 2021">
+    </div><div class="av" data-tipo="bimotor_turboelice" data-moeda="USD" data-valor="5600000" data-criado="1793288091418" data-nome="King Air 260 (B200GT) - 2021">
       <a class="av-row" href="/aeronaves/king-air-260-b200gt-2021/">
         <span class="c-img"><img src="/assets/thumbs/c2fdd88b-3e7f-41e8-9987-81515fd1a5e9-480.webp" data-orig="https://hobtolagifjjxcmxreip.supabase.co/storage/v1/object/public/aeronaves/c2fdd88b-3e7f-41e8-9987-81515fd1a5e9.jpeg" onerror="this.onerror=null;this.src=this.dataset.orig" alt="King Air 260 (B200GT) - 2021" width="480" height="360" loading="lazy" decoding="async"></span>
-        <span class="c-nome"><b>King Air 260 (B200GT) - 2021</b><span class="cat">Turboélice</span></span>
+        <span class="c-nome"><b>King Air 260 (B200GT) - 2021</b><span class="cat">Bimotor turboélice</span></span>
         <span class="c-sit" data-label="Situação"><span class="sit ">Disponível</span></span>
         <span class="c-valor" data-label="Valor"><span class="vwrap"><span class="moeda">US$</span><span class="cifra">5.600.000,00</span></span></span>
-        <span class="c-caret" aria-hidden="true">›</span>
+        <span class="c-caret" aria-hidden="true"><svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg></span>
       </a>
-    </div><div class="av" data-tipo="monomotor" data-moeda="BRL" data-valor="3100000" data-criado="1793287972174" data-nome="Cessna 210L - 1976">
+    </div><div class="av" data-tipo="monomotor_pistao" data-moeda="BRL" data-valor="3100000" data-criado="1793287972174" data-nome="Cessna 210L - 1976">
       <a class="av-row" href="/aeronaves/cessna-210l-1976/">
         <span class="c-img"><img src="/assets/thumbs/7e7fb5df-79e0-4b36-9f6a-f97704c5273e-480.webp" data-orig="https://hobtolagifjjxcmxreip.supabase.co/storage/v1/object/public/aeronaves/7e7fb5df-79e0-4b36-9f6a-f97704c5273e.jpeg" onerror="this.onerror=null;this.src=this.dataset.orig" alt="Cessna 210L - 1976" width="480" height="360" loading="lazy" decoding="async"></span>
-        <span class="c-nome"><b>Cessna 210L - 1976</b><span class="cat">Monomotor</span></span>
+        <span class="c-nome"><b>Cessna 210L - 1976</b><span class="cat">Monomotor a pistão</span></span>
         <span class="c-sit" data-label="Situação"><span class="sit ">Disponível</span></span>
         <span class="c-valor" data-label="Valor"><span class="vwrap"><span class="moeda">R$</span><span class="cifra">3.100.000,00</span></span></span>
-        <span class="c-caret" aria-hidden="true">›</span>
+        <span class="c-caret" aria-hidden="true"><svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg></span>
       </a>
-    </div><div class="av" data-tipo="monomotor" data-moeda="BRL" data-valor="3000000" data-criado="1793287882934" data-nome="Cessna 210 - 1978">
+    </div><div class="av" data-tipo="monomotor_pistao" data-moeda="BRL" data-valor="3000000" data-criado="1793287882934" data-nome="Cessna 210 - 1978">
       <a class="av-row" href="/aeronaves/cessna-210-1978/">
         <span class="c-img"><img src="/assets/thumbs/58bc4d41-7a00-47f2-a2a6-6bc35c4545c4-480.webp" data-orig="https://hobtolagifjjxcmxreip.supabase.co/storage/v1/object/public/aeronaves/58bc4d41-7a00-47f2-a2a6-6bc35c4545c4.jpeg" onerror="this.onerror=null;this.src=this.dataset.orig" alt="Cessna 210 - 1978" width="480" height="360" loading="lazy" decoding="async"></span>
-        <span class="c-nome"><b>Cessna 210 - 1978</b><span class="cat">Monomotor</span></span>
+        <span class="c-nome"><b>Cessna 210 - 1978</b><span class="cat">Monomotor a pistão</span></span>
         <span class="c-sit" data-label="Situação"><span class="sit ">Disponível</span></span>
         <span class="c-valor" data-label="Valor"><span class="vwrap"><span class="moeda">R$</span><span class="cifra">3.000.000,00</span></span></span>
-        <span class="c-caret" aria-hidden="true">›</span>
+        <span class="c-caret" aria-hidden="true"><svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg></span>
       </a>
-    </div><div class="av" data-tipo="monomotor" data-moeda="BRL" data-valor="2350000" data-criado="1793287775060" data-nome="Cessna 210M Centurion - 1977">
+    </div><div class="av" data-tipo="monomotor_pistao" data-moeda="BRL" data-valor="2350000" data-criado="1793287775060" data-nome="Cessna 210M Centurion - 1977">
       <a class="av-row" href="/aeronaves/cessna-210m-centurion-1977/">
         <span class="c-img"><img src="/assets/thumbs/214eb44c-30be-455a-bd97-0003f5d51603-480.webp" data-orig="https://hobtolagifjjxcmxreip.supabase.co/storage/v1/object/public/aeronaves/214eb44c-30be-455a-bd97-0003f5d51603.jpeg" onerror="this.onerror=null;this.src=this.dataset.orig" alt="Cessna 210M Centurion - 1977" width="480" height="360" loading="lazy" decoding="async"></span>
-        <span class="c-nome"><b>Cessna 210M Centurion - 1977</b><span class="cat">Monomotor</span></span>
+        <span class="c-nome"><b>Cessna 210M Centurion - 1977</b><span class="cat">Monomotor a pistão</span></span>
         <span class="c-sit" data-label="Situação"><span class="sit ">Disponível</span></span>
         <span class="c-valor" data-label="Valor"><span class="vwrap"><span class="moeda">R$</span><span class="cifra">2.350.000,00</span></span></span>
-        <span class="c-caret" aria-hidden="true">›</span>
+        <span class="c-caret" aria-hidden="true"><svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg></span>
       </a>
-    </div><div class="av" data-tipo="turboelice" data-moeda="USD" data-valor="1180000" data-criado="1792066620356" data-nome="King Air C90 - 1981">
+    </div><div class="av" data-tipo="bimotor_turboelice" data-moeda="USD" data-valor="1180000" data-criado="1792066620356" data-nome="King Air C90 - 1981">
       <a class="av-row" href="/aeronaves/king-air-c90-1981/">
         <span class="c-img"><img src="/assets/thumbs/f5d0709e-602b-425e-9a4c-13701bc2e56a-480.webp" data-orig="https://hobtolagifjjxcmxreip.supabase.co/storage/v1/object/public/aeronaves/f5d0709e-602b-425e-9a4c-13701bc2e56a.jpeg" onerror="this.onerror=null;this.src=this.dataset.orig" alt="King Air C90 - 1981" width="480" height="360" loading="lazy" decoding="async"></span>
-        <span class="c-nome"><b>King Air C90 - 1981</b><span class="cat">Turboélice</span></span>
+        <span class="c-nome"><b>King Air C90 - 1981</b><span class="cat">Bimotor turboélice</span></span>
         <span class="c-sit" data-label="Situação"><span class="sit ">Disponível</span></span>
         <span class="c-valor" data-label="Valor"><span class="vwrap"><span class="moeda">US$</span><span class="cifra">1.180.000,00</span></span></span>
-        <span class="c-caret" aria-hidden="true">›</span>
+        <span class="c-caret" aria-hidden="true"><svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg></span>
       </a>
-    </div><div class="av" data-tipo="bimotor" data-moeda="BRL" data-valor="1900000" data-criado="1791160893111" data-nome="Baron B55 - 1973">
+    </div><div class="av" data-tipo="bimotor_pistao" data-moeda="BRL" data-valor="1900000" data-criado="1791160893111" data-nome="Baron B55 - 1973">
       <a class="av-row" href="/aeronaves/baron-b55-1973/">
         <span class="c-img"><img src="/assets/thumbs/1dd26165-b248-4697-8180-eee60e73f066-480.webp" data-orig="https://hobtolagifjjxcmxreip.supabase.co/storage/v1/object/public/aeronaves/1dd26165-b248-4697-8180-eee60e73f066.jpeg" onerror="this.onerror=null;this.src=this.dataset.orig" alt="Baron B55 - 1973" width="480" height="360" loading="lazy" decoding="async"></span>
-        <span class="c-nome"><b>Baron B55 - 1973</b><span class="cat">Bimotor</span></span>
+        <span class="c-nome"><b>Baron B55 - 1973</b><span class="cat">Bimotor a pistão</span></span>
         <span class="c-sit" data-label="Situação"><span class="sit ">Disponível</span></span>
         <span class="c-valor" data-label="Valor"><span class="vwrap"><span class="moeda">R$</span><span class="cifra">1.900.000,00</span></span></span>
-        <span class="c-caret" aria-hidden="true">›</span>
+        <span class="c-caret" aria-hidden="true"><svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg></span>
       </a>
-    </div><div class="av" data-tipo="monomotor" data-moeda="BRL" data-valor="3200000" data-criado="1790949558937" data-nome="Saratoga II TC P32R-301T - 2000">
+    </div><div class="av" data-tipo="monomotor_pistao" data-moeda="BRL" data-valor="3200000" data-criado="1790949558937" data-nome="Saratoga II TC P32R-301T - 2000">
       <a class="av-row" href="/aeronaves/saratoga-ii-tc-p32r-301t-2000/">
         <span class="c-img"><img src="/assets/thumbs/75621eab-beaf-4f66-a8e2-c56f5b1c26d5-480.webp" data-orig="https://hobtolagifjjxcmxreip.supabase.co/storage/v1/object/public/aeronaves/75621eab-beaf-4f66-a8e2-c56f5b1c26d5.jpeg" onerror="this.onerror=null;this.src=this.dataset.orig" alt="Saratoga II TC P32R-301T - 2000" width="480" height="360" loading="lazy" decoding="async"></span>
-        <span class="c-nome"><b>Saratoga II TC P32R-301T - 2000</b><span class="cat">Monomotor</span></span>
+        <span class="c-nome"><b>Saratoga II TC P32R-301T - 2000</b><span class="cat">Monomotor a pistão</span></span>
         <span class="c-sit" data-label="Situação"><span class="sit ">Disponível</span></span>
         <span class="c-valor" data-label="Valor"><span class="vwrap"><span class="moeda">R$</span><span class="cifra">3.200.000,00</span></span></span>
-        <span class="c-caret" aria-hidden="true">›</span>
+        <span class="c-caret" aria-hidden="true"><svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg></span>
       </a>
-    </div><div class="av" data-tipo="monomotor" data-moeda="BRL" data-valor="350000" data-criado="1790949484885" data-nome="Aeronca Champion 7EC - 1940">
+    </div><div class="av" data-tipo="monomotor_pistao" data-moeda="BRL" data-valor="350000" data-criado="1790949484885" data-nome="Aeronca Champion 7EC - 1940">
       <a class="av-row" href="/aeronaves/aeronca-champion-7ec-1940/">
         <span class="c-img"><img src="/assets/thumbs/6e6470bf-3756-4efe-a46a-a35e7403ddf7-480.webp" data-orig="https://hobtolagifjjxcmxreip.supabase.co/storage/v1/object/public/aeronaves/6e6470bf-3756-4efe-a46a-a35e7403ddf7.jpeg" onerror="this.onerror=null;this.src=this.dataset.orig" alt="Aeronca Champion 7EC - 1940" width="480" height="360" loading="lazy" decoding="async"></span>
-        <span class="c-nome"><b>Aeronca Champion 7EC - 1940</b><span class="cat">Monomotor</span></span>
+        <span class="c-nome"><b>Aeronca Champion 7EC - 1940</b><span class="cat">Monomotor a pistão</span></span>
         <span class="c-sit" data-label="Situação"><span class="sit ">Disponível</span></span>
         <span class="c-valor" data-label="Valor"><span class="vwrap"><span class="moeda">R$</span><span class="cifra">350.000,00</span></span></span>
-        <span class="c-caret" aria-hidden="true">›</span>
+        <span class="c-caret" aria-hidden="true"><svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg></span>
       </a>
-    </div><div class="av" data-tipo="monomotor" data-moeda="BRL" data-valor="1800000" data-criado="1790949414126" data-nome="Embraer Minuano - 1978">
+    </div><div class="av" data-tipo="monomotor_pistao" data-moeda="BRL" data-valor="1800000" data-criado="1790949414126" data-nome="Embraer Minuano - 1978">
       <a class="av-row" href="/aeronaves/embraer-minuano-1978/">
         <span class="c-img"><img src="/assets/thumbs/e9fef309-eb6e-4713-9cf3-f2b5f3d4fb7d-480.webp" data-orig="https://hobtolagifjjxcmxreip.supabase.co/storage/v1/object/public/aeronaves/e9fef309-eb6e-4713-9cf3-f2b5f3d4fb7d.jpeg" onerror="this.onerror=null;this.src=this.dataset.orig" alt="Embraer Minuano - 1978" width="480" height="360" loading="lazy" decoding="async"></span>
-        <span class="c-nome"><b>Embraer Minuano - 1978</b><span class="cat">Monomotor</span></span>
+        <span class="c-nome"><b>Embraer Minuano - 1978</b><span class="cat">Monomotor a pistão</span></span>
         <span class="c-sit" data-label="Situação"><span class="sit ">Disponível</span></span>
         <span class="c-valor" data-label="Valor"><span class="vwrap"><span class="moeda">R$</span><span class="cifra">1.800.000,00</span></span></span>
-        <span class="c-caret" aria-hidden="true">›</span>
+        <span class="c-caret" aria-hidden="true"><svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg></span>
       </a>
-    </div><div class="av" data-tipo="monomotor" data-moeda="BRL" data-valor="750000" data-criado="1790949343060" data-nome="Embraer Tupi EMB712 - 1985">
+    </div><div class="av" data-tipo="monomotor_pistao" data-moeda="BRL" data-valor="750000" data-criado="1790949343060" data-nome="Embraer Tupi EMB712 - 1985">
       <a class="av-row" href="/aeronaves/embraer-tupi-emb712-1985/">
         <span class="c-img"><img src="/assets/thumbs/a2884757-0b13-40ef-83c9-466fbcffe163-480.webp" data-orig="https://hobtolagifjjxcmxreip.supabase.co/storage/v1/object/public/aeronaves/a2884757-0b13-40ef-83c9-466fbcffe163.jpeg" onerror="this.onerror=null;this.src=this.dataset.orig" alt="Embraer Tupi EMB712 - 1985" width="480" height="360" loading="lazy" decoding="async"></span>
-        <span class="c-nome"><b>Embraer Tupi EMB712 - 1985</b><span class="cat">Monomotor</span></span>
+        <span class="c-nome"><b>Embraer Tupi EMB712 - 1985</b><span class="cat">Monomotor a pistão</span></span>
         <span class="c-sit" data-label="Situação"><span class="sit ">Disponível</span></span>
         <span class="c-valor" data-label="Valor"><span class="vwrap"><span class="moeda">R$</span><span class="cifra">750.000,00</span></span></span>
-        <span class="c-caret" aria-hidden="true">›</span>
+        <span class="c-caret" aria-hidden="true"><svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg></span>
       </a>
-    </div><div class="av" data-tipo="turboelice" data-moeda="USD" data-valor="2280000" data-criado="1790862745415" data-nome="King Air C90A 1999">
+    </div><div class="av" data-tipo="bimotor_turboelice" data-moeda="USD" data-valor="2280000" data-criado="1790862745415" data-nome="King Air C90A 1999">
       <a class="av-row" href="/aeronaves/king-air-c90a-1999/">
         <span class="c-img"><img src="/assets/thumbs/b3c904a4-d5ed-4d8e-940c-6b9d80d83947-480.webp" data-orig="https://hobtolagifjjxcmxreip.supabase.co/storage/v1/object/public/aeronaves/b3c904a4-d5ed-4d8e-940c-6b9d80d83947.jpeg" onerror="this.onerror=null;this.src=this.dataset.orig" alt="King Air C90A 1999" width="480" height="360" loading="lazy" decoding="async"></span>
-        <span class="c-nome"><b>King Air C90A 1999</b><span class="cat">Turboélice</span></span>
+        <span class="c-nome"><b>King Air C90A 1999</b><span class="cat">Bimotor turboélice</span></span>
         <span class="c-sit" data-label="Situação"><span class="sit ">Disponível</span></span>
         <span class="c-valor" data-label="Valor"><span class="vwrap"><span class="moeda">US$</span><span class="cifra">2.280.000,00</span></span></span>
-        <span class="c-caret" aria-hidden="true">›</span>
+        <span class="c-caret" aria-hidden="true"><svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg></span>
       </a>
-    </div><div class="av" data-tipo="monomotor" data-moeda="BRL" data-valor="1300000" data-criado="1790862577856" data-nome="Corisco Turbo - 1979">
+    </div><div class="av" data-tipo="monomotor_pistao" data-moeda="BRL" data-valor="1300000" data-criado="1790862577856" data-nome="Corisco Turbo - 1979">
       <a class="av-row" href="/aeronaves/corisco-turbo-1979/">
         <span class="c-img"><img src="/assets/thumbs/928717ee-b08d-43e9-9a60-a60488be6d9f-480.webp" data-orig="https://hobtolagifjjxcmxreip.supabase.co/storage/v1/object/public/aeronaves/928717ee-b08d-43e9-9a60-a60488be6d9f.jpeg" onerror="this.onerror=null;this.src=this.dataset.orig" alt="Corisco Turbo - 1979" width="480" height="360" loading="lazy" decoding="async"></span>
-        <span class="c-nome"><b>Corisco Turbo - 1979</b><span class="cat">Monomotor</span></span>
+        <span class="c-nome"><b>Corisco Turbo - 1979</b><span class="cat">Monomotor a pistão</span></span>
         <span class="c-sit" data-label="Situação"><span class="sit ">Disponível</span></span>
         <span class="c-valor" data-label="Valor"><span class="vwrap"><span class="moeda">R$</span><span class="cifra">1.300.000,00</span></span></span>
-        <span class="c-caret" aria-hidden="true">›</span>
+        <span class="c-caret" aria-hidden="true"><svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg></span>
       </a>
-    </div><div class="av" data-tipo="monomotor" data-moeda="BRL" data-valor="820000" data-criado="1790862477807" data-nome="Cessna 172M - 1974">
+    </div><div class="av" data-tipo="monomotor_pistao" data-moeda="BRL" data-valor="820000" data-criado="1790862477807" data-nome="Cessna 172M - 1974">
       <a class="av-row" href="/aeronaves/cessna-172m-1974/">
         <span class="c-img"><img src="/assets/thumbs/bf807b95-4945-4695-98da-3f1adef5b135-480.webp" data-orig="https://hobtolagifjjxcmxreip.supabase.co/storage/v1/object/public/aeronaves/bf807b95-4945-4695-98da-3f1adef5b135.jpeg" onerror="this.onerror=null;this.src=this.dataset.orig" alt="Cessna 172M - 1974" width="480" height="360" loading="lazy" decoding="async"></span>
-        <span class="c-nome"><b>Cessna 172M - 1974</b><span class="cat">Monomotor</span></span>
+        <span class="c-nome"><b>Cessna 172M - 1974</b><span class="cat">Monomotor a pistão</span></span>
         <span class="c-sit" data-label="Situação"><span class="sit ">Disponível</span></span>
         <span class="c-valor" data-label="Valor"><span class="vwrap"><span class="moeda">R$</span><span class="cifra">820.000,00</span></span></span>
-        <span class="c-caret" aria-hidden="true">›</span>
+        <span class="c-caret" aria-hidden="true"><svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg></span>
       </a>
-    </div><div class="av" data-tipo="monomotor" data-moeda="BRL" data-valor="980000" data-criado="1790862361975" data-nome="Corisco Aspirado - 1997">
+    </div><div class="av" data-tipo="monomotor_pistao" data-moeda="BRL" data-valor="980000" data-criado="1790862361975" data-nome="Corisco Aspirado - 1997">
       <a class="av-row" href="/aeronaves/corisco-aspirado-1997/">
         <span class="c-img"><img src="/assets/thumbs/97b910a0-ef01-4657-8341-7d2df5bcf26e-480.webp" data-orig="https://hobtolagifjjxcmxreip.supabase.co/storage/v1/object/public/aeronaves/97b910a0-ef01-4657-8341-7d2df5bcf26e.jpeg" onerror="this.onerror=null;this.src=this.dataset.orig" alt="Corisco Aspirado - 1997" width="480" height="360" loading="lazy" decoding="async"></span>
-        <span class="c-nome"><b>Corisco Aspirado - 1997</b><span class="cat">Monomotor</span></span>
+        <span class="c-nome"><b>Corisco Aspirado - 1997</b><span class="cat">Monomotor a pistão</span></span>
         <span class="c-sit" data-label="Situação"><span class="sit ">Disponível</span></span>
         <span class="c-valor" data-label="Valor"><span class="vwrap"><span class="moeda">R$</span><span class="cifra">980.000,00</span></span></span>
-        <span class="c-caret" aria-hidden="true">›</span>
+        <span class="c-caret" aria-hidden="true"><svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg></span>
       </a>
-    </div><div class="av" data-tipo="bimotor" data-moeda="BRL" data-valor="2300000" data-criado="1787333290476" data-nome="Baron 58 - 1978">
+    </div><div class="av" data-tipo="bimotor_pistao" data-moeda="BRL" data-valor="2300000" data-criado="1787333290476" data-nome="Baron 58 - 1978">
       <a class="av-row" href="/aeronaves/baron-58-1978/">
         <span class="c-img"><img src="/assets/thumbs/c995c6de-afa0-4973-9717-60f53299ee55-480.webp" data-orig="https://hobtolagifjjxcmxreip.supabase.co/storage/v1/object/public/aeronaves/c995c6de-afa0-4973-9717-60f53299ee55.jpeg" onerror="this.onerror=null;this.src=this.dataset.orig" alt="Baron 58 - 1978" width="480" height="360" loading="lazy" decoding="async"></span>
-        <span class="c-nome"><b>Baron 58 - 1978</b><span class="cat">Bimotor</span></span>
+        <span class="c-nome"><b>Baron 58 - 1978</b><span class="cat">Bimotor a pistão</span></span>
         <span class="c-sit" data-label="Situação"><span class="sit ">Disponível</span></span>
         <span class="c-valor" data-label="Valor"><span class="vwrap"><span class="moeda">R$</span><span class="cifra">2.300.000,00</span></span></span>
-        <span class="c-caret" aria-hidden="true">›</span>
+        <span class="c-caret" aria-hidden="true"><svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg></span>
       </a>
-    </div><div class="av" data-tipo="bimotor" data-moeda="BRL" data-valor="0" data-criado="1787333162173" data-nome="Cessna 310R - 1978">
+    </div><div class="av" data-tipo="bimotor_pistao" data-moeda="BRL" data-valor="0" data-criado="1787333162173" data-nome="Cessna 310R - 1978">
       <a class="av-row" href="/aeronaves/cessna-310r-1978/">
         <span class="c-img"><img src="/assets/thumbs/cd8584aa-091c-43d6-b1b0-a7e82abe2830-480.webp" data-orig="https://hobtolagifjjxcmxreip.supabase.co/storage/v1/object/public/aeronaves/cd8584aa-091c-43d6-b1b0-a7e82abe2830.jpeg" onerror="this.onerror=null;this.src=this.dataset.orig" alt="Cessna 310R - 1978" width="480" height="360" loading="lazy" decoding="async"></span>
-        <span class="c-nome"><b>Cessna 310R - 1978</b><span class="cat">Bimotor</span></span>
+        <span class="c-nome"><b>Cessna 310R - 1978</b><span class="cat">Bimotor a pistão</span></span>
         <span class="c-sit" data-label="Situação"><span class="sit ">Disponível</span></span>
         <span class="c-valor tbc" data-label="Valor">[a confirmar]</span>
-        <span class="c-caret" aria-hidden="true">›</span>
+        <span class="c-caret" aria-hidden="true"><svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg></span>
       </a>
-    </div><div class="av" data-tipo="bimotor" data-moeda="BRL" data-valor="1799000" data-criado="1787078942039" data-nome="Seneca III 1990">
+    </div><div class="av" data-tipo="bimotor_pistao" data-moeda="BRL" data-valor="1799000" data-criado="1787078942039" data-nome="Seneca III 1990">
       <a class="av-row" href="/aeronaves/seneca-iii-1990/">
         <span class="c-img"><img src="/assets/thumbs/12c5138b-02fb-45ff-b895-12c71ede3594-480.webp" data-orig="https://hobtolagifjjxcmxreip.supabase.co/storage/v1/object/public/aeronaves/12c5138b-02fb-45ff-b895-12c71ede3594.jpeg" onerror="this.onerror=null;this.src=this.dataset.orig" alt="Seneca III 1990" width="480" height="360" loading="lazy" decoding="async"></span>
-        <span class="c-nome"><b>Seneca III 1990</b><span class="cat">Bimotor</span></span>
+        <span class="c-nome"><b>Seneca III 1990</b><span class="cat">Bimotor a pistão</span></span>
         <span class="c-sit" data-label="Situação"><span class="sit ">Disponível</span></span>
         <span class="c-valor" data-label="Valor"><span class="vwrap"><span class="moeda">R$</span><span class="cifra">1.799.000,00</span></span></span>
-        <span class="c-caret" aria-hidden="true">›</span>
+        <span class="c-caret" aria-hidden="true"><svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg></span>
       </a>
-    </div><div class="av" data-tipo="turboelice" data-moeda="USD" data-valor="2450000" data-criado="1786646234137" data-nome="King Air C90A 1989/1990">
+    </div><div class="av" data-tipo="bimotor_turboelice" data-moeda="USD" data-valor="2450000" data-criado="1786646234137" data-nome="King Air C90A 1989/1990">
       <a class="av-row" href="/aeronaves/king-air-c90a-1989-1990/">
         <span class="c-img"><img src="/assets/thumbs/e0ff5b32-bd5c-4092-a0b5-a0a3b8918d4a-480.webp" data-orig="https://hobtolagifjjxcmxreip.supabase.co/storage/v1/object/public/aeronaves/e0ff5b32-bd5c-4092-a0b5-a0a3b8918d4a.jpeg" onerror="this.onerror=null;this.src=this.dataset.orig" alt="King Air C90A 1989/1990" width="480" height="360" loading="lazy" decoding="async"></span>
-        <span class="c-nome"><b>King Air C90A 1989/1990</b><span class="cat">Turboélice</span></span>
+        <span class="c-nome"><b>King Air C90A 1989/1990</b><span class="cat">Bimotor turboélice</span></span>
         <span class="c-sit" data-label="Situação"><span class="sit ">Disponível</span></span>
         <span class="c-valor" data-label="Valor"><span class="vwrap"><span class="moeda">US$</span><span class="cifra">2.450.000,00</span></span></span>
-        <span class="c-caret" aria-hidden="true">›</span>
+        <span class="c-caret" aria-hidden="true"><svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg></span>
       </a>
-    </div><div class="av" data-tipo="monomotor" data-moeda="BRL" data-valor="2000000" data-criado="1786556233840" data-nome="Cessna 182T Aspirado 2003">
+    </div><div class="av" data-tipo="monomotor_pistao" data-moeda="BRL" data-valor="2000000" data-criado="1786556233840" data-nome="Cessna 182T Aspirado 2003">
       <a class="av-row" href="/aeronaves/cessna-182t-aspirado-2003/">
         <span class="c-img"><img src="/assets/thumbs/92779aca-1891-4a32-af0b-3ea2771255a9-480.webp" data-orig="https://hobtolagifjjxcmxreip.supabase.co/storage/v1/object/public/aeronaves/92779aca-1891-4a32-af0b-3ea2771255a9.jpeg" onerror="this.onerror=null;this.src=this.dataset.orig" alt="Cessna 182T Aspirado 2003" width="480" height="360" loading="lazy" decoding="async"></span>
-        <span class="c-nome"><b>Cessna 182T Aspirado 2003</b><span class="cat">Monomotor</span></span>
+        <span class="c-nome"><b>Cessna 182T Aspirado 2003</b><span class="cat">Monomotor a pistão</span></span>
         <span class="c-sit" data-label="Situação"><span class="sit ">Disponível</span></span>
         <span class="c-valor" data-label="Valor"><span class="vwrap"><span class="moeda">R$</span><span class="cifra">2.000.000,00</span></span></span>
-        <span class="c-caret" aria-hidden="true">›</span>
+        <span class="c-caret" aria-hidden="true"><svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg></span>
       </a>
     </div><div class="av" data-tipo="jato" data-moeda="USD" data-valor="1880000" data-criado="1786542024782" data-nome="Beechjet 400A">
       <a class="av-row" href="/aeronaves/beechjet-400a/">
@@ -600,37 +544,41 @@
         <span class="c-nome"><b>Beechjet 400A</b><span class="cat">Jato</span></span>
         <span class="c-sit" data-label="Situação"><span class="sit ">Disponível</span></span>
         <span class="c-valor" data-label="Valor"><span class="vwrap"><span class="moeda">US$</span><span class="cifra">1.880.000,00</span></span></span>
-        <span class="c-caret" aria-hidden="true">›</span>
+        <span class="c-caret" aria-hidden="true"><svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg></span>
       </a>
-    </div><div class="av" data-tipo="monomotor" data-moeda="BRL" data-valor="3050000" data-criado="1786451276924" data-nome="Cessna 210 - 1972">
+    </div><div class="av" data-tipo="monomotor_pistao" data-moeda="BRL" data-valor="3050000" data-criado="1786451276924" data-nome="Cessna 210 - 1972">
       <a class="av-row" href="/aeronaves/cessna-210-1972/">
         <span class="c-img"><img src="/assets/thumbs/e40a6780-100e-42a8-8a78-2de7130d5318-480.webp" data-orig="https://hobtolagifjjxcmxreip.supabase.co/storage/v1/object/public/aeronaves/e40a6780-100e-42a8-8a78-2de7130d5318.jpeg" onerror="this.onerror=null;this.src=this.dataset.orig" alt="Cessna 210 - 1972" width="480" height="360" loading="lazy" decoding="async"></span>
-        <span class="c-nome"><b>Cessna 210 - 1972</b><span class="cat">Monomotor</span></span>
+        <span class="c-nome"><b>Cessna 210 - 1972</b><span class="cat">Monomotor a pistão</span></span>
         <span class="c-sit" data-label="Situação"><span class="sit ">Disponível</span></span>
         <span class="c-valor" data-label="Valor"><span class="vwrap"><span class="moeda">R$</span><span class="cifra">3.050.000,00</span></span></span>
-        <span class="c-caret" aria-hidden="true">›</span>
+        <span class="c-caret" aria-hidden="true"><svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg></span>
       </a>
     </div><!--/CAT-ROWS--></div>
-    <div class="cat-more home-only"><a class="btn btn-p" href="/aeronaves/">+ Ver todas as aeronaves disponíveis</a></div>
-    <!-- ATUALIZAR PERIODICAMENTE: dados lidos do Instagram da V4 em jul/2026 — confirmar com a V4 -->
-    <p class="cat-note mono reveal">Valores e disponibilidade sujeitos a confirmação.</p>
+
+    <div class="cat-more home-only">
+      <a class="btn btn-p" href="/aeronaves/">Ver todas as aeronaves <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+      <a class="btn btn-s" href="/vender/">Quero vender a minha</a>
+    </div>
+    <p class="cat-note">Valores e disponibilidade sujeitos a confirmação.</p>
   </div>
 </section>
 
 
+</main>
 
-<!-- ===================== FOOTER ===================== -->
 <footer>
   <div class="wrap">
     <div class="foot">
-      <a href="/#top" class="logo" aria-label="V4 Aero Flight — início">
-      <svg class="mark" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="21" fill="none" stroke="#3E77AE" stroke-width="2.4"/><path d="M24 10 L16 33 L24 28 Z" fill="currentColor"/><path d="M24 10 L32 33 L24 28 Z" fill="#3E77AE"/></svg>
-      <span class="wm"><b>V4 <i>Aero</i></b><small>Flight</small></span>
-    </a>
-      <p class="desc">Compra, venda e intermediação de aeronaves.</p>
-      <nav class="foot-nav">
+      <a href="/" class="logo" aria-label="V4 Aero Flight — início">
+        <svg class="mark" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="21" fill="none" stroke="#3E77AE" stroke-width="2.4"/><path d="M24 10 L16 33 L24 28 Z" fill="currentColor"/><path d="M24 10 L32 33 L24 28 Z" fill="#3E77AE"/></svg>
+        <span class="wm"><b>V4 <i>Aero</i></b><small>Flight</small></span>
+      </a>
+      <p class="desc">Compra, venda e intermediação de aeronaves. Atendimento em todo o Brasil.</p>
+      <nav class="foot-nav" aria-label="Rodapé">
         <a href="/aeronaves/">Aeronaves</a>
-        <a href="/#servicos">Serviços</a>
+        <a href="/vender/">Vender</a>
+        <a href="/#como">Como trabalhamos</a>
         <a href="/#sobre">Sobre</a>
         <a href="/#contato">Contato</a>
       </nav>
@@ -639,39 +587,40 @@
   </div>
 </footer>
 
-<a class="wa js-lead" href="https://wa.me/5565981476175" target="_blank" rel="noopener">Falar no WhatsApp</a>
+<a class="wa js-lead" href="https://wa.me/5565981476175" target="_blank" rel="noopener" aria-label="Falar no WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.2A9.7 9.7 0 0 0 3.6 16.8L2.3 21.7l5-1.3A9.7 9.7 0 1 0 12 2.2Zm0 17.7a8 8 0 0 1-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 1 1 12 19.9Zm4.4-6c-.2-.1-1.4-.7-1.7-.8-.2-.1-.4-.1-.5.1l-.8.9c-.1.2-.3.2-.5.1a6.5 6.5 0 0 1-3.2-2.8c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.5-.4h-.5a.9.9 0 0 0-.7.3 2.8 2.8 0 0 0-.9 2.1 4.9 4.9 0 0 0 1 2.6 11.2 11.2 0 0 0 4.3 3.8c1.6.7 2.2.7 3 .6a2.6 2.6 0 0 0 1.7-1.2 2.1 2.1 0 0 0 .2-1.2c-.1-.1-.3-.2-.5-.3Z"/></svg><span>Falar no WhatsApp</span></a>
 
 <!-- modal de captação de lead (compartilhado com as páginas de aeronave) -->
 <script src="/assets/lead.js" defer></script>
 
 <script type="module">
-  import { buscarAeronaves, selecionar, listaHTML, assinatura } from '/assets/catalogo.js';
+  import { buscarAeronaves, selecionar, listaHTML, tilesHTML, assinatura, HERO_N } from '/assets/catalogo.js';
 
-  // header scrolled + menu mobile
-  const header=document.getElementById('header');
-  addEventListener('scroll',()=>header.classList.toggle('scrolled',scrollY>10),{passive:true});
+  // menu mobile
   const mnav=document.getElementById('mnav'), menuBtn=document.getElementById('menuBtn');
   const setMenu=open=>{mnav.style.display=open?'flex':'none';menuBtn.setAttribute('aria-expanded',open);};
   menuBtn.addEventListener('click',()=>setMenu(mnav.style.display!=='flex'));
   mnav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>setMenu(false)));
 
-  // reveal
-  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.1,rootMargin:'0px 0px -30px 0px'});
-  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-
   // ---------- catálogo ----------
-  // As linhas já vêm prontas no HTML (build/generate.mjs). Aqui só filtramos/ordenamos e,
+  // Tudo já vem pronto no HTML (build/generate.mjs). Aqui só filtramos/ordenamos e,
   // se o banco mudou depois do último build, re-renderizamos com os dados frescos.
   const CATALOGO=document.body.classList.contains('catalogo');
-  const list=document.getElementById('catList');
+  const list=document.getElementById('catList'), tiles=document.getElementById('heroTiles');
   const countEl=document.getElementById('count');
   const pad=n=>String(n).padStart(2,'0');
   let filtro='todas', ordem='recentes';
   const rows=()=>[...list.querySelectorAll('.av')];
-  function apply(){let vis=0;rows().forEach(a=>{const sh=filtro==='todas'||a.dataset.tipo===filtro;a.style.display=sh?'':'none';if(sh)vis++;});countEl.textContent=pad(vis)+(vis===1?' aeronave':' aeronaves');}
+  function apply(){
+    if(!CATALOGO) return;
+    // categoria sem nenhuma aeronave no momento: o filtro some (volta sozinho quando houver)
+    const tipos=new Set(rows().map(a=>a.dataset.tipo));
+    document.querySelectorAll('.filtro').forEach(b=>{b.hidden=b.dataset.f!=='todas'&&!tipos.has(b.dataset.f);});
+    let vis=0;rows().forEach(a=>{const sh=filtro==='todas'||a.dataset.tipo===filtro;a.style.display=sh?'':'none';if(sh)vis++;});
+    countEl.textContent=pad(vis)+(vis===1?' aeronave':' aeronaves');
+  }
   document.querySelectorAll('.filtro').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.filtro').forEach(x=>x.classList.remove('active'));b.classList.add('active');filtro=b.dataset.f;apply();}));
   // ─────────────────────────────────────────────────────────────
-  // Cotação de referência — USADA APENAS PARA ORDENAR A TABELA.
+  // Cotação de referência — USADA APENAS PARA ORDENAR.
   // Nunca é exibida na tela e nunca converte o valor anunciado. ATUALIZAR PERIODICAMENTE.
   // ─────────────────────────────────────────────────────────────
   const USD_BRL_REFERENCIA = 5.40;
@@ -691,11 +640,18 @@
   buscarAeronaves().then(data=>{
     const shown=selecionar(data,CATALOGO), sig=assinatura(shown);
     if(list.dataset.sig===sig) return;            // nada mudou desde o build
-    list.innerHTML=listaHTML(shown); list.dataset.sig=sig;
+    if(CATALOGO){ list.innerHTML=listaHTML(shown); }
+    else {
+      tiles.innerHTML=tilesHTML(shown.slice(0,HERO_N));
+      list.innerHTML=listaHTML(shown.slice(HERO_N));
+      const aVenda=data.filter(a=>!/vend/i.test(a.situacao||'')).length;
+      ['heroCount','heroCount2'].forEach(id=>{const el=document.getElementById(id); if(el) el.textContent=aVenda;});
+    }
+    list.dataset.sig=sig;
     ordenar(); apply();
   }).catch(e=>{
     console.warn('Catálogo indisponível.', e.message);
-    if(!rows().length) list.innerHTML='<p class="cat-note" style="text-align:center;padding:2rem 0">Não foi possível carregar as aeronaves agora. Fale conosco no WhatsApp.</p>';
+    if(!rows().length) list.innerHTML='<p class="cat-note" style="grid-column:1/-1;text-align:center;padding:2rem 0">Não foi possível carregar as aeronaves agora. Fale conosco no WhatsApp.</p>';
   });
 </script>
 </body>

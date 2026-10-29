@@ -3,9 +3,11 @@
 export const SB_URL = 'https://hobtolagifjjxcmxreip.supabase.co';
 export const SB_KEY = 'sb_publishable_29hmID65I5x-X0Ieot6f5Q_eLOk_Pkl';
 export const CAMPOS = 'id,nome,categoria,situacao,moeda,valor,fotos,foto_url,descricao,created_at,updated_at';
-export const HOME_MAX = 5;
+export const HOME_MAX = 6;   // home: 3 na porta "comprar" + 3 em "Também à venda"
+export const HERO_N = 3;
 
-export const CATS = { monomotor:'Monomotor', bimotor:'Bimotor', turboelice:'Turboélice', jato:'Jato', helicoptero:'Helicóptero' };
+// categorias da aeronave (coluna aeronaves.categoria + check constraint no banco)
+export const CATS = { monomotor_pistao:'Monomotor a pistão', monomotor_turboelice:'Monomotor turboélice', bimotor_pistao:'Bimotor a pistão', bimotor_turboelice:'Bimotor turboélice', jato:'Jato', helicoptero:'Helicóptero' };
 const nf = new Intl.NumberFormat('pt-BR', { minimumFractionDigits:2, maximumFractionDigits:2 });
 export const esc = s => (s ?? '').toString().replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 export const slug = s => (s || '').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'') || 'aeronave';
@@ -18,7 +20,7 @@ export const thumbName = (url, w) => { const m = /\/aeronaves\/([^/?#]+)\.[a-z0-
 export const thumb = (url, w) => { const n = thumbName(url, w); return n ? `/assets/thumbs/${n}` : url; };
 
 export const vendida = av => /vend/i.test(av.situacao || '');
-// home: 5 mais recentes ainda à venda · catálogo: todas
+// home: as HOME_MAX mais recentes ainda à venda · catálogo: todas
 export const selecionar = (data, catalogo) => catalogo ? data : data.filter(av => !vendida(av)).slice(0, HOME_MAX);
 // assinatura do conteúdo: se o banco não mudou desde o build, o navegador não re-renderiza nada
 export const assinatura = data => { let h = 5381; const s = data.map(a => a.id + ':' + a.updated_at).join('|'); for (let i = 0; i < s.length; i++) h = ((h << 5) + h + s.charCodeAt(i)) | 0; return (h >>> 0).toString(36); };
@@ -44,14 +46,30 @@ export function rowHTML(av, i = 9){
         <span class="c-nome"><b>${nome}</b><span class="cat">${CATS[av.categoria] || esc(av.categoria)}</span></span>
         <span class="c-sit" data-label="Situação"><span class="sit ${sitCls}">${esc(sit)}</span></span>
         ${valorCell(av)}
-        <span class="c-caret" aria-hidden="true">›</span>
+        <span class="c-caret" aria-hidden="true"><svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg></span>
       </a>
     </div>`;
 }
 
+// Porta "comprar" da home: foto 4:3 + nome + preço (mesmos dados dos cards)
+export function tileHTML(av, i = 0){
+  const nome = esc(av.nome || '[a confirmar]');
+  const orig = fotosDe(av)[0] || av.foto_url || '';
+  const img = orig
+    ? `<img src="${esc(thumb(orig, 480))}" data-orig="${esc(orig)}" onerror="this.onerror=null;this.src=this.dataset.orig" alt="${nome}" width="480" height="360"${i === 0 ? ' fetchpriority="high"' : ''} decoding="async">`
+    : '';
+  const sit = av.situacao || 'Disponível';
+  const selo = /reserv/i.test(sit) ? `<span class="sit reservada">${esc(sit)}</span>` : '';
+  const preco = (av.valor == null || +av.valor === 0)
+    ? '<span class="pr tbc tnum">Valor sob consulta</span>'
+    : `<span class="pr tnum">${av.moeda === 'USD' ? 'US$' : 'R$'} ${nf.format(av.valor)}</span>`;
+  return `<a class="tile" href="/aeronaves/${slug(av.nome)}/"><span class="ph">${img}${selo}</span><b>${nome}</b>${preco}</a>`;
+}
+export const tilesHTML = arr => arr.map(tileHTML).join('');
+
 export const listaHTML = shown => shown.length
   ? shown.map(rowHTML).join('')
-  : '<p class="cat-note" style="text-align:center;padding:2rem 0">Nenhuma aeronave disponível no momento. Fale conosco no WhatsApp.</p>';
+  : '<p class="cat-note" style="grid-column:1/-1;text-align:center;padding:2rem 0">Nenhuma aeronave disponível no momento. Fale conosco no WhatsApp.</p>';
 
 export async function buscarAeronaves(){
   const r = await fetch(`${SB_URL}/rest/v1/aeronaves?ativo=eq.true&order=created_at.desc&select=${CAMPOS}`,

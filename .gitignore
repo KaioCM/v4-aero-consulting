@@ -10,3 +10,8 @@ assets/instagram.svg
 
 # dependências do gerador
 node_modules/
+
+# contexto de design (impeccable) — interno, não publicar
+PRODUCT.md
+DESIGN.md
+.impeccable/

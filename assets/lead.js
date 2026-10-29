@@ -20,7 +20,7 @@
 
   var Q = {
     intencao:  { req: true, opts: [['comprar','Comprar'],['vender','Vender minha aeronave'],['pesquisando','Só pesquisando']] },
-    categoria: { opts: [['monomotor','Monomotor'],['bimotor','Bimotor'],['turboelice','Turboélice'],['jato','Jato'],['helicoptero','Helicóptero']] },
+    categoria: { opts: [['monomotor_pistao','Monomotor a pistão'],['monomotor_turboelice','Monomotor turboélice'],['bimotor_pistao','Bimotor a pistão'],['bimotor_turboelice','Bimotor turboélice'],['jato','Jato'],['helicoptero','Helicóptero']] },
     faixa:     { opts: [['ate1','Até R$ 1 mi'],['1a3','R$ 1–3 mi'],['3a10','R$ 3–10 mi'],['10mais','Acima de R$ 10 mi'],['nd','Prefiro não dizer']] },
     prazo:     { opts: [['dias','Nos próximos dias'],['ate3m','Até 3 meses'],['3a12m','3 a 12 meses'],['sem_pressa','Sem pressa']] }
   };

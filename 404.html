@@ -89,7 +89,7 @@
 <script>
 (function(){
   var SB='https://hobtolagifjjxcmxreip.supabase.co', KEY='sb_publishable_29hmID65I5x-X0Ieot6f5Q_eLOk_Pkl';
-  var CATS={monomotor:'Monomotor',bimotor:'Bimotor',turboelice:'Turboélice',jato:'Jato',helicoptero:'Helicóptero'};
+  var CATS={monomotor_pistao:'Monomotor a pistão',monomotor_turboelice:'Monomotor turboélice',bimotor_pistao:'Bimotor a pistão',bimotor_turboelice:'Bimotor turboélice',jato:'Jato',helicoptero:'Helicóptero'};
   var nf=new Intl.NumberFormat('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
   document.getElementById('yr').textContent=new Date().getFullYear();
   var esc=function(s){return (s==null?'':String(s)).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});};
@@ -103,7 +103,7 @@
       if(line===''||line==='---'){flush();continue;}
       if(/^#{1,6}\s/.test(line)){flush();continue;}   // título colado do material interno (repete o H1)
       var h=line.match(/^\*\*(.+)\*\*$/);
-      if(h){flush();html+='<h4 class="ds-h">'+esc(h[1])+'</h4>';continue;}
+      if(h){flush();html+='<h2 class="ds-h">'+esc(h[1])+'</h2>';continue;}
       if(/^[-*]\s+/.test(line)){list.push(line.replace(/^[-*]\s+/,''));continue;}
       flush();html+='<p>'+inlineMd(line)+'</p>';
     }

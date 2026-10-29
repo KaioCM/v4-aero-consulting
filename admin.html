@@ -163,9 +163,10 @@
         <div class="full"><label>Nome / modelo</label><input id="f_nome" placeholder="Ex.: Cessna 210"></div>
         <div><label>Categoria</label>
           <select id="f_categoria">
-            <option value="monomotor">Monomotor</option>
-            <option value="bimotor">Bimotor</option>
-            <option value="turboelice">Turboélice</option>
+            <option value="monomotor_pistao">Monomotor a pistão</option>
+            <option value="monomotor_turboelice">Monomotor turboélice</option>
+            <option value="bimotor_pistao">Bimotor a pistão</option>
+            <option value="bimotor_turboelice">Bimotor turboélice</option>
             <option value="jato">Jato</option>
             <option value="helicoptero">Helicóptero</option>
           </select>
@@ -220,7 +221,7 @@
   const $ = id => document.getElementById(id);
   const show = (el,on)=>el.style.display = on ? '' : 'none';
   const msg = (el,type,text)=>{el.className='msg '+(type||'');el.textContent=text||'';};
-  const CATS={monomotor:'Monomotor',bimotor:'Bimotor',turboelice:'Turboélice',jato:'Jato',helicoptero:'Helicóptero'};
+  const CATS={monomotor_pistao:'Monomotor a pistão',monomotor_turboelice:'Monomotor turboélice',bimotor_pistao:'Bimotor a pistão',bimotor_turboelice:'Bimotor turboélice',jato:'Jato',helicoptero:'Helicóptero'};
   const nf = new Intl.NumberFormat('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
   const fmtVal = av => (av.valor==null||+av.valor===0) ? '[a confirmar]' : (av.moeda==='USD'?'US$ ':'R$ ')+nf.format(av.valor);
 
@@ -280,7 +281,7 @@
   const fmtDate = s => { try{ return new Date(s).toLocaleString('pt-BR',{day:'2-digit',month:'2-digit',year:'2-digit',hour:'2-digit',minute:'2-digit'}); }catch(e){ return s; } };
   const LBL = {
     intencao:{comprar:'Compra',vender:'Venda',pesquisando:'Pesquisando'},
-    categoria:{monomotor:'Monomotor',bimotor:'Bimotor',turboelice:'Turboélice',jato:'Jato',helicoptero:'Helicóptero'},
+    categoria:{monomotor_pistao:'Monomotor a pistão',monomotor_turboelice:'Monomotor turboélice',bimotor_pistao:'Bimotor a pistão',bimotor_turboelice:'Bimotor turboélice',jato:'Jato',helicoptero:'Helicóptero',monomotor:'Monomotor',bimotor:'Bimotor',turboelice:'Turboélice'},
     faixa:{ate1:'Até R$ 1 mi','1a3':'R$ 1–3 mi','3a10':'R$ 3–10 mi','10mais':'Acima de R$ 10 mi',nd:'Faixa não informada'},
     prazo:{dias:'Nos próximos dias',ate3m:'Até 3 meses','3a12m':'3 a 12 meses',sem_pressa:'Sem pressa'}
   };
@@ -341,7 +342,7 @@
   function openForm(av){
     editing=av||null;
     $('formTitle').textContent = av?'Editar aeronave':'Nova aeronave';
-    F.forEach(k=>{ const el=$('f_'+k); if(el) el.value = av? (av[k]??'') : (k==='moeda'?'BRL':k==='situacao'?'Disponível':k==='categoria'?'monomotor':''); });
+    F.forEach(k=>{ const el=$('f_'+k); if(el) el.value = av? (av[k]??'') : (k==='moeda'?'BRL':k==='situacao'?'Disponível':k==='categoria'?'monomotor_pistao':''); });
     $('f_ativo').checked = av? !!av.ativo : true;
     $('f_foto').value=''; $('fotoStatus').textContent='';
     fotosArr = av ? (Array.isArray(av.fotos)&&av.fotos.length ? av.fotos.slice() : (av.foto_url?[av.foto_url]:[])) : [];
