@@ -212,7 +212,7 @@
 </div>
 
 <script type="module">
-  import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+  import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.118.0';
   const SB_URL = 'https://hobtolagifjjxcmxreip.supabase.co';
   const SB_KEY = 'sb_publishable_29hmID65I5x-X0Ieot6f5Q_eLOk_Pkl';
   const sb = createClient(SB_URL, SB_KEY);
@@ -355,13 +355,30 @@
   $('modal').addEventListener('click',e=>{ if(e.target===$('modal')) $('modal').classList.remove('open'); });
   $('addFotoBtn').addEventListener('click',()=>$('f_foto').click());
   $('f_foto').addEventListener('change',()=>{ if($('f_foto').files.length) uploadFiles([...$('f_foto').files]); });
+  // Foto de celular costuma vir com 3–8 MB: reduz para no máx. 2000 px (lado maior), JPEG 85%.
+  // Fotos já leves (≤ 900 KB e ≤ 2000 px) sobem como estão.
+  async function otimizarFoto(file){
+    if(!/^image\/(jpeg|png|webp)$/.test(file.type)) return file;
+    try{
+      const bmp=await createImageBitmap(file,{imageOrientation:'from-image'});
+      const lado=Math.max(bmp.width,bmp.height), MAX=2000;
+      if(file.size<=900*1024 && lado<=MAX){ bmp.close(); return file; }
+      const k=Math.min(1,MAX/lado), c=document.createElement('canvas');
+      c.width=Math.round(bmp.width*k); c.height=Math.round(bmp.height*k);
+      c.getContext('2d').drawImage(bmp,0,0,c.width,c.height); bmp.close();
+      const blob=await new Promise(r=>c.toBlob(r,'image/jpeg',.85));
+      return (blob&&blob.size<file.size) ? new File([blob],file.name.replace(/\.\w+$/,'')+'.jpg',{type:'image/jpeg'}) : file;
+    }catch(e){ return file; }
+  }
   async function uploadFiles(files){
     $('addFotoBtn').disabled=true; $('fotoStatus').textContent='Enviando…';
     try{
-      for(const file of files){
-        const ext=(file.name.split('.').pop()||'jpg').toLowerCase();
+      for(const original of files){
+        const file=await otimizarFoto(original);
+        const ext=file.type==='image/jpeg'?'jpg':(file.name.split('.').pop()||'jpg').toLowerCase();
         const path=crypto.randomUUID()+'.'+ext;
-        const up=await sb.storage.from('aeronaves').upload(path,file,{upsert:false,contentType:file.type});
+        // nome único (UUID) nunca muda de conteúdo → pode ficar em cache por 1 ano
+        const up=await sb.storage.from('aeronaves').upload(path,file,{upsert:false,contentType:file.type,cacheControl:'31536000'});
         if(up.error) throw up.error;
         fotosArr.push(sb.storage.from('aeronaves').getPublicUrl(path).data.publicUrl);
         renderFotos();

@@ -1,9 +1,27 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="index, follow">
-<link rel="icon" href="assets/logo-mark.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/logo-mark.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/favicon-48.png" sizes="48x48" type="image/png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<meta name="theme-color" content="#0B2137">
 <title>V4 Aero Flight — Aeronaves disponíveis para venda</title>
 <meta name="description" content="Compra, venda e intermediação de aeronaves, com ficha técnica completa e assessoria em todo o processo.">
+<link rel="canonical" href="https://v4aeroflight.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="V4 Aero Flight">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="V4 Aero Flight — Aeronaves disponíveis para venda">
+<meta property="og:description" content="Compra, venda e intermediação de aeronaves, com ficha técnica, fotos e assessoria em todo o processo.">
+<meta property="og:url" content="https://v4aeroflight.com/">
+<meta property="og:image" content="https://v4aeroflight.com/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<!--LD--><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://v4aeroflight.com/#org","name":"V4 Aero Flight","url":"https://v4aeroflight.com/","logo":"https://v4aeroflight.com/assets/icon-512.png","image":"https://v4aeroflight.com/assets/og.jpg","description":"Compra, venda e intermediação de aeronaves, com assessoria completa da avaliação à transferência.","email":"v4consulting@hotmail.com","telephone":"+55-65-98147-6175","areaServed":"BR","sameAs":["https://www.instagram.com/v4aeroconsulting/"],"contactPoint":{"@type":"ContactPoint","contactType":"sales","telephone":"+55-65-98147-6175","email":"v4consulting@hotmail.com","availableLanguage":"Portuguese","areaServed":"BR"}},{"@type":"WebSite","@id":"https://v4aeroflight.com/#website","name":"V4 Aero Flight","url":"https://v4aeroflight.com/","inLanguage":"pt-BR","publisher":{"@id":"https://v4aeroflight.com/#org"}}]}</script><!--/LD-->
 
 <!-- ============ TRACKING / PIXELS · V4 Aero ============ -->
 <!-- Preencha os IDs abaixo para ligar o rastreamento. Vazio = desligado (nada carrega). -->
@@ -12,6 +30,8 @@
 <script>(function(){var id=window.V4_TRACK.GA4_ID;if(!id)return;var s=document.createElement('script');s.async=1;s.src='https://www.googletagmanager.com/gtag/js?id='+id;document.head.appendChild(s);window.dataLayer=window.dataLayer||[];window.gtag=function(){dataLayer.push(arguments)};gtag('js',new Date());gtag('config',id);})();</script>
 <!-- ==================================================== -->
 
+<link rel="preconnect" href="https://hobtolagifjjxcmxreip.supabase.co" crossorigin>
+<link rel="modulepreload" href="/assets/catalogo.js">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -178,7 +198,7 @@
 
   /* ---------- sobre ---------- */
   .sobre{background:var(--blue-900);color:var(--white);position:relative;overflow:hidden}
-  .sobre::before{content:"";position:absolute;inset:0;background:url(assets/hero.png) center/cover no-repeat;opacity:.10}
+  .sobre::before{content:"";position:absolute;inset:0;background:url(/assets/hero-1600.webp) center/cover no-repeat;opacity:.10}
   .sobre .grid{position:relative;z-index:1;display:grid;grid-template-columns:1fr 2fr;gap:clamp(1.5rem,5vw,4rem);align-items:start}
   .sobre h2{color:var(--white);font-size:clamp(1.7rem,3.4vw,2.4rem)}
   .sobre .body p{color:#C3D3E4;font-size:1.05rem;margin-bottom:1.1rem;max-width:62ch}
@@ -247,6 +267,8 @@
   @media (max-width:400px){.hero .actions .btn{flex:1;justify-content:center}}
   /* home x catálogo (/aeronaves/ é gerada a partir deste arquivo pelo build/generate.mjs) */
   body:not(.catalogo) .cat-only,body.catalogo .home-only{display:none!important}
+  body.catalogo .reveal{opacity:1;transform:none}   /* no catálogo os cards são o conteúdo principal: aparecem já */
+  :focus-visible{outline:2px solid var(--blue-500);outline-offset:3px}
   body.catalogo #aeronaves{padding-top:7.5rem}
   .cat-more{text-align:center;margin-top:1.6rem}
   /* catálogo em cards (só na /aeronaves/; a home segue em lista) */
@@ -287,7 +309,7 @@
     </nav>
     <div class="end">
       <a href="https://wa.me/5565981476175" class="btn btn-p js-lead">Falar no WhatsApp</a>
-      <button class="menu-btn" id="menuBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+      <button class="menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false" aria-controls="mnav"><span></span><span></span><span></span></button>
     </div>
   </div>
   <nav class="mnav" id="mnav">
@@ -303,7 +325,7 @@
 <!-- ===================== HERO ===================== -->
 <section class="hero" id="top">
   <!-- Fundo de ambiente (aeronave genérica ao longe, imagem ilustrativa) — pode trocar por foto real da V4 -->
-  <img class="bg" src="assets/hero.png" alt="" aria-hidden="true">
+  <img class="bg" src="/assets/hero-1600.webp" srcset="/assets/hero-900.webp 900w, /assets/hero-1600.webp 1600w" sizes="100vw" width="1600" height="900" fetchpriority="high" alt="" aria-hidden="true">
   <svg class="hero-mark" viewBox="0 0 48 48" aria-hidden="true"><path d="M24 4 L24 33 L6 42 Z" fill="#8FB0D8"/><path d="M24 4 L42 42 L24 33 Z" fill="#3E77AE"/></svg>
   <div class="wrap">
     <span class="k mono">Compra · Venda · Intermediação de aeronaves</span>
@@ -335,7 +357,7 @@
         <button class="opt filtro" data-f="turboelice">Turboélice</button>
         <button class="opt filtro" data-f="jato">Jato</button>
         <button class="opt filtro" data-f="helicoptero">Helicóptero</button>
-        <span class="count mono" id="count">06 aeronaves</span>
+        <span class="count mono" id="count">05 aeronaves</span>
       </div>
       <div class="ctrl-line">
         <span class="lbl mono">Ordenar:</span>
@@ -348,9 +370,47 @@
       <span></span><span>Aeronave</span><span>Situação</span><span>Valor</span><span></span>
     </div>
 
-    <div class="cat-list reveal" id="catList">
-      <p class="cat-note" id="catLoading" style="text-align:center;padding:2rem 0">Carregando aeronaves…</p>
-    </div>
+    <div class="cat-list reveal" id="catList" data-sig="lj7a8y"><!--CAT-ROWS--><div class="av" data-tipo="bimotor" data-moeda="BRL" data-valor="4000000" data-criado="1793290121506" data-nome="Baron B58 (Série Ouro) - 1982">
+      <a class="av-row" href="/aeronaves/baron-b58-serie-ouro-1982/">
+        <span class="c-img"><img src="/assets/thumbs/bef6be58-a0f0-4e7d-9f24-1784109711d9-480.webp" data-orig="https://hobtolagifjjxcmxreip.supabase.co/storage/v1/object/public/aeronaves/bef6be58-a0f0-4e7d-9f24-1784109711d9.jpeg" onerror="this.onerror=null;this.src=this.dataset.orig" alt="Baron B58 (Série Ouro) - 1982" width="480" height="360" fetchpriority="high" decoding="async"></span>
+        <span class="c-nome"><b>Baron B58 (Série Ouro) - 1982</b><span class="cat">Bimotor</span></span>
+        <span class="c-sit" data-label="Situação"><span class="sit ">Disponível</span></span>
+        <span class="c-valor" data-label="Valor"><span class="vwrap"><span class="moeda">R$</span><span class="cifra">4.000.000,00</span></span></span>
+        <span class="c-caret" aria-hidden="true">›</span>
+      </a>
+    </div><div class="av" data-tipo="monomotor" data-moeda="BRL" data-valor="1400000" data-criado="1793290053455" data-nome="Cessna Skylane - 1963">
+      <a class="av-row" href="/aeronaves/cessna-skylane-1963/">
+        <span class="c-img"><img src="/assets/thumbs/046dde2d-02a4-467f-b465-b4063dfb62dc-480.webp" data-orig="https://hobtolagifjjxcmxreip.supabase.co/storage/v1/object/public/aeronaves/046dde2d-02a4-467f-b465-b4063dfb62dc.jpeg" onerror="this.onerror=null;this.src=this.dataset.orig" alt="Cessna Skylane - 1963" width="480" height="360" decoding="async"></span>
+        <span class="c-nome"><b>Cessna Skylane - 1963</b><span class="cat">Monomotor</span></span>
+        <span class="c-sit" data-label="Situação"><span class="sit ">Disponível</span></span>
+        <span class="c-valor" data-label="Valor"><span class="vwrap"><span class="moeda">R$</span><span class="cifra">1.400.000,00</span></span></span>
+        <span class="c-caret" aria-hidden="true">›</span>
+      </a>
+    </div><div class="av" data-tipo="monomotor" data-moeda="BRL" data-valor="690000" data-criado="1793290020010" data-nome="Corisco Aspirado - 1980">
+      <a class="av-row" href="/aeronaves/corisco-aspirado-1980/">
+        <span class="c-img"><img src="/assets/thumbs/4f8f357d-5fbd-4440-90a9-690f3db40068-480.webp" data-orig="https://hobtolagifjjxcmxreip.supabase.co/storage/v1/object/public/aeronaves/4f8f357d-5fbd-4440-90a9-690f3db40068.jpeg" onerror="this.onerror=null;this.src=this.dataset.orig" alt="Corisco Aspirado - 1980" width="480" height="360" decoding="async"></span>
+        <span class="c-nome"><b>Corisco Aspirado - 1980</b><span class="cat">Monomotor</span></span>
+        <span class="c-sit" data-label="Situação"><span class="sit ">Disponível</span></span>
+        <span class="c-valor" data-label="Valor"><span class="vwrap"><span class="moeda">R$</span><span class="cifra">690.000,00</span></span></span>
+        <span class="c-caret" aria-hidden="true">›</span>
+      </a>
+    </div><div class="av" data-tipo="monomotor" data-moeda="BRL" data-valor="1950000" data-criado="1793289967474" data-nome="Bonanza V35B - 1975">
+      <a class="av-row" href="/aeronaves/bonanza-v35b-1975/">
+        <span class="c-img"><img src="/assets/thumbs/840e81c2-ae55-40a2-9aaa-7d9430df62a1-480.webp" data-orig="https://hobtolagifjjxcmxreip.supabase.co/storage/v1/object/public/aeronaves/840e81c2-ae55-40a2-9aaa-7d9430df62a1.jpeg" onerror="this.onerror=null;this.src=this.dataset.orig" alt="Bonanza V35B - 1975" width="480" height="360" loading="lazy" decoding="async"></span>
+        <span class="c-nome"><b>Bonanza V35B - 1975</b><span class="cat">Monomotor</span></span>
+        <span class="c-sit" data-label="Situação"><span class="sit ">Disponível</span></span>
+        <span class="c-valor" data-label="Valor"><span class="vwrap"><span class="moeda">R$</span><span class="cifra">1.950.000,00</span></span></span>
+        <span class="c-caret" aria-hidden="true">›</span>
+      </a>
+    </div><div class="av" data-tipo="bimotor" data-moeda="BRL" data-valor="5300000" data-criado="1793289873141" data-nome="Beechcraft Baron G58 - 2006">
+      <a class="av-row" href="/aeronaves/beechcraft-baron-g58-2006/">
+        <span class="c-img"><img src="/assets/thumbs/1115aa4c-ecc7-4644-9d8f-a878bd90707f-480.webp" data-orig="https://hobtolagifjjxcmxreip.supabase.co/storage/v1/object/public/aeronaves/1115aa4c-ecc7-4644-9d8f-a878bd90707f.jpeg" onerror="this.onerror=null;this.src=this.dataset.orig" alt="Beechcraft Baron G58 - 2006" width="480" height="360" loading="lazy" decoding="async"></span>
+        <span class="c-nome"><b>Beechcraft Baron G58 - 2006</b><span class="cat">Bimotor</span></span>
+        <span class="c-sit" data-label="Situação"><span class="sit ">Disponível</span></span>
+        <span class="c-valor" data-label="Valor"><span class="vwrap"><span class="moeda">R$</span><span class="cifra">5.300.000,00</span></span></span>
+        <span class="c-caret" aria-hidden="true">›</span>
+      </a>
+    </div><!--/CAT-ROWS--></div>
     <div class="cat-more home-only"><a class="btn btn-p" href="/aeronaves/">+ Ver todas as aeronaves disponíveis</a></div>
     <!-- ATUALIZAR PERIODICAMENTE: dados lidos do Instagram da V4 em jul/2026 — confirmar com a V4 -->
     <p class="cat-note mono reveal">Valores e disponibilidade sujeitos a confirmação.</p>
@@ -401,15 +461,15 @@
     <div class="sec-head reveal"><span class="k mono">04 · Instagram</span><h2>As aeronaves novas aparecem primeiro no Instagram.</h2></div>
     <p class="ig-lead reveal">Publicamos as aeronaves que entram na carteira, os detalhes de cada uma e os negócios já concluídos. Acompanhe para saber das oportunidades antes que elas saiam da lista.</p>
     <div class="ig-grid reveal">
-      <a class="ig-post" href="https://instagram.com/v4aeroconsulting" target="_blank" rel="noopener noreferrer"><img src="assets/ig/ig-01.jpg" alt="Aeronave à venda — V4 Aero Flight no Instagram" loading="lazy"></a>
-      <a class="ig-post" href="https://instagram.com/v4aeroconsulting" target="_blank" rel="noopener noreferrer"><img src="assets/ig/ig-02.jpg" alt="Aeronave à venda — V4 Aero Flight no Instagram" loading="lazy"></a>
-      <a class="ig-post" href="https://instagram.com/v4aeroconsulting" target="_blank" rel="noopener noreferrer"><img src="assets/ig/ig-03.jpg" alt="Aeronave à venda — V4 Aero Flight no Instagram" loading="lazy"></a>
-      <a class="ig-post" href="https://instagram.com/v4aeroconsulting" target="_blank" rel="noopener noreferrer"><img src="assets/ig/ig-05.jpg" alt="Aeronave à venda — V4 Aero Flight no Instagram" loading="lazy"></a>
-      <a class="ig-post" href="https://instagram.com/v4aeroconsulting" target="_blank" rel="noopener noreferrer"><img src="assets/ig/ig-06.jpg" alt="Aeronave à venda — V4 Aero Flight no Instagram" loading="lazy"></a>
-      <a class="ig-post" href="https://instagram.com/v4aeroconsulting" target="_blank" rel="noopener noreferrer"><img src="assets/ig/ig-07.jpg" alt="Aeronave à venda — V4 Aero Flight no Instagram" loading="lazy"></a>
-      <a class="ig-post" href="https://instagram.com/v4aeroconsulting" target="_blank" rel="noopener noreferrer"><img src="assets/ig/ig-09.jpg" alt="Aeronave à venda — V4 Aero Flight no Instagram" loading="lazy"></a>
-      <a class="ig-post" href="https://instagram.com/v4aeroconsulting" target="_blank" rel="noopener noreferrer"><img src="assets/ig/ig-10.jpg" alt="Aeronave à venda — V4 Aero Flight no Instagram" loading="lazy"></a>      <a class="ig-post" href="https://instagram.com/v4aeroconsulting" target="_blank" rel="noopener noreferrer"><img src="assets/ig/ig-12.jpg" alt="Aeronave à venda — V4 Aero Flight no Instagram" loading="lazy"></a>
-      <a class="ig-post" href="https://instagram.com/v4aeroconsulting" target="_blank" rel="noopener noreferrer"><img src="assets/ig/ig-13.jpg" alt="Aeronave à venda — V4 Aero Flight no Instagram" loading="lazy"></a>    </div>
+      <a class="ig-post" href="https://instagram.com/v4aeroconsulting" target="_blank" rel="noopener noreferrer"><img src="/assets/ig/ig-01.webp" width="480" height="480" decoding="async" alt="Aeronave à venda — V4 Aero Flight no Instagram" loading="lazy"></a>
+      <a class="ig-post" href="https://instagram.com/v4aeroconsulting" target="_blank" rel="noopener noreferrer"><img src="/assets/ig/ig-02.webp" width="480" height="480" decoding="async" alt="Aeronave à venda — V4 Aero Flight no Instagram" loading="lazy"></a>
+      <a class="ig-post" href="https://instagram.com/v4aeroconsulting" target="_blank" rel="noopener noreferrer"><img src="/assets/ig/ig-03.webp" width="480" height="480" decoding="async" alt="Aeronave à venda — V4 Aero Flight no Instagram" loading="lazy"></a>
+      <a class="ig-post" href="https://instagram.com/v4aeroconsulting" target="_blank" rel="noopener noreferrer"><img src="/assets/ig/ig-05.webp" width="480" height="480" decoding="async" alt="Aeronave à venda — V4 Aero Flight no Instagram" loading="lazy"></a>
+      <a class="ig-post" href="https://instagram.com/v4aeroconsulting" target="_blank" rel="noopener noreferrer"><img src="/assets/ig/ig-06.webp" width="480" height="480" decoding="async" alt="Aeronave à venda — V4 Aero Flight no Instagram" loading="lazy"></a>
+      <a class="ig-post" href="https://instagram.com/v4aeroconsulting" target="_blank" rel="noopener noreferrer"><img src="/assets/ig/ig-07.webp" width="480" height="480" decoding="async" alt="Aeronave à venda — V4 Aero Flight no Instagram" loading="lazy"></a>
+      <a class="ig-post" href="https://instagram.com/v4aeroconsulting" target="_blank" rel="noopener noreferrer"><img src="/assets/ig/ig-09.webp" width="480" height="480" decoding="async" alt="Aeronave à venda — V4 Aero Flight no Instagram" loading="lazy"></a>
+      <a class="ig-post" href="https://instagram.com/v4aeroconsulting" target="_blank" rel="noopener noreferrer"><img src="/assets/ig/ig-10.webp" width="480" height="480" decoding="async" alt="Aeronave à venda — V4 Aero Flight no Instagram" loading="lazy"></a>      <a class="ig-post" href="https://instagram.com/v4aeroconsulting" target="_blank" rel="noopener noreferrer"><img src="/assets/ig/ig-12.webp" width="480" height="480" decoding="async" alt="Aeronave à venda — V4 Aero Flight no Instagram" loading="lazy"></a>
+      <a class="ig-post" href="https://instagram.com/v4aeroconsulting" target="_blank" rel="noopener noreferrer"><img src="/assets/ig/ig-13.webp" width="480" height="480" decoding="async" alt="Aeronave à venda — V4 Aero Flight no Instagram" loading="lazy"></a>    </div>
     <div class="ig-bar reveal">
       <a class="ig-handle" href="https://instagram.com/v4aeroconsulting" target="_blank" rel="noopener noreferrer">
         <svg class="ig-glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.2"/><circle cx="12" cy="12" r="4.6"/><circle cx="17.6" cy="6.4" r="1.15" fill="currentColor" stroke="none"/></svg>
@@ -426,7 +486,7 @@
 <section class="sec contato" id="contato">
   <div class="wrap grid">
     <div class="cdata reveal">
-      <div class="row"><span class="k mono">WhatsApp</span><a class="v" href="https://wa.me/5565981476175">(65) 98147-6175</a></div>
+      <div class="row"><span class="k mono">WhatsApp</span><a class="v js-lead" href="https://wa.me/5565981476175">(65) 98147-6175</a></div>
       <div class="row"><span class="k mono">Instagram</span><a class="v" href="https://instagram.com/v4aeroconsulting">@v4aeroconsulting</a></div>
       <div class="row"><span class="k mono">E-mail</span><a class="v" href="mailto:v4consulting@hotmail.com">v4consulting@hotmail.com</a></div>
     </div>
@@ -455,7 +515,7 @@
         <a href="#contato">Contato</a>
       </nav>
     </div>
-    <div class="foot-copy">© 2026 V4 Aero Flight</div>
+    <div class="foot-copy">© 2026 V4 Aero Flight · <a href="/privacidade/">Política de privacidade</a></div>
   </div>
 </footer>
 
@@ -465,29 +525,28 @@
 <script src="/assets/lead.js" defer></script>
 
 <script type="module">
-  import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
-  const SB_URL = 'https://hobtolagifjjxcmxreip.supabase.co';
-  const SB_KEY = 'sb_publishable_29hmID65I5x-X0Ieot6f5Q_eLOk_Pkl';
-  const sb = createClient(SB_URL,SB_KEY);
+  import { buscarAeronaves, selecionar, listaHTML, assinatura } from '/assets/catalogo.js';
 
   // header scrolled + menu mobile
   const header=document.getElementById('header');
   addEventListener('scroll',()=>header.classList.toggle('scrolled',scrollY>10),{passive:true});
-  const mnav=document.getElementById('mnav');
-  document.getElementById('menuBtn').addEventListener('click',()=>{mnav.style.display=mnav.style.display==='flex'?'none':'flex';});
-  mnav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>mnav.style.display='none'));
+  const mnav=document.getElementById('mnav'), menuBtn=document.getElementById('menuBtn');
+  const setMenu=open=>{mnav.style.display=open?'flex':'none';menuBtn.setAttribute('aria-expanded',open);};
+  menuBtn.addEventListener('click',()=>setMenu(mnav.style.display!=='flex'));
+  mnav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>setMenu(false)));
 
   // reveal
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.1,rootMargin:'0px 0px -30px 0px'});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
   // ---------- catálogo ----------
+  // As linhas já vêm prontas no HTML (build/generate.mjs). Aqui só filtramos/ordenamos e,
+  // se o banco mudou depois do último build, re-renderizamos com os dados frescos.
   const CATALOGO=document.body.classList.contains('catalogo');
-  const HOME_MAX=5;
   const list=document.getElementById('catList');
   const countEl=document.getElementById('count');
   const pad=n=>String(n).padStart(2,'0');
-  let filtro='todas';
+  let filtro='todas', ordem='recentes';
   const rows=()=>[...list.querySelectorAll('.av')];
   function apply(){let vis=0;rows().forEach(a=>{const sh=filtro==='todas'||a.dataset.tipo===filtro;a.style.display=sh?'':'none';if(sh)vis++;});countEl.textContent=pad(vis)+(vis===1?' aeronave':' aeronaves');}
   document.querySelectorAll('.filtro').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.filtro').forEach(x=>x.classList.remove('active'));b.classList.add('active');filtro=b.dataset.f;apply();}));
@@ -497,53 +556,27 @@
   // ─────────────────────────────────────────────────────────────
   const USD_BRL_REFERENCIA = 5.40;
   const valorOrd=el=>{const v=parseFloat(el.dataset.valor)||0;return v===0?Infinity:v*(el.dataset.moeda==='USD'?USD_BRL_REFERENCIA:1);};
-  document.querySelectorAll('.ord').forEach(b=>b.addEventListener('click',()=>{
-    document.querySelectorAll('.ord').forEach(x=>x.classList.remove('active'));b.classList.add('active');
-    const s=b.dataset.s;const arr=rows();
-    const num=(el,k)=>{const v=parseFloat(el.dataset[k]);return isNaN(v)||v===0?Infinity:v;};
-    if(s==='valor')arr.sort((a,b)=>valorOrd(a)-valorOrd(b));
+  function ordenar(){
+    const arr=rows();
+    if(ordem==='valor')arr.sort((a,b)=>valorOrd(a)-valorOrd(b));
     else arr.sort((a,b)=>(+b.dataset.criado||0)-(+a.dataset.criado||0));
     arr.forEach(a=>list.appendChild(a));
+  }
+  document.querySelectorAll('.ord').forEach(b=>b.addEventListener('click',()=>{
+    document.querySelectorAll('.ord').forEach(x=>x.classList.remove('active'));b.classList.add('active');
+    ordem=b.dataset.s;ordenar();
   }));
   apply();
 
-  // render a partir do banco
-  const CATS={monomotor:'Monomotor',bimotor:'Bimotor',turboelice:'Turboélice',jato:'Jato',helicoptero:'Helicóptero'};
-  const nf=new Intl.NumberFormat('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
-  const esc=s=>(s??'').toString().replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-  const slug=s=>(s||'').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'')||'aeronave';
-  const cellField=(l,v)=> v&&String(v).trim()!=='' ? `<span class="cell" data-label="${l}">${esc(v)}</span>` : `<span class="cell tbc" data-label="${l}">[a confirmar]</span>`;
-  const ficha=(l,v)=> `<div class="f"><span class="k">${l}</span><span class="v">${v&&String(v).trim()!==''?esc(v):'[a confirmar]'}</span></div>`;
-  function valorCell(av){if(av.valor==null||+av.valor===0)return `<span class="c-valor tbc" data-label="Valor">[a confirmar]</span>`;const m=av.moeda==='USD'?'US$':'R$';return `<span class="c-valor" data-label="Valor"><span class="vwrap"><span class="moeda">${m}</span><span class="cifra">${nf.format(av.valor)}</span></span></span>`;}
-  function wa(av){const t=av.nome&&!av.nome.includes('[')?`Olá, tenho interesse na aeronave ${av.nome} anunciada no site.`:'Olá, tenho interesse na aeronave anunciada no site.';return 'https://wa.me/5565981476175?text='+encodeURIComponent(t);}
-  function rowHTML(av){const nome=esc(av.nome||'[a confirmar]');const dv=av.valor==null?'0':String(av.valor);
-    const fotos=(Array.isArray(av.fotos)?av.fotos:[]).filter(Boolean);const foto=esc(fotos[0]||av.foto_url||'assets/logo-mark.svg');
-    const sit=av.situacao||'Disponível';const sitCls=/reserv/i.test(sit)?'reservada':/vend/i.test(sit)?'vendida':'';
-    return `<div class="av" data-tipo="${esc(av.categoria)}" data-moeda="${esc(av.moeda||'BRL')}" data-valor="${dv}" data-criado="${Date.parse(av.created_at)||0}" data-nome="${nome}">
-      <a class="av-row" href="/aeronaves/${slug(av.nome)}/">
-        <span class="c-img"><img src="${foto}" alt="${nome}" loading="lazy"></span>
-        <span class="c-nome"><b>${nome}</b><span class="cat">${CATS[av.categoria]||esc(av.categoria)}</span></span>
-        <span class="c-sit" data-label="Situação"><span class="sit ${sitCls}">${esc(sit)}</span></span>
-        ${valorCell(av)}
-        <span class="c-caret">›</span>
-      </a>
-    </div>`;}
-
-  // (galeria e lightbox agora vivem na página individual de cada aeronave)
-
-  (async()=>{
-    try{
-      const {data,error}=await sb.from('aeronaves').select('*').eq('ativo',true).order('created_at',{ascending:false});
-      if(error) throw error;
-      if(Array.isArray(data)){
-        // home: só as 5 mais recentes ainda à venda; o catálogo (/aeronaves/) mostra todas
-        const shown = CATALOGO ? data : data.filter(av=>!/vend/i.test(av.situacao||'')).slice(0,HOME_MAX);
-        list.innerHTML = shown.length ? shown.map(rowHTML).join('') : '<p class="cat-note" style="text-align:center;padding:2rem 0">Nenhuma aeronave disponível no momento. Fale conosco no WhatsApp.</p>';
-        filtro='todas';document.querySelectorAll('.filtro').forEach(x=>x.classList.toggle('active',x.dataset.f==='todas'));
-        apply();
-      }
-    }catch(e){ console.warn('Catálogo indisponível.', e.message); const el=document.getElementById('catLoading'); if(el) el.textContent='Não foi possível carregar as aeronaves agora. Fale conosco no WhatsApp.'; }
-  })();
+  buscarAeronaves().then(data=>{
+    const shown=selecionar(data,CATALOGO), sig=assinatura(shown);
+    if(list.dataset.sig===sig) return;            // nada mudou desde o build
+    list.innerHTML=listaHTML(shown); list.dataset.sig=sig;
+    ordenar(); apply();
+  }).catch(e=>{
+    console.warn('Catálogo indisponível.', e.message);
+    if(!rows().length) list.innerHTML='<p class="cat-note" style="text-align:center;padding:2rem 0">Não foi possível carregar as aeronaves agora. Fale conosco no WhatsApp.</p>';
+  });
 </script>
 </body>
 </html>

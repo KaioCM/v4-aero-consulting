@@ -1,0 +1,12 @@
+{
+  "name": "v4-aero-site",
+  "private": true,
+  "type": "module",
+  "description": "Gerador estático do site V4 Aero Flight (páginas de aeronave, catálogo, miniaturas, sitemap).",
+  "scripts": {
+    "build": "node build/generate.mjs"
+  },
+  "dependencies": {
+    "sharp": "^0.35.5"
+  }
+}

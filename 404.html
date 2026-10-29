@@ -6,6 +6,9 @@
 <meta name="robots" content="noindex, follow">
 <title>V4 Aero Flight</title>
 <link rel="icon" href="/assets/logo-mark.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/favicon-48.png" sizes="48x48" type="image/png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<meta name="robots" content="noindex">
 <script>window.V4_TRACK={META_PIXEL_ID:'2357400451462284',GA4_ID:''};</script>
 <script>(function(){var id=window.V4_TRACK.META_PIXEL_ID;if(!id)return;!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init',id);fbq('track','PageView');})();</script>
 <script>(function(){var id=window.V4_TRACK.GA4_ID;if(!id)return;var s=document.createElement('script');s.async=1;s.src='https://www.googletagmanager.com/gtag/js?id='+id;document.head.appendChild(s);window.dataLayer=window.dataLayer||[];window.gtag=function(){dataLayer.push(arguments)};gtag('js',new Date());gtag('config',id);})();</script>
@@ -74,12 +77,12 @@
     <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="21" fill="none" stroke="#3E77AE" stroke-width="2.4"/><path d="M24 10 L16 33 L24 28 Z" fill="#061423"/><path d="M24 10 L32 33 L24 28 Z" fill="#3E77AE"/></svg>
     <span class="wm"><b>V4 <i>Aero</i></b><small>Flight</small></span>
   </a>
-  <a class="btn btn-p" href="/#aeronaves">Ver aeronaves</a>
+  <a class="btn btn-p" href="/aeronaves/">Ver aeronaves</a>
 </div></header>
 <main><div class="wrap" id="root">
   <div class="loading">Carregando…</div>
 </div></main>
-<footer><div class="wrap">© <span id="yr"></span> V4 Aero Flight · Compra, venda e intermediação de aeronaves</div></footer>
+<footer><div class="wrap">© <span id="yr"></span> V4 Aero Flight · Compra, venda e intermediação de aeronaves · <a href="/privacidade/">Política de privacidade</a></div></footer>
 
 <script src="/assets/lead.js" defer></script>
 
@@ -98,6 +101,7 @@
     for(var i=0;i<lines.length;i++){
       var line=lines[i].trim();
       if(line===''||line==='---'){flush();continue;}
+      if(/^#{1,6}\s/.test(line)){flush();continue;}   // título colado do material interno (repete o H1)
       var h=line.match(/^\*\*(.+)\*\*$/);
       if(h){flush();html+='<h4 class="ds-h">'+esc(h[1])+'</h4>';continue;}
       if(/^[-*]\s+/.test(line)){list.push(line.replace(/^[-*]\s+/,''));continue;}
@@ -108,7 +112,7 @@
   var root=document.getElementById('root');
 
   function notFound(){
-    root.innerHTML='<div class="center"><h1>Página não encontrada</h1><p>O endereço não existe ou a aeronave saiu do catálogo.</p><a class="btn btn-p" href="/#aeronaves">Ver aeronaves disponíveis</a></div>';
+    root.innerHTML='<div class="center"><h1>Página não encontrada</h1><p>O endereço não existe ou a aeronave saiu do catálogo.</p><a class="btn btn-p" href="/aeronaves/">Ver aeronaves disponíveis</a></div>';
   }
 
   function gallery(fotos){
@@ -120,19 +124,24 @@
 
   function render(av){
     document.title=av.nome+' à venda — V4 Aero Flight';
+    // ViewContent / view_item — mesmo formato das páginas geradas (content_ids = slug)
+    try{var vi={id:(location.pathname.match(/\/aeronaves\/([^/]+)/)||[])[1],name:av.nome,category:CATS[av.categoria]||av.categoria||''};
+      if(av.valor&&+av.valor){vi.value=+av.valor;vi.currency=av.moeda||'BRL';}
+      if(window.fbq)fbq('track','ViewContent',Object.assign({content_ids:[vi.id],content_type:'product',content_name:vi.name,content_category:vi.category},vi.value?{value:vi.value,currency:vi.currency}:{}));
+      if(window.gtag)gtag('event','view_item',Object.assign({items:[{item_id:vi.id,item_name:vi.name,item_category:vi.category,price:vi.value}]},vi.value?{value:vi.value,currency:vi.currency}:{}));}catch(e){}
     var fotos=(Array.isArray(av.fotos)?av.fotos:[]).filter(Boolean);
     var sit=av.situacao||'Disponível', sitCls=/reserv/i.test(sit)?'reservada':/vend/i.test(sit)?'vendida':'';
     var preco=(av.valor==null||+av.valor===0)?'<div class="preco tbc">Valor sob consulta</div>':'<div class="preco"><small>'+(av.moeda==='USD'?'US$':'R$')+'</small>'+esc(nf.format(av.valor))+'</div>';
     var descr=(av.descricao&&String(av.descricao).trim())?'<div class="descr">'+renderDescricao(av.descricao)+'</div>':'';
     root.innerHTML=''+
-      '<nav class="crumb"><a href="/">Início</a> › <a href="/#aeronaves">Aeronaves</a> › '+esc(av.nome)+'</nav>'+
+      '<nav class="crumb"><a href="/">Início</a> › <a href="/aeronaves/">Aeronaves</a> › '+esc(av.nome)+'</nav>'+
       '<div class="top"><div>'+gallery(fotos)+'</div><div>'+
         '<h1>'+esc(av.nome)+'</h1>'+
         '<div class="cat">'+esc(CATS[av.categoria]||av.categoria||'')+' · <span class="sit '+sitCls+'">'+esc(sit)+'</span></div>'+
         preco+descr+
         '<div class="cta"><a class="btn btn-p js-lead" data-aero="'+esc(av.nome)+'" href="#">Consultar esta aeronave</a></div>'+
       '</div></div>'+
-      '<a class="back mono" href="/#aeronaves">‹ Ver todas as aeronaves</a>';
+      '<a class="back mono" href="/aeronaves/">‹ Ver todas as aeronaves</a>';
     if(fotos.length>1) wireGallery(fotos);
   }
 

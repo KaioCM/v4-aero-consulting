@@ -7,3 +7,6 @@ assets/aeronave-*.svg
 assets/hero.svg
 assets/av-06.png
 assets/instagram.svg
+
+# dependências do gerador
+node_modules/

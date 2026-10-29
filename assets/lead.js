@@ -61,6 +61,7 @@
     '.v4l input::placeholder{color:#3E77AE;opacity:.7}' +
     '.v4l input:focus{outline:none;border-color:#3E77AE;box-shadow:0 0 0 2px rgba(62,119,174,.16)}' +
     '.v4l-back{background:none;border:0;font:inherit;font-size:.85rem;color:#2A5B8C;cursor:pointer;align-self:flex-start;padding:.2rem 0}' +
+    '.v4l-lgpd{font-size:.74rem;color:#2A5B8C;margin:-.1rem 0 0;text-align:center}.v4l-lgpd a{color:#2A5B8C;text-decoration:underline}' +
     '.v4l-note{font-size:.85rem;margin:.1rem 0 0}.v4l-note.ok{color:#1a7a4c}.v4l-note.err{color:#b3261e}' +
     '@media(max-width:560px){.v4l{align-items:flex-end;padding:0}.v4l-box{border-radius:10px 10px 0 0;max-height:92vh}.v4l-row{flex-direction:column}}';
   var st = document.createElement('style'); st.textContent = css; document.head.appendChild(st);
@@ -78,6 +79,7 @@
         '<div class="v4l-row"><input name="nome" placeholder="Seu nome" autocomplete="name"><input name="tel" type="tel" inputmode="tel" placeholder="WhatsApp (com DDD)" autocomplete="tel"></div>' +
         '<input name="email" type="email" placeholder="E-mail (opcional)" autocomplete="email">' +
         '<button type="submit" class="v4l-btn">Continuar no WhatsApp</button>' +
+        '<p class="v4l-lgpd">Usamos seus dados só para falar sobre aeronaves. <a href="/privacidade/" target="_blank">Política de privacidade</a></p>' +
         '<button type="button" class="v4l-back">‹ Voltar</button>' +
         '<p class="v4l-note" hidden></p>' +
       '</form>' +
@@ -164,7 +166,11 @@
       body: JSON.stringify(rec) }).catch(function(){});
     try {
       if (window.fbq) {
-        fbq('track', 'Lead', { content_name: AERO || 'Geral', content_category: A.intencao });
+        // content_ids = slug da página da aeronave (mesmo id do ViewContent / catálogo de anúncios)
+        var slugAero = AERO ? (location.pathname.match(/\/aeronaves\/([^/]+)/) || [])[1] : null;
+        fbq('track', 'Lead', slugAero
+          ? { content_name: AERO, content_category: A.intencao, content_ids: [slugAero], content_type: 'product' }
+          : { content_name: AERO || 'Geral', content_category: A.intencao });
         if (sc === 'quente') fbq('trackCustom', 'LeadQualificado', { content_name: AERO || 'Geral', intencao: A.intencao, prazo: A.prazo });
       }
     } catch (err) {}
